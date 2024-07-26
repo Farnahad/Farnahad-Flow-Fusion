@@ -1,0 +1,61 @@
+﻿<me:MeDxRibbonWindow x:Class="ManaErp.Module.Main.MainMeDxRibbonWindow"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                     mc:Ignorable="d" xmlns:me="ManaErp"
+                     xmlns:regions="http://prismlibrary.com/"
+                     xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+                     Title="Mana ERP" WindowState="Maximized"
+                     MinHeight="379" MinWidth="643">
+    <me:MeGrid>
+        <me:MeGrid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </me:MeGrid.RowDefinitions>
+        <me:MeRibbonControl Grid.Row="0"
+                            regions:RegionManager.RegionName="Ribbon">
+            <dxr:RibbonDefaultPageCategory />
+        </me:MeRibbonControl>
+        <!--<ContentControl Grid.Row="1"    Background="Aquamarine"/>-->
+        <me:MeDockLayoutManager Grid.Row="1">
+            <me:MeDockVerticalLayoutGroup>
+                <me:MeDockHorizontalLayoutGroup regions:RegionManager.RegionName="TopLayoutGroup"
+                                                ItemHeight="1*" />
+                <me:MeDockHorizontalLayoutGroup ItemHeight="3*">
+                    <me:MeDockVerticalLayoutGroup regions:RegionManager.RegionName="LeftLayoutGroup"
+                                                  ItemWidth="1*">
+                        <me:MeLayoutPanel Caption="XXXX" />
+                        <me:MeLayoutPanel Caption="XXXX" />
+                        <me:MeLayoutPanel Caption="XXXX" />
+                        <me:MeLayoutPanel Caption="XXXX" />
+
+                    </me:MeDockVerticalLayoutGroup>
+                    <me:MeDocumentGroup regions:RegionManager.RegionName="DocumentLayoutGroup" ItemWidth="3*">
+                        <me:MeDocumentPanel Caption="XXXX" />
+                        <me:MeDocumentPanel Caption="XXXX" />
+                        <me:MeDocumentPanel Caption="XXXX" />
+                        <me:MeDocumentPanel Caption="XXXX" />
+                    </me:MeDocumentGroup>
+                    <me:MeDockVerticalLayoutGroup regions:RegionManager.RegionName="RightLayoutGroup"
+                                                  ItemWidth="1*">
+                        <me:MeLayoutPanel Caption="XXXX" />
+                        <me:MeLayoutPanel Caption="XXXX" />
+                        <me:MeLayoutPanel Caption="XXXX" />
+
+                    </me:MeDockVerticalLayoutGroup>
+                </me:MeDockHorizontalLayoutGroup>
+                <me:MeDockHorizontalLayoutGroup regions:RegionManager.RegionName="BottomLayoutGroup"
+                                                ItemHeight="1*" />
+            </me:MeDockVerticalLayoutGroup>
+            <me:MeDockLayoutManager.AutoHideGroups>
+                <me:MeAutoHideGroup regions:RegionManager.RegionName="TopAutoHideGroup" DockType="Top" />
+                <me:MeAutoHideGroup regions:RegionManager.RegionName="RightAutoHideGroup" DockType="Right" />
+                <me:MeAutoHideGroup regions:RegionManager.RegionName="BottomAutoHideGroup" DockType="Bottom" />
+                <me:MeAutoHideGroup regions:RegionManager.RegionName="LeftAutoHideGroup" DockType="Left" />
+            </me:MeDockLayoutManager.AutoHideGroups>
+        </me:MeDockLayoutManager>
+        <me:MeContentControl Grid.Row="2" regions:RegionManager.RegionName="StatusBar" />
+    </me:MeGrid>
+</me:MeDxRibbonWindow>

@@ -1,0 +1,13 @@
+﻿<layout:FffAutoLayoutItem x:Class="FarnahadFlowFusion.Core.Control.DateTimeLayoutItem.FffDatePickerLayoutItem"
+                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                          xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                          xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                          xmlns:layout="clr-namespace:FarnahadFlowFusion.Core.Control.Layout"
+                          xmlns:dateTime="clr-namespace:FarnahadFlowFusion.Core.Control.DateTime"
+                          xmlns:fff="FarnahadFlowFusion"
+                          mc:Ignorable="d" d:DesignWidth="800"
+                          x:Name="MainFffAutoLayoutItem">
+    <dateTime:FffDatePicker
+        SelectedDate="{fff:FffBinding Path=EditValue, ElementName=MainFffAutoLayoutItem}" />
+</layout:FffAutoLayoutItem>

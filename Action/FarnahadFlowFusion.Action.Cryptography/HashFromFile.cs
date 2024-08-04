@@ -1,6 +1,7 @@
 ﻿using System.Security.Cryptography;
 using FarnahadFlowFusion.Action.Cryptography.HashFromFileBase;
 using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Variable;
 using FarnahadFlowFusion.Service.Scripting.CSharp;
 using HashAlgorithm = FarnahadFlowFusion.Action.Cryptography.HashFromFileBase.HashAlgorithm;
 

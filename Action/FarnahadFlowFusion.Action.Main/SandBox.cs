@@ -1,20 +1,35 @@
-﻿namespace FarnahadFlowFusion.Action.Main;
+﻿using FarnahadFlowFusion.Action.Main.Action;
+
+namespace FarnahadFlowFusion.Action.Main;
 
 public class SandBox
 {
-    public SandBox(WorkFlow workFlow)
-    {
-        WorkFlow = workFlow;
-        Variables = new List<Variable>();
-        WorkFlow.Variables.ForEach(
-            item => Variables.Add(new Variable(item.Name, item.Value)));
-    }
+    private readonly List<Variable.Variable> _variables;
 
     public WorkFlow WorkFlow { get; set; }
     public IAction CurrentAction { get; set; }
-    public List<Variable> Variables { get; set; }
     public SandBoxStatus SandBoxStatus { get; set; }
     public Exception Exception { get; set; }
+
+    public SandBox(WorkFlow workFlow)
+    {
+        WorkFlow = workFlow;
+        InitialWorkFlow();
+        _variables = new List<Variable.Variable>();
+    }
+
+    private void InitialWorkFlow()
+    {
+        foreach (var inputVariable in WorkFlow.InputVariables)
+        {
+                
+        }
+
+        foreach (var outputVariable in WorkFlow.OutputVariables)
+        {
+            
+        }
+    }
 
     public async Task<SandBox> Run()
     {
@@ -35,24 +50,35 @@ public class SandBox
         return this;
     }
 
-    public object GetVariableValue(string name)
+    public T GetValue<T>(ActionInput actionInput)
     {
-        var variable = Variables.FirstOrDefault(item => item.Name == name);
+        var realVariable = _variables.FirstOrDefault(item => item.Name == variable.Name);
 
-        if (variable != null)
-            return variable.Value;
+        if (realVariable != null)
+            return realVariable.Value;
 
-        return null;
+        return default;
     }
 
-    public object GetListVariableValue(string name)
+    public void SetValue(Variable.Variable variable)
     {
-        var listVariable = (ListVariable)Variables.FirstOrDefault(
-            item => item.Name == name);
+        if (variable.Enable)
+        {
+            var realVariable = _variables.FirstOrDefault(item => item.Name == variable.Name);
 
-        if (listVariable != null)
-            return listVariable.Value;
+            if (variable != null)
+            {
 
-        return null;
+            }
+            else
+            {
+                realVariable = new Variable.Variable();
+            }
+        }
+    }
+
+    public async Task<T> EvaluateActionInput<T>(SandBox sandBox, ActionInput actionInput)
+    {
+        return Task.FromResult(new T());
     }
 }

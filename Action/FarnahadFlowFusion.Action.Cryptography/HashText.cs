@@ -1,6 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Variable;
 using FarnahadFlowFusion.Service.Scripting.CSharp;
 using Encoding = FarnahadFlowFusion.Action.Cryptography.HashTextBase.Encoding;
 using HashAlgorithm = FarnahadFlowFusion.Action.Cryptography.HashTextBase.HashAlgorithm;

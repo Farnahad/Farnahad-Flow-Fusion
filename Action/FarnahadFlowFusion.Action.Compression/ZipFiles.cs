@@ -1,5 +1,6 @@
 ﻿using System.IO.Compression;
 using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Variable;
 using FarnahadFlowFusion.Service.Scripting.CSharp;
 using CompressionLevel = FarnahadFlowFusion.Action.Compression.ZipFilesBase.CompressionLevel;
 

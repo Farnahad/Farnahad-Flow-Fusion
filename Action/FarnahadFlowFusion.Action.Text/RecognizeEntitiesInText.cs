@@ -1,4 +1,5 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
 using FarnahadFlowFusion.Action.Text.RecognizeEntitiesInTextBase;
 
@@ -6,8 +7,6 @@ namespace FarnahadFlowFusion.Action.Text;
 
 public class RecognizeEntitiesInText : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Recognize entities in text";
 
     public ActionInput TextToRecognizeFrom { get; set; }
@@ -17,8 +16,6 @@ public class RecognizeEntitiesInText : IAction
 
     public RecognizeEntitiesInText()
     {
-        _cSharpService = new CSharpService();
-
         TextToRecognizeFrom = new ActionInput();
         EntityType = EntityType.Datetime;
         Language = Language.English;
@@ -27,11 +24,11 @@ public class RecognizeEntitiesInText : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var minimumVaXXXXXXXXXXXXlue = await _cSharpService.EvaluateActionInput<int>(sandBox, XXXXXXXXXXXX);
-        var XXXXXXXXXXXX = await _cSharpService.EvaluateActionInput<int>(sandBox, XXXXXXXXXXXX);
+        var minimumVaXXXXXXXXXXXXlue = await sandBox.EvaluateActionInput<int>(XXXXXXXXXXXX);
+        var XXXXXXXXXXXX = await sandBox.EvaluateActionInput<int>(XXXXXXXXXXXX);
 
         XXXXXXXXXXXX.Value = new Random().Next(XXXXXXXXXXXX, XXXXXXXXXXXX);
 
-        sandBox.Variables.Add(XXXXXXXXXXXX);
+        sandBox.SetVariable(XXXXXXXXXXXX);
     }
 }

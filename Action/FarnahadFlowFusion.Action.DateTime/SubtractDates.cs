@@ -1,14 +1,12 @@
 ﻿using FarnahadFlowFusion.Action.DateTime.SubtractDatesBase;
 using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
 
 namespace FarnahadFlowFusion.Action.DateTime;
 
 public class SubtractDates : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Subtract dates";
 
     public ActionInput FromDate { get; set; }
@@ -18,8 +16,6 @@ public class SubtractDates : IAction
 
     public SubtractDates()
     {
-        _cSharpService = new CSharpService();
-
         FromDate = new ActionInput();
         SubtractDate = new ActionInput();
         GetDifferenceIn = GetDifferenceIn.Days;
@@ -28,8 +24,8 @@ public class SubtractDates : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var fromDateValue = await _cSharpService.EvaluateActionInput<global::System.DateTime>(sandBox, FromDate);
-        var subtractDateValue = await _cSharpService.EvaluateActionInput<global::System.DateTime>(sandBox, SubtractDate);
+        var fromDateValue = await sandBox.EvaluateActionInput<global::System.DateTime>(FromDate);
+        var subtractDateValue = await sandBox.EvaluateActionInput<global::System.DateTime>(SubtractDate);
 
         var dateTimeResult = fromDateValue - subtractDateValue;
 
@@ -42,6 +38,6 @@ public class SubtractDates : IAction
             _ => TimeDifference.Value
         };
 
-        sandBox.Variables.Add(TimeDifference);
+        sandBox.SetVariable(TimeDifference);
     }
 }

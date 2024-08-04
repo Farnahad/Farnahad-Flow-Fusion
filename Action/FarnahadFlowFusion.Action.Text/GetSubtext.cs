@@ -1,4 +1,5 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
 using FarnahadFlowFusion.Action.Text.GetSubtextBase;
 
@@ -6,8 +7,6 @@ namespace FarnahadFlowFusion.Action.Text;
 
 public class GetSubtext : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Get subtext";
 
     public ActionInput OriginalText { get; set; }
@@ -19,8 +18,6 @@ public class GetSubtext : IAction
 
     public GetSubtext()
     {
-        _cSharpService = new CSharpService();
-
         OriginalText = new ActionInput();
         StartIndex = StartIndex.CharacterPosition;
         CharacterPosition = new ActionInput();
@@ -31,9 +28,9 @@ public class GetSubtext : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var originalTextValue = await _cSharpService.EvaluateActionInput<string>(sandBox, OriginalText);
-        var characterPositionValue = await _cSharpService.EvaluateActionInput<int>(sandBox, CharacterPosition);
-        var numberOfCharsValue = await _cSharpService.EvaluateActionInput<int>(sandBox, NumberOfChars);
+        var originalTextValue = await sandBox.EvaluateActionInput<string>(OriginalText);
+        var characterPositionValue = await sandBox.EvaluateActionInput<int>(CharacterPosition);
+        var numberOfCharsValue = await sandBox.EvaluateActionInput<int>(NumberOfChars);
 
         int startIndex = 0;
 
@@ -61,6 +58,6 @@ public class GetSubtext : IAction
 
         Subtext.Value = originalTextValue.Substring(startIndex, length);
 
-        sandBox.Variables.Add(Subtext);
+        sandBox.SetVariable(Subtext);
     }
 }

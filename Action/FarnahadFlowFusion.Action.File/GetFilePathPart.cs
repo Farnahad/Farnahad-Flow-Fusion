@@ -1,13 +1,11 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
 
 namespace FarnahadFlowFusion.Action.File;
 
 public class GetFilePathPart : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Get file path part";
 
     public ActionInput FilePath { get; set; }
@@ -19,8 +17,6 @@ public class GetFilePathPart : IAction
 
     public GetFilePathPart()
     {
-        _cSharpService = new CSharpService();
-
         FilePath = new ActionInput();
         RootPath = new Variable();
         Directory = new Variable();
@@ -31,7 +27,7 @@ public class GetFilePathPart : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var filePathValue = await _cSharpService.EvaluateActionInput<string>(sandBox, FilePath);
+        var filePathValue = await sandBox.EvaluateActionInput<string>(FilePath);
 
         var fileInfo = new FileInfo(filePathValue);
 
@@ -41,10 +37,10 @@ public class GetFilePathPart : IAction
         FileNameNoExtension.Value = fileInfo.Name.Replace(fileInfo.Extension, "");
         FileExtension.Value = fileInfo.Extension;
 
-        sandBox.Variables.Add(RootPath);
-        sandBox.Variables.Add(Directory);
-        sandBox.Variables.Add(FileName);
-        sandBox.Variables.Add(FileNameNoExtension);
-        sandBox.Variables.Add(FileExtension);
+        sandBox.SetVariable(RootPath);
+        sandBox.SetVariable(Directory);
+        sandBox.SetVariable(FileName);
+        sandBox.SetVariable(FileNameNoExtension);
+        sandBox.SetVariable(FileExtension);
     }
 }

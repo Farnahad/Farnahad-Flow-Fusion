@@ -1,10 +1,11 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
+using FarnahadFlowFusion.Service.Workstation.Workstation;
 
 namespace FarnahadFlowFusion.Action.Workstation;
 
 public class SetScreenResolution : IAction
 {
-    private readonly CSharpService _cSharpService;
     private readonly WorkstationService _workstationService;
 
     public string Name => "Set screen resolution";
@@ -17,7 +18,6 @@ public class SetScreenResolution : IAction
 
     public SetScreenResolution()
     {
-        _cSharpService = new CSharpService();
         _workstationService = new WorkstationService();
 
         MonitorNumber = new ActionInput();
@@ -29,11 +29,11 @@ public class SetScreenResolution : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var monitorNumberValue = await _cSharpService.EvaluateActionInput<int>(sandBox, MonitorNumber);
-        var monitorWidthValue = await _cSharpService.EvaluateActionInput<int>(sandBox, MonitorWidth);
-        var monitorHeightValue = await _cSharpService.EvaluateActionInput<int>(sandBox, MonitorHeight);
-        var monitorBitCountValue = await _cSharpService.EvaluateActionInput<int>(sandBox, MonitorBitCount);
-        var monitorFrequencyValue = await _cSharpService.EvaluateActionInput<int>(sandBox, MonitorFrequency);
+        var monitorNumberValue = await sandBox.EvaluateActionInput<int>(MonitorNumber);
+        var monitorWidthValue = await sandBox.EvaluateActionInput<int>(MonitorWidth);
+        var monitorHeightValue = await sandBox.EvaluateActionInput<int>(MonitorHeight);
+        var monitorBitCountValue = await sandBox.EvaluateActionInput<int>(MonitorBitCount);
+        var monitorFrequencyValue = await sandBox.EvaluateActionInput<int>(MonitorFrequency);
 
         _workstationService.SetScreenResolution(monitorNumberValue,
             monitorWidthValue, monitorHeightValue, monitorBitCountValue, monitorFrequencyValue);

@@ -1,11 +1,12 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Workstation.ShutdownComputerBase;
+using FarnahadFlowFusion.Service.Workstation.Workstation;
 
 namespace FarnahadFlowFusion.Action.Workstation;
 
 public class ShutdownComputer : IAction
 {
-    private readonly CSharpService _cSharpService;
     private readonly WorkstationService _workstationService;
 
     public string Name => "Shutdown computer";
@@ -15,7 +16,6 @@ public class ShutdownComputer : IAction
 
     public ShutdownComputer()
     {
-        _cSharpService = new CSharpService();
         _workstationService = new WorkstationService();
 
         ActionToPerform = ActionToPerform.Shutdown;

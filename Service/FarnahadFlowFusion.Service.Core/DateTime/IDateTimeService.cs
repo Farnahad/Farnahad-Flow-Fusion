@@ -1,6 +1,4 @@
-﻿using ManaErp.Core.Main.Mvvm;
-
-namespace ManaErp.Service.Main.DateTime
+﻿namespace ManaErp.Service.Main.DateTime
 {
     public interface IDateTimeService : IService
     {

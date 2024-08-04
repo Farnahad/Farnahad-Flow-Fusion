@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
-using ManaErp.Core.Main.Command;
-using ManaErp.Core.Main.Event;
-using ManaErp.DataAccess.Model;
-using ManaErp.DataAccess.Wrapper.Core;
+﻿using System.Collections.ObjectModel;
 using ManaErp.Module.Core.Edit;
 using ManaErp.Module.Core.General;
-using ManaErp.Service.Core.Container;
-using ManaErp.Service.Core.Crud;
 
 namespace ManaErp.Module.Core.List
 {

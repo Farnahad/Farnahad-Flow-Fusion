@@ -1,11 +1,12 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
+using FarnahadFlowFusion.Service.Workstation.Workstation;
 
 namespace FarnahadFlowFusion.Action.Workstation;
 
 public class GetDefaultPrinter : IAction
 {
-    private readonly CSharpService _cSharpService;
     private readonly WorkstationService _workstationService;
 
     public string Name => "Get default printer";
@@ -14,7 +15,6 @@ public class GetDefaultPrinter : IAction
 
     public GetDefaultPrinter()
     {
-        _cSharpService = new CSharpService();
         _workstationService = new WorkstationService();
 
         PrinterName = new Variable();
@@ -24,6 +24,6 @@ public class GetDefaultPrinter : IAction
     {
         PrinterName.Value = _workstationService.GetDefaultPrinter();
 
-        sandBox.Variables.Add(PrinterName);
+        sandBox.SetVariable(PrinterName);
     }
 }

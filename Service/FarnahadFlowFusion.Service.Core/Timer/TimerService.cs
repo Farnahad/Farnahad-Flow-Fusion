@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ManaErp.Service.Main.Timer
+﻿namespace ManaErp.Service.Main.Timer
 {
     public class TimerService : ITimerService
     {

@@ -1,14 +1,12 @@
 ﻿using System.Net;
 using System.Net.Mail;
 using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
+using FarnahadFlowFusion.Action.Main.Action;
 
 namespace FarnahadFlowFusion.Action.Email;
 
 public class SendEmail : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Send email";
 
     public ActionInput From { get; set; }
@@ -30,8 +28,6 @@ public class SendEmail : IAction
 
     public SendEmail()
     {
-        _cSharpService = new CSharpService();
-
         From = new ActionInput();
         SenderDisplayName = new ActionInput();
         To = new ActionInput();
@@ -51,18 +47,18 @@ public class SendEmail : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var fromValue = await _cSharpService.EvaluateActionInput<string>(sandBox, From);
-        var senderDisplayNameValue = await _cSharpService.EvaluateActionInput<string>(sandBox, SenderDisplayName);
-        var toValue = await _cSharpService.EvaluateActionInput<string>(sandBox, To);
-        var ccValue = await _cSharpService.EvaluateActionInput<string>(sandBox, Cc);
-        var bccValue = await _cSharpService.EvaluateActionInput<string>(sandBox, Bcc);
-        var subjectValue = await _cSharpService.EvaluateActionInput<string>(sandBox, Subject);
-        var bodyValue = await _cSharpService.EvaluateActionInput<string>(sandBox, Body);
-        var attachmentsValue = await _cSharpService.EvaluateActionInput<List<string>>(sandBox, Attachments);
-        var smtpServerValue = await _cSharpService.EvaluateActionInput<string>(sandBox, SmtpServer);
-        var serverPortValue = await _cSharpService.EvaluateActionInput<int>(sandBox, ServerPort);
-        var userNameValue = await _cSharpService.EvaluateActionInput<string>(sandBox, UserName);
-        var passwordValue = await _cSharpService.EvaluateActionInput<string>(sandBox, Password);
+        var fromValue = await sandBox.EvaluateActionInput<string>(From);
+        var senderDisplayNameValue = await sandBox.EvaluateActionInput<string>(SenderDisplayName);
+        var toValue = await sandBox.EvaluateActionInput<string>(To);
+        var ccValue = await sandBox.EvaluateActionInput<string>(Cc);
+        var bccValue = await sandBox.EvaluateActionInput<string>(Bcc);
+        var subjectValue = await sandBox.EvaluateActionInput<string>(Subject);
+        var bodyValue = await sandBox.EvaluateActionInput<string>(Body);
+        var attachmentsValue = await sandBox.EvaluateActionInput<List<string>>(Attachments);
+        var smtpServerValue = await sandBox.EvaluateActionInput<string>(SmtpServer);
+        var serverPortValue = await sandBox.EvaluateActionInput<int>(ServerPort);
+        var userNameValue = await sandBox.EvaluateActionInput<string>(UserName);
+        var passwordValue = await sandBox.EvaluateActionInput<string>(Password);
 
         var smtpClient = new SmtpClient(smtpServerValue, serverPortValue)
         {

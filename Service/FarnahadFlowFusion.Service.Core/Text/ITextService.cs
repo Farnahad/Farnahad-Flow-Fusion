@@ -1,6 +1,4 @@
-﻿using ManaErp.Core.Main.Mvvm;
-
-namespace ManaErp.Service.Main.Text
+﻿namespace ManaErp.Service.Main.Text
 {
     public interface ITextService : IService
     {

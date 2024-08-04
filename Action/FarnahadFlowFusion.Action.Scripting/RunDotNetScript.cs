@@ -1,6 +1,6 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Scripting.RunDotNetScriptBase;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
 
@@ -8,8 +8,6 @@ namespace FarnahadFlowFusion.Action.Scripting;
 
 public class RunDotNetScript : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Run .NET script";
 
     public Language Language { get; set; }
@@ -20,8 +18,6 @@ public class RunDotNetScript : IAction
 
     public RunDotNetScript()
     {
-        _cSharpService = new CSharpService();
-
         Language = Language.CSharp;
         DotNetScriptImports = new ActionInput();
         ReferencesToBeLoaded = new ActionInput();
@@ -31,9 +27,9 @@ public class RunDotNetScript : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var dotNetScriptImportsValue = await _cSharpService.EvaluateActionInput<string>(sandBox, DotNetScriptImports);
-        var referencesToBeLoadedValue = await _cSharpService.EvaluateActionInput<string>(sandBox, ReferencesToBeLoaded);
-        var dDotNetCodeToRunValue = await _cSharpService.EvaluateActionInput<string>(sandBox, DotNetCodeToRun);
+        var dotNetScriptImportsValue = await sandBox.EvaluateActionInput<string>(DotNetScriptImports);
+        var referencesToBeLoadedValue = await sandBox.EvaluateActionInput<string>(ReferencesToBeLoaded);
+        var dDotNetCodeToRunValue = await sandBox.EvaluateActionInput<string>(DotNetCodeToRun);
 
         // Language
 
@@ -55,6 +51,6 @@ public class RunDotNetScript : IAction
 
         XXXXXXXXXXXX.Value = new Random().Next(XXXXXXXXXXXX, XXXXXXXXXXXX);
 
-        sandBox.Variables.Add(XXXXXXXXXXXX);
+        sandBox.SetVariable(XXXXXXXXXXXX);
     }
 }

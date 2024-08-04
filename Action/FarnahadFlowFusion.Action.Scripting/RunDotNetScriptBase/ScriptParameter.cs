@@ -1,6 +1,4 @@
-﻿using FarnahadFlowFusion.Action.Main;
-
-namespace FarnahadFlowFusion.Action.Scripting.RunDotNetScriptBase;
+﻿namespace FarnahadFlowFusion.Action.Scripting.RunDotNetScriptBase;
 
 public class ScriptParameter
 {

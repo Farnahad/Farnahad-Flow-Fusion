@@ -1,13 +1,11 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
 
 namespace FarnahadFlowFusion.Action.Folder;
 
 public class RenameFolder : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Rename folder";
 
     public ActionInput FolderToRename { get; set; }
@@ -16,8 +14,6 @@ public class RenameFolder : IAction
 
     public RenameFolder()
     {
-        _cSharpService = new CSharpService();
-
         FolderToRename = new ActionInput();
         NewFolderName = new ActionInput();
         RenamedFolder = new Variable();
@@ -25,8 +21,8 @@ public class RenameFolder : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var folderToRenameValue = await _cSharpService.EvaluateActionInput<string>(sandBox, FolderToRename);
-        var newFolderNameValue = await _cSharpService.EvaluateActionInput<string>(sandBox, NewFolderName);
+        var folderToRenameValue = await sandBox.EvaluateActionInput<string>(FolderToRename);
+        var newFolderNameValue = await sandBox.EvaluateActionInput<string>(NewFolderName);
 
         var directoryInfo = new DirectoryInfo(folderToRenameValue);
 

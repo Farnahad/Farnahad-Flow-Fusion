@@ -1,4 +1,5 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
 using FarnahadFlowFusion.Action.Text.TrimTextBase;
 
@@ -6,8 +7,6 @@ namespace FarnahadFlowFusion.Action.Text;
 
 public class TrimText : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Trim text";
 
     public ActionInput TextToTrim { get; set; }
@@ -16,8 +15,6 @@ public class TrimText : IAction
 
     public TrimText()
     {
-        _cSharpService = new CSharpService();
-
         TextToTrim = new ActionInput();
         WhatToTrim = WhatToTrim.WhitespaceCharactersFromTheBeginningAndEnd;
         TrimmedText = new Variable();
@@ -25,7 +22,7 @@ public class TrimText : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var textToTrimValue = await _cSharpService.EvaluateActionInput<string>(sandBox, TextToTrim);
+        var textToTrimValue = await sandBox.EvaluateActionInput<string>(TextToTrim);
 
         switch (WhatToTrim)
         {
@@ -40,6 +37,6 @@ public class TrimText : IAction
                 break;
         }
 
-        sandBox.Variables.Add(TrimmedText);
+        sandBox.SetVariable(TrimmedText);
     }
 }

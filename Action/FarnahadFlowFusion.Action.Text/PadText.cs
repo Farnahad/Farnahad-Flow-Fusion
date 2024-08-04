@@ -1,4 +1,5 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
 using FarnahadFlowFusion.Action.Text.PadTextBase;
 
@@ -6,8 +7,6 @@ namespace FarnahadFlowFusion.Action.Text;
 
 public class PadText : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Pad text";
 
     public ActionInput TextToPad { get; set; }
@@ -18,8 +17,6 @@ public class PadText : IAction
 
     public PadText()
     {
-        _cSharpService = new CSharpService();
-
         TextToPad = new ActionInput();
         Pad = Pad.Left;
         TextForPadding = new ActionInput();
@@ -29,9 +26,9 @@ public class PadText : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var textToPadValue = await _cSharpService.EvaluateActionInput<string>(sandBox, TextToPad);
-        var textForPaddingValue = await _cSharpService.EvaluateActionInput<char>(sandBox, TextForPadding);
-        var totalLengthValue = await _cSharpService.EvaluateActionInput<int>(sandBox, TotalLength);
+        var textToPadValue = await sandBox.EvaluateActionInput<string>(TextToPad);
+        var textForPaddingValue = await sandBox.EvaluateActionInput<char>(TextForPadding);
+        var totalLengthValue = await sandBox.EvaluateActionInput<int>(TotalLength);
 
         switch (Pad)
         {
@@ -43,6 +40,6 @@ public class PadText : IAction
                 break;
         }
 
-        sandBox.Variables.Add(PaddedText);
+        sandBox.SetVariable(PaddedText);
     }
 }

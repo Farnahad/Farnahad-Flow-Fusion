@@ -1,26 +1,22 @@
 ﻿using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
+using FarnahadFlowFusion.Action.Main.Action;
 
 namespace FarnahadFlowFusion.Action.File;
 
 public class DeleteFiles : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Delete file(s)";
 
     public ActionInput FilesToDelete { get; set; }
 
     public DeleteFiles()
     {
-        _cSharpService = new CSharpService();
-
         FilesToDelete = new ActionInput();
     }
 
     public async Task Execute(SandBox sandBox)
     {
-        var filesToDeleteValue = await _cSharpService.EvaluateActionInput<List<string>>(sandBox, FilesToDelete);
+        var filesToDeleteValue = await sandBox.EvaluateActionInput<List<string>>(FilesToDelete);
 
         foreach (var fileToDelete in filesToDeleteValue)
         {

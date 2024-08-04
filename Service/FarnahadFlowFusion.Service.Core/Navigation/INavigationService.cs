@@ -1,9 +1,4 @@
-﻿using System;
-using ManaErp.Core.Control.DockLayout;
-using ManaErp.Core.Control.Ribbon;
-using ManaErp.Core.Main.Mvvm;
-
-namespace ManaErp.Service.Main.Navigation
+﻿namespace ManaErp.Service.Main.Navigation
 {
     public interface INavigationService : IService
     {

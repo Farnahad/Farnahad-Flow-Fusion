@@ -1,10 +1,11 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
+using FarnahadFlowFusion.Service.WindowsServices.WindowsService;
 
 namespace FarnahadFlowFusion.Action.WindowsServices;
 
 public class StartService : IAction
 {
-    private readonly CSharpService _cSharpService;
     private readonly WindowsServiceService _windowsServiceService;
 
     public string Name => "Start service";
@@ -13,7 +14,6 @@ public class StartService : IAction
 
     public StartService()
     {
-        _cSharpService = new CSharpService();
         _windowsServiceService = new WindowsServiceService();
 
         ServiceToStart = new ActionInput();
@@ -21,7 +21,7 @@ public class StartService : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var serviceToStart = await _cSharpService.EvaluateActionInput<string>(sandBox, ServiceToStart);
+        var serviceToStart = await sandBox.EvaluateActionInput<string>(ServiceToStart);
         _windowsServiceService.Start(serviceToStart);
     }
 }

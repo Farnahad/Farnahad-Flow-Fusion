@@ -1,16 +1,13 @@
 ﻿using FarnahadFlowFusion.Action.Email.ProcessEmailMessagesBase;
 using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
+using FarnahadFlowFusion.Action.Main.Action;
 using MailKit;
 using MailKit.Net.Imap;
-using UniqueId = System.Xml.UniqueId;
 
 namespace FarnahadFlowFusion.Action.Email;
 
 public class ProcessEmailMessages : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Process email messages";
 
     public ActionInput EmailMessagesToProcess { get; set; }
@@ -25,8 +22,6 @@ public class ProcessEmailMessages : IAction
 
     public ProcessEmailMessages()
     {
-        _cSharpService = new CSharpService();
-
         EmailMessagesToProcess = new ActionInput();
         Operation = Operation.MoveEmailMessagesToMailFolder;
         MailFolder = new ActionInput();
@@ -40,12 +35,12 @@ public class ProcessEmailMessages : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var emailMessagesToProcessValues = await _cSharpService.EvaluateActionInput<List<string>>(sandBox, EmailMessagesToProcess);
-        var mailFolderValue = await _cSharpService.EvaluateActionInput<string>(sandBox, MailFolder);
-        var imapServerValue = await _cSharpService.EvaluateActionInput<string>(sandBox, ImapServer);
-        var portValue = await _cSharpService.EvaluateActionInput<int>(sandBox, Port);
-        var usernameValue = await _cSharpService.EvaluateActionInput<string>(sandBox, Username);
-        var passwordValue = await _cSharpService.EvaluateActionInput<string>(sandBox, Password);
+        var emailMessagesToProcessValues = await sandBox.EvaluateActionInput<List<string>>(EmailMessagesToProcess);
+        var mailFolderValue = await sandBox.EvaluateActionInput<string>(MailFolder);
+        var imapServerValue = await sandBox.EvaluateActionInput<string>(ImapServer);
+        var portValue = await sandBox.EvaluateActionInput<int>(Port);
+        var usernameValue = await sandBox.EvaluateActionInput<string>(Username);
+        var passwordValue = await sandBox.EvaluateActionInput<string>(Password);
 
         using (var client = new ImapClient())
         {
@@ -54,7 +49,7 @@ public class ProcessEmailMessages : IAction
 
             foreach (var uid in emailMessagesToProcessValues)
             {
-                var mailbox = client.GetFolder(Environment.SpecialFolder.All);
+                var mailbox = client.GetFolder(SpecialFolder.All);
                 var mailFolder = await client.GetFolderAsync(mailFolderValue);
 
                 switch (Operation)

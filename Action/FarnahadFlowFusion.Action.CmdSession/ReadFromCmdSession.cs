@@ -1,14 +1,12 @@
 ﻿using System.Diagnostics;
 using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
 
 namespace FarnahadFlowFusion.Action.CmdSession;
 
 public class ReadFromCmdSession : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Read from CMD session";
 
     public ActionInput CmdSession { get; set; }
@@ -17,8 +15,6 @@ public class ReadFromCmdSession : IAction
 
     public ReadFromCmdSession()
     {
-        _cSharpService = new CSharpService();
-
         CmdSession = new ActionInput();
         SeparateOutputFromError = false;
         CmdOutput = new Variable();
@@ -26,7 +22,7 @@ public class ReadFromCmdSession : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var cmdSessionValue = await _cSharpService.EvaluateActionInput<Process>(sandBox, CmdSession);
+        var cmdSessionValue = await sandBox.EvaluateActionInput<Process>(CmdSession);
 
         if (SeparateOutputFromError)
         {
@@ -58,6 +54,6 @@ public class ReadFromCmdSession : IAction
 
         await cmdSessionValue.WaitForExitAsync();
 
-        sandBox.Variables.Add(CmdOutput);
+        sandBox.SetVariable(CmdOutput);
     }
 }

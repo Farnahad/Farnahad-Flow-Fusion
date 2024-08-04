@@ -1,9 +1,4 @@
-﻿using System;
-using ManaErp.Core.Control.DockLayout;
-using ManaErp.Core.Control.Ribbon;
-using ManaErp.Core.Main.Mvvm;
-using ManaErp.Service.Core.Container;
-using Prism.Regions;
+﻿using Prism.Regions;
 
 namespace ManaErp.Service.Main.Navigation
 {

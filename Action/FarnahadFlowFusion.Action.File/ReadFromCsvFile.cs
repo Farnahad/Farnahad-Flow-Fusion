@@ -1,14 +1,12 @@
 ﻿using FarnahadFlowFusion.Action.File.ReadFromCsvFileBase;
 using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
 
 namespace FarnahadFlowFusion.Action.File;
 
 public class ReadFromCsvFile : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Read from CSV file";
 
     public ActionInput FilePath { get; set; }
@@ -17,8 +15,6 @@ public class ReadFromCsvFile : IAction
 
     public ReadFromCsvFile()
     {
-        _cSharpService = new CSharpService();
-
         FilePath = new ActionInput();
         Encoding = Encoding.Utf8;
         CsvTable = new Variable();
@@ -26,7 +22,7 @@ public class ReadFromCsvFile : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var filePathValue = await _cSharpService.EvaluateActionInput<string>(sandBox, FilePath);
+        var filePathValue = await sandBox.EvaluateActionInput<string>(FilePath);
 
         var csvLines = new List<string[]>();
 
@@ -51,6 +47,6 @@ public class ReadFromCsvFile : IAction
 
         CsvTable.Value = csvLines;
 
-        sandBox.Variables.Add(CsvTable);
+        sandBox.SetVariable(CsvTable);
     }
 }

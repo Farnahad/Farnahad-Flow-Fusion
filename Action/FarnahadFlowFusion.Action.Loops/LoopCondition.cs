@@ -1,13 +1,11 @@
 ﻿using FarnahadFlowFusion.Action.Loops.LoopConditionBase;
 using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
+using FarnahadFlowFusion.Action.Main.Action;
 
 namespace FarnahadFlowFusion.Action.Loops;
 
 public class LoopCondition : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Loop condition";
 
     public ActionInput FirstOperand { get; set; }
@@ -17,8 +15,6 @@ public class LoopCondition : IAction
 
     public LoopCondition()
     {
-        _cSharpService = new CSharpService();
-
         FirstOperand = new ActionInput();
         Operator = Operator.EqualTo;
         SecondOperand = new ActionInput();
@@ -27,8 +23,8 @@ public class LoopCondition : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var firstOperandValue = await _cSharpService.EvaluateActionInput<double>(sandBox, FirstOperand);
-        var secondOperandValue = await _cSharpService.EvaluateActionInput<double>(sandBox, SecondOperand);
+        var firstOperandValue = await sandBox.EvaluateActionInput<double>(FirstOperand);
+        var secondOperandValue = await sandBox.EvaluateActionInput<double>(SecondOperand);
 
         var whileResult = GetWhileResult(firstOperandValue, secondOperandValue);
 

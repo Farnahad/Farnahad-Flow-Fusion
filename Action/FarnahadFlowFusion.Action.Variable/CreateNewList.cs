@@ -1,4 +1,6 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
+using FarnahadFlowFusion.Action.Main.Variable;
 
 namespace FarnahadFlowFusion.Action.Variable;
 
@@ -11,7 +13,7 @@ public class CreateNewList : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        sandBox.Variables.Add(new ListVariable(_Name, new List<object>()));
+        sandBox.SetVariable(new ListVariable(_Name, new List<object>()));
         await Task.CompletedTask;
     }
 }

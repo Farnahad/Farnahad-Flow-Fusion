@@ -1,7 +1,4 @@
 ﻿using System.Windows.Controls;
-using ManaErp.Core.Control.DockLayout;
-using ManaErp.Core.Control.Window;
-using ManaErp.Core.Main.Mvvm;
 
 namespace ManaErp.Module.Core.General
 {

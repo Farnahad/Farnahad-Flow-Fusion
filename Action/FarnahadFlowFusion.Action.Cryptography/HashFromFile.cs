@@ -1,16 +1,14 @@
 ﻿using System.Security.Cryptography;
 using FarnahadFlowFusion.Action.Cryptography.HashFromFileBase;
 using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
 using HashAlgorithm = FarnahadFlowFusion.Action.Cryptography.HashFromFileBase.HashAlgorithm;
 
 namespace FarnahadFlowFusion.Action.Cryptography;
 
 public class HashFromFile : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Hash from file";
 
     public HashAlgorithm HashAlgorithm { get; set; }
@@ -20,8 +18,6 @@ public class HashFromFile : IAction
 
     public HashFromFile()
     {
-        _cSharpService = new CSharpService();
-
         HashAlgorithm = HashAlgorithm.Sha256;
         Encoding = Encoding.Unicode;
         FileToHash = new ActionInput();
@@ -30,7 +26,7 @@ public class HashFromFile : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var fileToHashValue = await _cSharpService.EvaluateActionInput<string>(sandBox, FileToHash);
+        var fileToHashValue = await sandBox.EvaluateActionInput<string>(FileToHash);
 
         var realEncoding = Encoding switch
         {
@@ -52,6 +48,6 @@ public class HashFromFile : IAction
             _ => HashedText.Value
         };
 
-        sandBox.Variables.Add(HashedText);
+        sandBox.SetVariable(HashedText);
     }
 }

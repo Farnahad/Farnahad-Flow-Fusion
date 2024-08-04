@@ -1,15 +1,13 @@
 ﻿using System.Security.Cryptography;
 using FarnahadFlowFusion.Action.Cryptography.DecryptToFileWithAesBase;
 using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
 
 namespace FarnahadFlowFusion.Action.Cryptography;
 
 public class DecryptToFileWithAes : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Decrypt to file with AES";
 
     public Encoding Encoding { get; set; }
@@ -21,8 +19,6 @@ public class DecryptToFileWithAes : IAction
 
     public DecryptToFileWithAes()
     {
-        _cSharpService = new CSharpService();
-
         Encoding = Encoding.Unicode;
         TextToDecrypt = new ActionInput();
         DecryptionKey = new ActionInput();
@@ -33,9 +29,9 @@ public class DecryptToFileWithAes : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var textToDecryptValue = await _cSharpService.EvaluateActionInput<string>(sandBox, TextToDecrypt);
-        var decryptionKeyValue = await _cSharpService.EvaluateActionInput<string>(sandBox, DecryptionKey);
-        var decryptToFileValue = await _cSharpService.EvaluateActionInput<string>(sandBox, DecryptToFile);
+        var textToDecryptValue = await sandBox.EvaluateActionInput<string>(TextToDecrypt);
+        var decryptionKeyValue = await sandBox.EvaluateActionInput<string>(DecryptionKey);
+        var decryptToFileValue = await sandBox.EvaluateActionInput<string>(DecryptToFile);
 
         var realEncoding = Encoding switch
         {
@@ -103,6 +99,6 @@ public class DecryptToFileWithAes : IAction
                 break;
         }
 
-        sandBox.Variables.Add(DecryptedFile);
+        sandBox.SetVariable(DecryptedFile);
     }
 }

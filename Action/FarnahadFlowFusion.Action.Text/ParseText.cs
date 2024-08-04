@@ -1,13 +1,12 @@
 ﻿using System.Text.RegularExpressions;
 using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
 
 namespace FarnahadFlowFusion.Action.Text;
 
 public class ParseText : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Parse text";
 
     public ActionInput TextToParse { get; set; }
@@ -20,8 +19,6 @@ public class ParseText : IAction
 
     public ParseText()
     {
-        _cSharpService = new CSharpService();
-
         TextToParse = new ActionInput();
         TextToFind = new ActionInput();
         IsRegularExpression = false;
@@ -33,9 +30,9 @@ public class ParseText : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var textToParseValue = await _cSharpService.EvaluateActionInput<string>(sandBox, TextToParse);
-        var textToFindValue = await _cSharpService.EvaluateActionInput<string>(sandBox, TextToFind);
-        var startParsingAtPositionValue = await _cSharpService.EvaluateActionInput<int>(sandBox, StartParsingAtPosition);
+        var textToParseValue = await sandBox.EvaluateActionInput<string>(TextToParse);
+        var textToFindValue = await sandBox.EvaluateActionInput<string>(TextToFind);
+        var startParsingAtPositionValue = await sandBox.EvaluateActionInput<int>(StartParsingAtPosition);
 
 
         var comparisonType = IgnoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
@@ -55,6 +52,6 @@ public class ParseText : IAction
             Position.Value = index;
         }
 
-        sandBox.Variables.Add(Position);
+        sandBox.SetVariable(Position);
     }
 }

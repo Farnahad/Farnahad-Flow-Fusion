@@ -6,6 +6,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\Service\FarnahadFlowFusion.Service.Workstation\FarnahadFlowFusion.Service.Workstation.csproj" />
 		<ProjectReference Include="..\FarnahadFlowFusion.Action.Main\FarnahadFlowFusion.Action.Main.csproj" />
 	</ItemGroup>
 </Project>

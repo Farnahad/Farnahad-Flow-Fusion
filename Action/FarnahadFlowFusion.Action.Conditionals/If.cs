@@ -1,13 +1,11 @@
 ﻿using FarnahadFlowFusion.Action.Conditionals.IfBase;
 using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
+using FarnahadFlowFusion.Action.Main.Action;
 
 namespace FarnahadFlowFusion.Action.Conditionals;
 
 public class If : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "If";
 
     public ActionInput FirstOperand { get; set; }
@@ -20,8 +18,6 @@ public class If : IAction
 
     public If()
     {
-        _cSharpService = new CSharpService();
-
         FirstOperand = new ActionInput();
         Operator = Operator.EqualTo;
         SecondOperand = new ActionInput();
@@ -32,8 +28,8 @@ public class If : IAction
     public async Task Execute(SandBox sandBox)
     {
         var ifResult = false;
-        var firstOperandValue = await _cSharpService.EvaluateActionInput<object>(sandBox, FirstOperand);
-        var secondOperandValue = await _cSharpService.EvaluateActionInput<object>(sandBox, SecondOperand);
+        var firstOperandValue = await sandBox.EvaluateActionInput<object>(FirstOperand);
+        var secondOperandValue = await sandBox.EvaluateActionInput<object>(SecondOperand);
         var stringComparison = IgnoreCase ? StringComparison.OrdinalIgnoreCase :
             StringComparison.CurrentCulture;
 

@@ -1,14 +1,4 @@
-﻿using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Threading.Tasks;
-using ManaErp.Core.Main.Command;
-using ManaErp.Core.Main.Event;
-using ManaErp.Core.Main.Window;
-using ManaErp.DataAccess.Model;
-using ManaErp.DataAccess.Wrapper.Core;
-using ManaErp.Module.Core.General;
-using ManaErp.Service.Core.Container;
-using ManaErp.Service.Core.Crud;
+﻿using ManaErp.Module.Core.General;
 
 namespace ManaErp.Module.Core.Edit
 {

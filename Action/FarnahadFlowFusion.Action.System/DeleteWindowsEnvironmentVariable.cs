@@ -1,12 +1,11 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using Type = FarnahadFlowFusion.Action.System.DeleteWindowsEnvironmentVariableBase.Type;
 
 namespace FarnahadFlowFusion.Action.System;
 
 public class DeleteWindowsEnvironmentVariable : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Delete Windows environment variable";
 
     public ActionInput EnvironmentVariableName { get; set; }
@@ -14,15 +13,13 @@ public class DeleteWindowsEnvironmentVariable : IAction
 
     public DeleteWindowsEnvironmentVariable()
     {
-        _cSharpService = new CSharpService();
-
         EnvironmentVariableName = new ActionInput();
         Type = DeleteWindowsEnvironmentVariableBase.Type.User;
     }
 
     public async Task Execute(SandBox sandBox)
     {
-        var environmentVariableNameValue = await _cSharpService.EvaluateActionInput<string>(sandBox, EnvironmentVariableName);
+        var environmentVariableNameValue = await sandBox.EvaluateActionInput<string>(EnvironmentVariableName);
 
         switch (Type)
         {

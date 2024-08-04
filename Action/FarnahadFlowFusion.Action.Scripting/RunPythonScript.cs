@@ -1,15 +1,13 @@
 ﻿using System.Diagnostics;
 using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
 using FarnahadFlowFusion.Action.Scripting.RunPythonScriptBase;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
 
 namespace FarnahadFlowFusion.Action.Scripting;
 
 public class RunPythonScript : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Run Python script";
 
     public ActionInput PythonScriptToRun { get; set; }
@@ -19,7 +17,6 @@ public class RunPythonScript : IAction
 
     public RunPythonScript()
     {
-        _cSharpService = new CSharpService();
 
         PythonScriptToRun = new ActionInput();
         PythonVersion = PythonVersion.Python27;
@@ -29,8 +26,8 @@ public class RunPythonScript : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var pythonScriptToRunValue = await _cSharpService.EvaluateActionInput<string>(sandBox, PythonScriptToRun);
-        var moduleFolderPathsValue = await _cSharpService.EvaluateActionInput<string>(sandBox, ModuleFolderPaths);
+        var pythonScriptToRunValue = await sandBox.EvaluateActionInput<string>(PythonScriptToRun);
+        var moduleFolderPathsValue = await sandBox.EvaluateActionInput<string>(ModuleFolderPaths);
 
         var pythonPath = PythonVersion == PythonVersion.Python34 ? "python" : "python2";
 
@@ -77,6 +74,6 @@ public class RunPythonScript : IAction
             }
         }
 
-        sandBox.Variables.Add(PythonScriptOutput);
+        sandBox.SetVariable(PythonScriptOutput);
     }
 }

@@ -1,12 +1,11 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
 
 namespace FarnahadFlowFusion.Action.Scripting;
 
 public class RunJavaScript : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Run JavaScript";
 
     public ActionInput JavaScriptToRun { get; set; }
@@ -16,8 +15,6 @@ public class RunJavaScript : IAction
 
     public RunJavaScript()
     {
-        _cSharpService = new CSharpService();
-
         JavaScriptToRun = new ActionInput();
         FailAfterTimeout = false;
         Timeout = new ActionInput();
@@ -26,15 +23,14 @@ public class RunJavaScript : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var javaScriptToRunValue = await _cSharpService.EvaluateActionInput<string>(sandBox, JavaScriptToRun);
-
+        var javaScriptToRunValue = await sandBox.EvaluateActionInput<string>(JavaScriptToRun);
 
         var engine = new Engine();
         var executeScriptTask = Task.Run(() => engine.Evaluate(javaScriptToRunValue).ToObject());
 
         if (FailAfterTimeout)
         {
-            var timeoutValue = await _cSharpService.EvaluateActionInput<int>(sandBox, Timeout);
+            var timeoutValue = await sandBox.EvaluateActionInput<int>(Timeout);
             if (await Task.WhenAny(executeScriptTask, Task.Delay(TimeSpan.FromSeconds(timeoutValue))) == executeScriptTask)
             {
                 JavascriptOutput.Value = executeScriptTask.Result;
@@ -49,7 +45,6 @@ public class RunJavaScript : IAction
             JavascriptOutput.Value = await executeScriptTask;
         }
 
-
-        sandBox.Variables.Add(JavascriptOutput);
+        sandBox.SetVariable(JavascriptOutput);
     }
 }

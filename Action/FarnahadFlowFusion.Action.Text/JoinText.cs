@@ -1,4 +1,5 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
 using FarnahadFlowFusion.Action.Text.JoinTextBase;
 
@@ -6,8 +7,6 @@ namespace FarnahadFlowFusion.Action.Text;
 
 public class JoinText : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Join text";
 
     public ActionInput SpecifyTheListToJoin { get; set; }
@@ -18,8 +17,6 @@ public class JoinText : IAction
 
     public JoinText()
     {
-        _cSharpService = new CSharpService();
-
         SpecifyTheListToJoin = new ActionInput();
         DelimiterToSeparateListItems = DelimiterToSeparateListItems.None;
         JoinedText = new Variable();
@@ -27,12 +24,12 @@ public class JoinText : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var specifyTheListToJoinValue = await _cSharpService.EvaluateActionInput<List<string>>(sandBox, SpecifyTheListToJoin);
+        var specifyTheListToJoinValue = await sandBox.EvaluateActionInput<List<string>>(SpecifyTheListToJoin);
 
         switch (DelimiterToSeparateListItems)
         {
             case DelimiterToSeparateListItems.Custom:
-                var customDelimiterValue = await _cSharpService.EvaluateActionInput<string>(sandBox, CustomDelimiter);
+                var customDelimiterValue = await sandBox.EvaluateActionInput<string>(CustomDelimiter);
                 JoinedText.Value = string.Join(customDelimiterValue, specifyTheListToJoinValue);
                 break;
             case DelimiterToSeparateListItems.None:
@@ -55,6 +52,6 @@ public class JoinText : IAction
                 break;
         }
 
-        sandBox.Variables.Add(JoinedText);
+        sandBox.SetVariable(JoinedText);
     }
 }

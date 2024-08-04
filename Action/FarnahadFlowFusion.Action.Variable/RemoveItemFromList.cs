@@ -1,12 +1,11 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Variable.RemoveItemFromListBase;
 
 namespace FarnahadFlowFusion.Action.Variable;
 
 public class RemoveItemFromList : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Remove Item from List";
 
     public RemoveItemBy RemoveItemBy { get; set; }
@@ -17,8 +16,6 @@ public class RemoveItemFromList : IAction
 
     public RemoveItemFromList()
     {
-        _cSharpService = new CSharpService();
-
         RemoveItemBy = RemoveItemBy.Index;
         AtIndex = new ActionInput();
         WithValue = new ActionInput();
@@ -27,22 +24,21 @@ public class RemoveItemFromList : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var fromList = await _cSharpService.EvaluateActionInput<List<object>>(sandBox, FromList);
+        var fromList = await sandBox.EvaluateActionInput<List<object>>(FromList);
 
         switch (RemoveItemBy)
         {
             case RemoveItemBy.Index:
-                var atIndex = await _cSharpService.EvaluateActionInput<int>(sandBox, AtIndex);
+                var atIndex = await sandBox.EvaluateActionInput<int>(AtIndex);
                 fromList.RemoveAt(atIndex);
                 break;
             case RemoveItemBy.Value:
-                var withValue = await _cSharpService.EvaluateActionInput<object>(sandBox, WithValue);
+                var withValue = await sandBox.EvaluateActionInput<object>(WithValue);
                 if (RemoveAllItemOccurrences)
                 {
                     var removeItems = fromList.Where(item => item == withValue);
                     foreach (var removeItem in removeItems)
                         fromList.Remove(removeItem);
-
                 }
                 else
                 {

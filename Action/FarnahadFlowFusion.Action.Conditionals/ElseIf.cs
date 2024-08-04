@@ -1,13 +1,11 @@
 ﻿using FarnahadFlowFusion.Action.Conditionals.ElseIfBase;
 using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
+using FarnahadFlowFusion.Action.Main.Action;
 
 namespace FarnahadFlowFusion.Action.Conditionals;
 
 public class ElseIf : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Else If";
 
     public ActionInput FirstOperand { get; set; }
@@ -19,8 +17,6 @@ public class ElseIf : IAction
 
     public ElseIf()
     {
-        _cSharpService = new CSharpService();
-
         FirstOperand = new ActionInput();
         Operator = Operator.EqualTo;
         SecondOperand = new ActionInput();
@@ -32,8 +28,8 @@ public class ElseIf : IAction
     {
         ElseIfResult = false;
 
-        var firstOperand = await _cSharpService.EvaluateActionInput<object>(sandBox, FirstOperand);
-        var secondOperand = await _cSharpService.EvaluateActionInput<object>(sandBox, SecondOperand);
+        var firstOperand = await sandBox.EvaluateActionInput<object>(FirstOperand);
+        var secondOperand = await sandBox.EvaluateActionInput<object>(SecondOperand);
         var stringComparison = IgnoreCase ? StringComparison.OrdinalIgnoreCase :
             StringComparison.CurrentCulture;
 

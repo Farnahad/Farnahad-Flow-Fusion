@@ -1,11 +1,12 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
+using FarnahadFlowFusion.Service.Workstation.Workstation;
 
 namespace FarnahadFlowFusion.Action.Workstation;
 
 public class GetScreenResolution : IAction
 {
-    private readonly CSharpService _cSharpService;
     private readonly WorkstationService _workstationService;
 
     public string Name => "Get screen resolution";
@@ -18,7 +19,6 @@ public class GetScreenResolution : IAction
 
     public GetScreenResolution()
     {
-        _cSharpService = new CSharpService();
         _workstationService = new WorkstationService();
 
         MonitorNumber = new ActionInput();
@@ -30,7 +30,7 @@ public class GetScreenResolution : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var monitorNumberValue = await _cSharpService.EvaluateActionInput<int>(sandBox, MonitorNumber);
+        var monitorNumberValue = await sandBox.EvaluateActionInput<int>(MonitorNumber);
 
         _workstationService.GetScreenResolution(monitorNumberValue,
             out var monitorWidth, out var monitorHeight,out var monitorBitCount, out var monitorFrequency);

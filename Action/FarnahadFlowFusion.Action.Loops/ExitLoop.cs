@@ -1,16 +1,14 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 
 namespace FarnahadFlowFusion.Action.Loops;
 
 public class ExitLoop : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Exit loop";
 
     public ExitLoop()
     {
-        _cSharpService = new CSharpService();
     }
 
     public async Task Execute(SandBox sandBox)

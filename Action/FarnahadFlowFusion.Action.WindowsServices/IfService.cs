@@ -1,11 +1,12 @@
 ﻿using System.ServiceProcess;
 using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
+using FarnahadFlowFusion.Service.WindowsServices.WindowsService;
 
 namespace FarnahadFlowFusion.Action.WindowsServices;
 
 public class IfService : IAction
 {
-    private readonly CSharpService _cSharpService;
     private readonly WindowsServiceService _windowsServiceService;
 
     public string Name => "If service";
@@ -16,7 +17,6 @@ public class IfService : IAction
 
     public IfService()
     {
-        _cSharpService = new CSharpService();
         _windowsServiceService = new WindowsServiceService();
 
         _IfService = IfServiceBase.IfService.IsRunning;
@@ -26,7 +26,7 @@ public class IfService : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var serviceNameValue = await _cSharpService.EvaluateActionInput<string>(sandBox, ServiceName);
+        var serviceNameValue = await sandBox.EvaluateActionInput<string>(ServiceName);
 
         var result = _IfService switch
         {

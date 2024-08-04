@@ -1,7 +1,7 @@
 ﻿using FarnahadFlowFusion.Action.Email.RetrieveEmailMessagesBase;
 using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
 using MailKit;
 using MailKit.Net.Imap;
 using MailKit.Search;
@@ -11,8 +11,6 @@ namespace FarnahadFlowFusion.Action.Email;
 
 public class RetrieveEmailMessages : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Retrieve email messages";
 
     public ActionInput ImapServer { get; set; }
@@ -33,7 +31,6 @@ public class RetrieveEmailMessages : IAction
 
     public RetrieveEmailMessages()
     {
-        _cSharpService = new CSharpService();
 
         ImapServer = new ActionInput();
         Port = new ActionInput();
@@ -54,11 +51,8 @@ public class RetrieveEmailMessages : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var minimumVaXXXXXXXXXXXXlue = await _cSharpService.EvaluateActionInput<int>(sandBox, XXXXXXXXXXXX);
-        var XXXXXXXXXXXX = await _cSharpService.EvaluateActionInput<int>(sandBox, XXXXXXXXXXXX);
-
-
-
+        var minimumVaXXXXXXXXXXXXlue = await sandBox.EvaluateActionInput<int>(XXXXXXXXXXXX);
+        var XXXXXXXXXXXX = await sandBox.EvaluateActionInput<int>(XXXXXXXXXXXX);
 
         using (var client = new ImapClient(new ProtocolLogger("imap.log")))
         {
@@ -113,7 +107,7 @@ public class RetrieveEmailMessages : IAction
 
         XXXXXXXXXXXX.Value = new Random().Next(XXXXXXXXXXXX, XXXXXXXXXXXX);
 
-        sandBox.Variables.Add(XXXXXXXXXXXX);
+        sandBox.SetVariable(XXXXXXXXXXXX);
     }
 
     private string GetSearchQuery()

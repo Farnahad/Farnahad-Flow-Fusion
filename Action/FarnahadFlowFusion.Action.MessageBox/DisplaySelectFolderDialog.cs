@@ -1,13 +1,11 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
 
 namespace FarnahadFlowFusion.Action.MessageBox;
 
 public class DisplaySelectFolderDialog : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Display select folder dialog";
 
     public ActionInput DialogDescription { get; set; }
@@ -18,8 +16,6 @@ public class DisplaySelectFolderDialog : IAction
 
     public DisplaySelectFolderDialog()
     {
-        _cSharpService = new CSharpService();
-
         DialogDescription = new ActionInput();
         InitialFolder = new ActionInput();
         KeepFolderSelectionDialogAlwaysOnTop = false;
@@ -29,8 +25,8 @@ public class DisplaySelectFolderDialog : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var dialogDescriptionValue = await _cSharpService.EvaluateActionInput<string>(sandBox, DialogDescription);
-        var initialFolderValue = await _cSharpService.EvaluateActionInput<string>(sandBox, InitialFolder);
+        var dialogDescriptionValue = await sandBox.EvaluateActionInput<string>(DialogDescription);
+        var initialFolderValue = await sandBox.EvaluateActionInput<string>(InitialFolder);
 
 
         using (var folderBrowserDialog = new FolderBrowserDialog())
@@ -53,7 +49,7 @@ public class DisplaySelectFolderDialog : IAction
             }
         }
 
-        sandBox.Variables.Add(ButtonPressed);
-        sandBox.Variables.Add(SelectedFolder);
+        sandBox.SetVariable(ButtonPressed);
+        sandBox.SetVariable(SelectedFolder);
     }
 }

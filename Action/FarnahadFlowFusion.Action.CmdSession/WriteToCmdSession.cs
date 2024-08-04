@@ -1,13 +1,11 @@
 ﻿using System.Diagnostics;
 using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
+using FarnahadFlowFusion.Action.Main.Action;
 
 namespace FarnahadFlowFusion.Action.CmdSession;
 
 public class WriteToCmdSession : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Write to CMD session";
 
     public ActionInput CmdSession { get; set; }
@@ -16,8 +14,6 @@ public class WriteToCmdSession : IAction
 
     public WriteToCmdSession()
     {
-        _cSharpService = new CSharpService();
-
         CmdSession = new ActionInput();
         Command = new ActionInput();
         SendEnterAfterCommand = true;
@@ -25,8 +21,8 @@ public class WriteToCmdSession : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var cmdSessionValue = await _cSharpService.EvaluateActionInput<Process>(sandBox, CmdSession);
-        var commandValue = await _cSharpService.EvaluateActionInput<string>(sandBox, Command);
+        var cmdSessionValue = await sandBox.EvaluateActionInput<Process>(CmdSession);
+        var commandValue = await sandBox.EvaluateActionInput<string>(Command);
 
         await cmdSessionValue.StandardInput.WriteLineAsync(commandValue);
 

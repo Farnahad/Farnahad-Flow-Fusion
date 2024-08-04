@@ -1,12 +1,10 @@
 ﻿using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
+using FarnahadFlowFusion.Action.Main.Action;
 
 namespace FarnahadFlowFusion.Action.Conditionals;
 
 public class Switch : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Switch";
 
     public ActionInput ValueToCheck { get; set; }
@@ -15,14 +13,12 @@ public class Switch : IAction
 
     public Switch()
     {
-        _cSharpService = new CSharpService();
-
         ValueToCheck = new ActionInput();
     }
 
     public async Task Execute(SandBox sandBox)
     {
-        var valueToCheck = await _cSharpService.EvaluateActionInput<object>(sandBox, ValueToCheck);
+        var valueToCheck = await sandBox.EvaluateActionInput<object>(ValueToCheck);
 
         var caseResult = false;
 

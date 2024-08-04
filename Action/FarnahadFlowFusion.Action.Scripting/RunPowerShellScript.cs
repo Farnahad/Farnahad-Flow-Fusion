@@ -1,13 +1,12 @@
 ﻿using System.Diagnostics;
 using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
 
 namespace FarnahadFlowFusion.Action.Scripting;
 
 public class RunPowerShellScript : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Run PowerShell script";
 
     public ActionInput PowerShellCodeToRun { get; set; }
@@ -17,8 +16,6 @@ public class RunPowerShellScript : IAction
 
     public RunPowerShellScript()
     {
-        _cSharpService = new CSharpService();
-
         PowerShellCodeToRun = new ActionInput();
         FailAfterTimeout = false;
         PowerShellOutput = new Variable();
@@ -26,8 +23,8 @@ public class RunPowerShellScript : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var powerShellCodeToRunValue = await _cSharpService.EvaluateActionInput<string>(sandBox, PowerShellCodeToRun);
-        var timeoutValue = await _cSharpService.EvaluateActionInput<int>(sandBox, Timeout);
+        var powerShellCodeToRunValue = await sandBox.EvaluateActionInput<string>(PowerShellCodeToRun);
+        var timeoutValue = await sandBox.EvaluateActionInput<int>(Timeout);
 
         using (Process powerShellProcess = new Process())
         {
@@ -58,6 +55,6 @@ public class RunPowerShellScript : IAction
             }
         }
 
-        sandBox.Variables.Add(PowerShellOutput);
+        sandBox.SetVariable(PowerShellOutput);
     }
 }

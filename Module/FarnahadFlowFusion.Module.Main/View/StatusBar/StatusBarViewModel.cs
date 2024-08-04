@@ -1,7 +1,4 @@
-﻿using ManaErp.Module.Core.General;
-using ManaErp.Service.Core.Container;
-
-namespace ManaErp.Module.Main.View.StatusBar
+﻿namespace ManaErp.Module.Main.View.StatusBar
 {
     public class StatusBarViewModel : GeneralViewModel
     {

@@ -1,13 +1,11 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
 
 namespace FarnahadFlowFusion.Action.MessageBox;
 
 public class DisplayCustomForm : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Display custom form";
 
     public List<byte> CustomForm { get; set; }
@@ -16,7 +14,6 @@ public class DisplayCustomForm : IAction
 
     public DisplayCustomForm()
     {
-        _cSharpService = new CSharpService();
 
         CustomForm = new List<byte>();
         CustomFormData = new Variable();
@@ -30,8 +27,8 @@ public class DisplayCustomForm : IAction
         CustomFormData.Value = "CustomFormData";
         ButtonPressed.Value = "ButtonPressed";
 
-        sandBox.Variables.Add(CustomFormData);
-        sandBox.Variables.Add(ButtonPressed);
+        sandBox.SetVariable(CustomFormData);
+        sandBox.SetVariable(ButtonPressed);
 
         await Task.CompletedTask;
     }

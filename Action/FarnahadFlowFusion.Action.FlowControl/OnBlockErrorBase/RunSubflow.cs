@@ -1,6 +1,4 @@
-﻿using FarnahadFlowFusion.Action.Main;
-
-namespace FarnahadFlowFusion.Action.FlowControl.OnBlockErrorBase;
+﻿namespace FarnahadFlowFusion.Action.FlowControl.OnBlockErrorBase;
 
 public class RunSubflow
 {

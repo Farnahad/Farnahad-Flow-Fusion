@@ -1,13 +1,11 @@
 ﻿using FarnahadFlowFusion.Action.File.RenameFilesBase;
 using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
+using FarnahadFlowFusion.Action.Main.Action;
 
 namespace FarnahadFlowFusion.Action.File;
 
 public class RenameFiles : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Rename file(s)";
 
     public ActionInput FileToRename { get; set; }
@@ -18,8 +16,6 @@ public class RenameFiles : IAction
 
     public RenameFiles()
     {
-        _cSharpService = new CSharpService();
-
         FileToRename = new ActionInput();
         RenameSchema = RenameSchema.SetNewName;
         NewFileName = new ActionInput();
@@ -29,8 +25,8 @@ public class RenameFiles : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var fileToRenameValue = await _cSharpService.EvaluateActionInput<string>(sandBox, FileToRename);
-        var newFileNameValue = await _cSharpService.EvaluateActionInput<string>(sandBox, NewFileName);
+        var fileToRenameValue = await sandBox.EvaluateActionInput<string>(FileToRename);
+        var newFileNameValue = await sandBox.EvaluateActionInput<string>(NewFileName);
 
         var sourceFileInfo = new FileInfo(fileToRenameValue);
 

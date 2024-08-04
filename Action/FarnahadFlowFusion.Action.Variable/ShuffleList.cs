@@ -1,25 +1,22 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 
 namespace FarnahadFlowFusion.Action.Variable;
 
 public class ShuffleList : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Shuffle List";
 
     public ActionInput ListToShuffle { get; set; }
 
     public ShuffleList()
     {
-        _cSharpService = new CSharpService();
-
         ListToShuffle = new ActionInput();
     }
 
     public async Task Execute(SandBox sandBox)
     {
-        var list = await _cSharpService.EvaluateActionInput<List<object>>(sandBox, ListToShuffle);
+        var list = await sandBox.EvaluateActionInput<List<object>>(ListToShuffle);
 
         var random = new Random();
         var n = list.Count;

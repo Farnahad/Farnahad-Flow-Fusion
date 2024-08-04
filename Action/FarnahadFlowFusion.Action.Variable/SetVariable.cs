@@ -1,4 +1,5 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
 
 namespace FarnahadFlowFusion.Action.Variable;
@@ -30,7 +31,7 @@ public class SetVariable : IAction
             _ => null
         };
 
-        sandBox.Variables.Add(new Variable(Variable, value));
+        sandBox.SetVariable(new Main.Variable.Variable(Variable, value));
         await Task.CompletedTask;
     }
 }

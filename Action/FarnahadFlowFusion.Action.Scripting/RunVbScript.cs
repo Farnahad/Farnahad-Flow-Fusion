@@ -1,13 +1,12 @@
 ﻿using System.Diagnostics;
 using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
 
 namespace FarnahadFlowFusion.Action.Scripting;
 
 public class RunVbScript : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Run VBScript";
 
     public ActionInput VbScriptToRun { get; set; }
@@ -17,8 +16,6 @@ public class RunVbScript : IAction
 
     public RunVbScript()
     {
-        _cSharpService = new CSharpService();
-
         VbScriptToRun = new ActionInput();
         FailAfterTimeout = false;
         VbScriptOutput = new Variable();
@@ -26,8 +23,8 @@ public class RunVbScript : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var vbScriptToRunValue = await _cSharpService.EvaluateActionInput<string>(sandBox, VbScriptToRun);
-        var timeoutValue = await _cSharpService.EvaluateActionInput<int>(sandBox, Timeout);
+        var vbScriptToRunValue = await sandBox.EvaluateActionInput<string>(VbScriptToRun);
+        var timeoutValue = await sandBox.EvaluateActionInput<int>(Timeout);
 
         var processStartInfo = new ProcessStartInfo
         {
@@ -58,6 +55,6 @@ public class RunVbScript : IAction
             }
         }
 
-        sandBox.Variables.Add(VbScriptOutput);
+        sandBox.SetVariable(VbScriptOutput);
     }
 }

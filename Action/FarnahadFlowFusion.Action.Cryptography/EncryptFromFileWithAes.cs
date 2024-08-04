@@ -1,15 +1,13 @@
 ﻿using System.Security.Cryptography;
 using FarnahadFlowFusion.Action.Cryptography.EncryptFromFileWithAesBase;
 using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
 
 namespace FarnahadFlowFusion.Action.Cryptography;
 
 public class EncryptFromFileWithAes : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Encrypt from file with AES";
 
     public Encoding Encoding { get; set; }
@@ -19,8 +17,6 @@ public class EncryptFromFileWithAes : IAction
 
     public EncryptFromFileWithAes()
     {
-        _cSharpService = new CSharpService();
-
         Encoding = Encoding.Unicode;
         FileToEncrypt = new ActionInput();
         EncryptionKey = new ActionInput();
@@ -29,8 +25,8 @@ public class EncryptFromFileWithAes : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var fileToEncryptValue = await _cSharpService.EvaluateActionInput<string>(sandBox, FileToEncrypt);
-        var encryptionKeyValue = await _cSharpService.EvaluateActionInput<string>(sandBox, EncryptionKey);
+        var fileToEncryptValue = await sandBox.EvaluateActionInput<string>(FileToEncrypt);
+        var encryptionKeyValue = await sandBox.EvaluateActionInput<string>(EncryptionKey);
 
         var realEncoding = Encoding switch
         {
@@ -63,6 +59,6 @@ public class EncryptFromFileWithAes : IAction
         }
 
         EncryptedText.Value = Convert.ToBase64String(memoryStream.ToArray());
-        sandBox.Variables.Add(EncryptedText);
+        sandBox.SetVariable(EncryptedText);
     }
 }

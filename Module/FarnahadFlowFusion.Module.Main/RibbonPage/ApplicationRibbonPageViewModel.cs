@@ -1,7 +1,4 @@
-﻿using ManaErp.Module.Core.General;
-using ManaErp.Service.Core.Container;
-
-namespace ManaErp.Module.Main.RibbonPage
+﻿namespace ManaErp.Module.Main.RibbonPage
 {
     public class ApplicationRibbonPageViewModel : GeneralViewModel
     {

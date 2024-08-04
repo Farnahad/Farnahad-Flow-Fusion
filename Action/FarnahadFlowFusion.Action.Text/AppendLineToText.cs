@@ -1,13 +1,12 @@
 ﻿using System.Text;
 using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
 
 namespace FarnahadFlowFusion.Action.Text;
 
 public class AppendLineToText : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Append line to text";
 
     public ActionInput OriginalText { get; set; }
@@ -16,8 +15,6 @@ public class AppendLineToText : IAction
 
     public AppendLineToText()
     {
-        _cSharpService = new CSharpService();
-
         OriginalText = new ActionInput();
         LineToAppend = new ActionInput();
         Result = new Variable();
@@ -25,13 +22,13 @@ public class AppendLineToText : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var originalTextValue = await _cSharpService.EvaluateActionInput<string>(sandBox, OriginalText);
-        var lineToAppendValue = await _cSharpService.EvaluateActionInput<string>(sandBox, LineToAppend);
+        var originalTextValue = await sandBox.EvaluateActionInput<string>(OriginalText);
+        var lineToAppendValue = await sandBox.EvaluateActionInput<string>(LineToAppend);
 
         var stringBuilder = new StringBuilder(originalTextValue);
         stringBuilder.AppendLine(lineToAppendValue);
         Result.Value = stringBuilder.ToString();
 
-        sandBox.Variables.Add(Result);
+        sandBox.SetVariable(Result);
     }
 }

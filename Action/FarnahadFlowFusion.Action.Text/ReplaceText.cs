@@ -1,13 +1,12 @@
 ﻿using System.Text.RegularExpressions;
 using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
 
 namespace FarnahadFlowFusion.Action.Text;
 
 public class ReplaceText : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Replace text";
 
     public ActionInput TextToParse { get; set; }
@@ -20,8 +19,6 @@ public class ReplaceText : IAction
 
     public ReplaceText()
     {
-        _cSharpService = new CSharpService();
-
         TextToParse = new ActionInput();
         TextToFind = new ActionInput();
         UseRegularExpressionsForFindAndReplace = false;
@@ -33,9 +30,9 @@ public class ReplaceText : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var textToParseValue = await _cSharpService.EvaluateActionInput<string>(sandBox, TextToParse);
-        var textToFindValue = await _cSharpService.EvaluateActionInput<string>(sandBox, TextToFind);
-        var replaceWithValue = await _cSharpService.EvaluateActionInput<string>(sandBox, ReplaceWith);
+        var textToParseValue = await sandBox.EvaluateActionInput<string>(TextToParse);
+        var textToFindValue = await sandBox.EvaluateActionInput<string>(TextToFind);
+        var replaceWithValue = await sandBox.EvaluateActionInput<string>(ReplaceWith);
 
 
         if (ActiveEscapeSequences)
@@ -56,7 +53,7 @@ public class ReplaceText : IAction
             Replaced.Value = textToParseValue.Replace(textToFindValue, replaceWithValue, comparison);
         }
 
-        sandBox.Variables.Add(Replaced);
+        sandBox.SetVariable(Replaced);
     }
 
     private string EscapeSequences(string text)

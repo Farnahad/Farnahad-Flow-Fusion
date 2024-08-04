@@ -1,7 +1,4 @@
 ﻿using System.Windows;
-using DevExpress.Xpf.Core;
-using ManaErp.Core.Main.Method;
-using ManaErp.DataAccess.Model;
 
 namespace ManaErp.Service.Main.MessageBox
 {

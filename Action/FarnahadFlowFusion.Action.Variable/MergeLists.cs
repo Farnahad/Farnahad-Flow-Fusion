@@ -1,32 +1,29 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 
 namespace FarnahadFlowFusion.Action.Variable;
 
 public class MergeLists : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Merge Lists";
 
     public ActionInput FirstList { get; set; }
     public ActionInput SecondList { get; set; }
-    public Variable OutputList { get; set; }
+    public Main.Variable.Variable OutputList { get; set; }
 
     public MergeLists()
     {
-        _cSharpService = new CSharpService();
-
         FirstList = new ActionInput();
         SecondList = new ActionInput();
-        OutputList = new Variable();
+        OutputList = new Main.Variable.Variable();
     }
 
     public async Task Execute(SandBox sandBox)
     {
-        var firstList = await _cSharpService.EvaluateActionInput<List<object>>(sandBox, FirstList);
-        var secondList = await _cSharpService.EvaluateActionInput<List<object>>(sandBox, SecondList);
+        var firstList = await sandBox.EvaluateActionInput<List<object>>(FirstList);
+        var secondList = await sandBox.EvaluateActionInput<List<object>>(SecondList);
 
         OutputList.Value = firstList.Union(secondList).ToList();
-        sandBox.Variables.Add(OutputList);
+        sandBox.SetVariable(OutputList);
     }
 }

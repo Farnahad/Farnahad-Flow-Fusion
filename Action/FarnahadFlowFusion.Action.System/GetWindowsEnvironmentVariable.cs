@@ -1,4 +1,5 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
 using FarnahadFlowFusion.Action.System.GetWindowsEnvironmentVariableBase;
 
@@ -6,8 +7,6 @@ namespace FarnahadFlowFusion.Action.System;
 
 public class GetWindowsEnvironmentVariable : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Get Windows environment variable";
 
     public ActionInput EnvironmentVariableName { get; set; }
@@ -17,8 +16,6 @@ public class GetWindowsEnvironmentVariable : IAction
 
     public GetWindowsEnvironmentVariable()
     {
-        _cSharpService = new CSharpService();
-
         EnvironmentVariableName = new ActionInput();
         SearchForVariableOnlyInScope = false;
         Scope = Scope.User;
@@ -27,7 +24,7 @@ public class GetWindowsEnvironmentVariable : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var environmentVariableNameValue = await _cSharpService.EvaluateActionInput<string>(sandBox, EnvironmentVariableName);
+        var environmentVariableNameValue = await sandBox.EvaluateActionInput<string>(EnvironmentVariableName);
 
         if (SearchForVariableOnlyInScope)
         {
@@ -55,6 +52,6 @@ public class GetWindowsEnvironmentVariable : IAction
             }
         }
 
-        sandBox.Variables.Add(EnvironmentVariableValue);
+        sandBox.SetVariable(EnvironmentVariableValue);
     }
 }

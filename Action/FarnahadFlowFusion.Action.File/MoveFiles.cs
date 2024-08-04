@@ -1,13 +1,11 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
 
 namespace FarnahadFlowFusion.Action.File;
 
 public class MoveFiles : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Move file(s)";
 
     public ActionInput FilesToMove { get; set; }
@@ -17,8 +15,6 @@ public class MoveFiles : IAction
 
     public MoveFiles()
     {
-        _cSharpService = new CSharpService();
-
         FilesToMove = new ActionInput();
         DestinationFolder = new ActionInput();
         IfFileExists = MoveFilesBase.IfFileExists.DoNothing;
@@ -27,8 +23,8 @@ public class MoveFiles : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var filesToMoveValue = await _cSharpService.EvaluateActionInput<List<string>>(sandBox, FilesToMove);
-        var destinationFolderValue = await _cSharpService.EvaluateActionInput<string>(sandBox, DestinationFolder);
+        var filesToMoveValue = await sandBox.EvaluateActionInput<List<string>>(FilesToMove);
+        var destinationFolderValue = await sandBox.EvaluateActionInput<string>(DestinationFolder);
 
         var movedFiles = new List<string>();
 
@@ -45,6 +41,6 @@ public class MoveFiles : IAction
 
         MovedFiles.Value = movedFiles;
 
-        sandBox.Variables.Add(MovedFiles);
+        sandBox.SetVariable(MovedFiles);
     }
 }

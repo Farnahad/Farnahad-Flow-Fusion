@@ -1,14 +1,12 @@
 ﻿using FarnahadFlowFusion.Action.Folder.GetSpecialFolderBase;
 using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
 
 namespace FarnahadFlowFusion.Action.Folder;
 
 public class GetSpecialFolder : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Get special folder";
 
     public SpecialFolderName SpecialFolderName { get; set; }
@@ -17,8 +15,6 @@ public class GetSpecialFolder : IAction
 
     public GetSpecialFolder()
     {
-        _cSharpService = new CSharpService();
-
         SpecialFolderName = SpecialFolderName.CommonProgramFiles;
         SpecialFolderPath = new ActionInput();
         SpecialFolderPathVariable = new Variable();
@@ -26,7 +22,7 @@ public class GetSpecialFolder : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var specialFolderPathValue = await _cSharpService.EvaluateActionInput<string>(sandBox, SpecialFolderPath);
+        var specialFolderPathValue = await sandBox.EvaluateActionInput<string>(SpecialFolderPath);
 
         var path = "";
 
@@ -99,6 +95,6 @@ public class GetSpecialFolder : IAction
 
         SpecialFolderPathVariable.Value = path;
 
-        sandBox.Variables.Add(SpecialFolderPathVariable);
+        sandBox.SetVariable(SpecialFolderPathVariable);
     }
 }

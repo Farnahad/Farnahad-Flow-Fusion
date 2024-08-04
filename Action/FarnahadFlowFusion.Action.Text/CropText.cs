@@ -1,4 +1,5 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
 using FarnahadFlowFusion.Action.Text.CropTextBase;
 
@@ -6,8 +7,6 @@ namespace FarnahadFlowFusion.Action.Text;
 
 public class CropText : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Crop text";
 
     public ActionInput OriginalText { get; set; }
@@ -19,8 +18,6 @@ public class CropText : IAction
 
     public CropText()
     {
-        _cSharpService = new CSharpService();
-
         OriginalText = new ActionInput();
         Mode = Mode.GetTextBeforeTheSpecifiedFlag;
         EndFlag = new ActionInput();
@@ -31,8 +28,8 @@ public class CropText : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var originalTextValue = await _cSharpService.EvaluateActionInput<string>(sandBox, OriginalText);
-        var endFlagValue = await _cSharpService.EvaluateActionInput<string>(sandBox, EndFlag);
+        var originalTextValue = await sandBox.EvaluateActionInput<string>(OriginalText);
+        var endFlagValue = await sandBox.EvaluateActionInput<string>(EndFlag);
 
 
         var comparison = IgnoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
@@ -82,7 +79,7 @@ public class CropText : IAction
         CroppedText.Value = croppedText;
         IsFlagFound.Value = isFlagFound;
 
-        sandBox.Variables.Add(CroppedText);
-        sandBox.Variables.Add(IsFlagFound);
+        sandBox.SetVariable(CroppedText);
+        sandBox.SetVariable(IsFlagFound);
     }
 }

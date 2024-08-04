@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace ManaErp.Service.Main.DateTime
+﻿namespace ManaErp.Service.Main.DateTime
 {
     public class DateTimeService : IDateTimeService
     {

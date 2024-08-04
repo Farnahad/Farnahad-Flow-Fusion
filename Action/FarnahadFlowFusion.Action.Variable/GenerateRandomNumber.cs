@@ -1,33 +1,30 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 
 namespace FarnahadFlowFusion.Action.Variable;
 
 public class GenerateRandomNumber : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Generate Random Number";
 
     public ActionInput MinimumValue { get; set; }
     public ActionInput MaximumValue { get; set; }
-    public Variable RandomNumber { get; set; }
+    public Main.Variable.Variable RandomNumber { get; set; }
 
     public GenerateRandomNumber()
     {
-        _cSharpService = new CSharpService();
-
         MinimumValue = new ActionInput();
         MaximumValue = new ActionInput();
-        RandomNumber = new Variable();
+        RandomNumber = new Main.Variable.Variable();
     }
 
     public async Task Execute(SandBox sandBox)
     {
-        var minimumValue = await _cSharpService.EvaluateActionInput<int>(sandBox, MinimumValue);
-        var maximumValue = await _cSharpService.EvaluateActionInput<int>(sandBox, MaximumValue);
+        var minimumValue = await sandBox.EvaluateActionInput<int>(MinimumValue);
+        var maximumValue = await sandBox.EvaluateActionInput<int>(MaximumValue);
 
         RandomNumber.Value = new Random().Next(minimumValue, maximumValue);
 
-        sandBox.Variables.Add(RandomNumber);
+        sandBox.SetVariable(RandomNumber);
     }
 }

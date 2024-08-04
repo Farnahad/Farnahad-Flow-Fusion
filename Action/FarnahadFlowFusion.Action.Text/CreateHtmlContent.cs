@@ -1,12 +1,11 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
 
 namespace FarnahadFlowFusion.Action.Text;
 
 public class CreateHtmlContent : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Create HTML content";
 
     public ActionInput Html { get; set; }
@@ -14,18 +13,16 @@ public class CreateHtmlContent : IAction
 
     public CreateHtmlContent()
     {
-        _cSharpService = new CSharpService();
-
         Html = new ActionInput();
         HtmlContent = new Variable();
     }
 
     public async Task Execute(SandBox sandBox)
     {
-        var htmlValue = await _cSharpService.EvaluateActionInput<string>(sandBox, Html);
+        var htmlValue = await sandBox.EvaluateActionInput<string>(Html);
 
         HtmlContent.Value = htmlValue;
 
-        sandBox.Variables.Add(HtmlContent);
+        sandBox.SetVariable(HtmlContent);
     }
 }

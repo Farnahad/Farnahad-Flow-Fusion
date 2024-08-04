@@ -1,9 +1,4 @@
-﻿using System;
-using ImTools;
-using ManaErp.Core.Main.Mvvm;
-using ManaErp.Core.Main.Window;
-using ManaErp.Service.Core.Container;
-using Prism.Ioc;
+﻿using Prism.Ioc;
 using Prism.Services.Dialogs;
 
 namespace ManaErp.Service.Main.Window

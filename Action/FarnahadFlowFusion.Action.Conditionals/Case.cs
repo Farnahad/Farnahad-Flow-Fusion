@@ -1,13 +1,11 @@
 ﻿using FarnahadFlowFusion.Action.Conditionals.CaseBase;
 using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
+using FarnahadFlowFusion.Action.Main.Action;
 
 namespace FarnahadFlowFusion.Action.Conditionals;
 
 public class Case : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Case";
 
     public Operator Operator { get; set; }
@@ -19,8 +17,6 @@ public class Case : IAction
 
     public Case()
     {
-        _cSharpService = new CSharpService();
-
         Operator = Operator.Contains;
         ValueToCompare = new ActionInput();
         IgnoreCase = false;
@@ -30,7 +26,7 @@ public class Case : IAction
     public async Task Execute(SandBox sandBox)
     {
         CaseResult = false;
-        var valueToCompare = await _cSharpService.EvaluateActionInput<object>(sandBox, ValueToCompare);
+        var valueToCompare = await sandBox.EvaluateActionInput<object>(ValueToCompare);
         var stringComparison = IgnoreCase ? StringComparison.OrdinalIgnoreCase :
             StringComparison.CurrentCulture;
 

@@ -1,7 +1,4 @@
-﻿using System;
-using ManaErp.Core.Main.Mvvm;
-
-namespace ManaErp.Service.Main.Session
+﻿namespace ManaErp.Service.Main.Session
 {
     public interface ISessionService : IService
     {

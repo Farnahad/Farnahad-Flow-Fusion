@@ -1,7 +1,4 @@
-﻿using System;
-using ManaErp.Service.Core.Container;
-
-namespace ManaErp.Service.Main.Session
+﻿namespace ManaErp.Service.Main.Session
 {
     public class SessionService : ISessionService
     {

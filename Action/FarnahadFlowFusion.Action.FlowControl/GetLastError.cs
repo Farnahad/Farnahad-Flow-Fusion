@@ -1,13 +1,11 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
 
 namespace FarnahadFlowFusion.Action.FlowControl;
 
 public class GetLastError : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Get last error";
 
     public Variable StoreInto { get; set; }
@@ -15,8 +13,6 @@ public class GetLastError : IAction
 
     public GetLastError()
     {
-        _cSharpService = new CSharpService();
-
         StoreInto = new Variable();
         ClearError = false;
     }
@@ -28,7 +24,7 @@ public class GetLastError : IAction
         if (ClearError)
             sandBox.Exception = null;
 
-        sandBox.Variables.Add(StoreInto);
+        sandBox.SetVariable(StoreInto);
         await Task.CompletedTask;
     }
 }

@@ -1,25 +1,22 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 
 namespace FarnahadFlowFusion.Action.Variable;
 
 public class ClearList : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Clear List";
 
     public ActionInput ListToClear { get; set; }
 
     public ClearList()
     {
-        _cSharpService = new CSharpService();
-
         ListToClear = new ActionInput();
     }
 
     public async Task Execute(SandBox sandBox)
     {
-        var list = await _cSharpService.EvaluateActionInput<List<object>>(sandBox, ListToClear);
+        var list = await sandBox.EvaluateActionInput<List<object>>(ListToClear);
 
         list.Clear();
     }

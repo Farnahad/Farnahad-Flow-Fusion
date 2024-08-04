@@ -6,8 +6,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference
-			Include="..\..\Service\FarnahadFlowFusion.Service.Scripting\FarnahadFlowFusion.Service.Scripting.csproj" />
+		<ProjectReference Include="..\..\Service\FarnahadFlowFusion.Service.Scripting\FarnahadFlowFusion.Service.Scripting.csproj" />
+		<ProjectReference Include="..\..\Service\FarnahadFlowFusion.Service.WindowsServices\FarnahadFlowFusion.Service.WindowsServices.csproj" />
 		<ProjectReference Include="..\FarnahadFlowFusion.Action.Main\FarnahadFlowFusion.Action.Main.csproj" />
 	</ItemGroup>
 </Project>

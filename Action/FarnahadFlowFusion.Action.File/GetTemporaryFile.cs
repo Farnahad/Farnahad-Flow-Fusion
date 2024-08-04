@@ -1,21 +1,17 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
 
 namespace FarnahadFlowFusion.Action.File;
 
 public class GetTemporaryFile : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Get temporary file";
 
     public Variable TempFile { get; set; }
 
     public GetTemporaryFile()
     {
-        _cSharpService = new CSharpService();
-
         TempFile = new Variable();
     }
 
@@ -26,7 +22,7 @@ public class GetTemporaryFile : IAction
 
         TempFile.Value = tempFilePath;
 
-        sandBox.Variables.Add(TempFile);
+        sandBox.SetVariable(TempFile);
         await Task.CompletedTask;
     }
 }

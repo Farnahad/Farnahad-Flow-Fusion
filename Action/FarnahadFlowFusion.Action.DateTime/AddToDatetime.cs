@@ -1,14 +1,12 @@
 ﻿using FarnahadFlowFusion.Action.DateTime.AddToDatetimeBase;
 using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
 
 namespace FarnahadFlowFusion.Action.DateTime;
 
 public class AddToDatetime : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Add to datetime";
 
     public ActionInput Datetime { get; set; }
@@ -18,8 +16,6 @@ public class AddToDatetime : IAction
 
     public AddToDatetime()
     {
-        _cSharpService = new CSharpService();
-
         Datetime = new ActionInput();
         Add = new ActionInput();
         TimeUnit = TimeUnit.Seconds;
@@ -28,8 +24,8 @@ public class AddToDatetime : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var datetimeValue = await _cSharpService.EvaluateActionInput<global::System.DateTime>(sandBox, Datetime);
-        var addValue = await _cSharpService.EvaluateActionInput<double>(sandBox, Add);
+        var datetimeValue = await sandBox.EvaluateActionInput<global::System.DateTime>(Datetime);
+        var addValue = await sandBox.EvaluateActionInput<double>(Add);
 
         ResultedDate.Value = TimeUnit switch
         {
@@ -42,6 +38,6 @@ public class AddToDatetime : IAction
             _ => ResultedDate.Value
         };
 
-        sandBox.Variables.Add(ResultedDate);
+        sandBox.SetVariable(ResultedDate);
     }
 }

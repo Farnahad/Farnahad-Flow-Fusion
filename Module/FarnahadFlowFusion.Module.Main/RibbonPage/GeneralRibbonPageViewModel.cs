@@ -1,10 +1,4 @@
-﻿using ManaErp.Core.Control.DockLayout;
-using ManaErp.Core.Main.Command;
-using ManaErp.Module.Core.General;
-using ManaErp.Module.General.Location;
-using ManaErp.Service.Core.Container;
-
-namespace ManaErp.Module.Main.RibbonPage
+﻿namespace ManaErp.Module.Main.RibbonPage
 {
     public class GeneralRibbonPageViewModel : GeneralViewModel
     {

@@ -1,11 +1,10 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 
 namespace FarnahadFlowFusion.Action.Variable;
 
 public class SortList : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Sort List";
 
     public ActionInput ListToSort { get; set; }
@@ -13,14 +12,12 @@ public class SortList : IAction
 
     public SortList()
     {
-        _cSharpService = new CSharpService();
-
         ListToSort = new ActionInput();
     }
 
     public async Task Execute(SandBox sandBox)
     {
-        var listToSort = await _cSharpService.EvaluateActionInput<List<object>>(sandBox, ListToSort);
+        var listToSort = await sandBox.EvaluateActionInput<List<object>>(ListToSort);
 
         listToSort.Sort();
     }

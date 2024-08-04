@@ -1,8 +1,4 @@
-﻿using System;
-using ManaErp.Core.Main.Mvvm;
-using ManaErp.Core.Main.Window;
-
-namespace ManaErp.Service.Main.Window
+﻿namespace ManaErp.Service.Main.Window
 {
     public interface IWindowService : IService
     {

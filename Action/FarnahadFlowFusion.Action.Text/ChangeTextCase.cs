@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
 using FarnahadFlowFusion.Action.Text.ChangeTextCaseBase;
 
@@ -7,8 +8,6 @@ namespace FarnahadFlowFusion.Action.Text;
 
 public class ChangeTextCase : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Change text case";
 
     public ActionInput TextToConvert { get; set; }
@@ -17,8 +16,6 @@ public class ChangeTextCase : IAction
 
     public ChangeTextCase()
     {
-        _cSharpService = new CSharpService();
-
         TextToConvert = new ActionInput();
         ConvertTo = ConvertTo.UpperCase;
         TextWithNewCase = new Variable();
@@ -26,7 +23,7 @@ public class ChangeTextCase : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var textToConvertValue = await _cSharpService.EvaluateActionInput<string>(sandBox, TextToConvert);
+        var textToConvertValue = await sandBox.EvaluateActionInput<string>(TextToConvert);
 
         TextWithNewCase.Value = ConvertTo switch
         {
@@ -37,7 +34,7 @@ public class ChangeTextCase : IAction
             _ => TextWithNewCase.Value
         };
 
-        sandBox.Variables.Add(TextWithNewCase);
+        sandBox.SetVariable(TextWithNewCase);
     }
 
     private string ToSentenceCase(string input)

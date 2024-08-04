@@ -1,6 +1,4 @@
-﻿using ManaErp.Core.Main.Mvvm;
-
-namespace ManaErp.Service.Main.Utility
+﻿namespace ManaErp.Service.Main.Utility
 {
     public interface IUtilityService : IService
     {

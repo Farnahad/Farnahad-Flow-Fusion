@@ -1,13 +1,11 @@
 ﻿using FarnahadFlowFusion.Action.FlowControl.StopFlowBase;
 using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
+using FarnahadFlowFusion.Action.Main.Action;
 
 namespace FarnahadFlowFusion.Action.FlowControl;
 
 public class StopFlow : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Stop flow";
 
     public EndFlow EndFlow { get; set; }
@@ -15,15 +13,13 @@ public class StopFlow : IAction
 
     public StopFlow()
     {
-        _cSharpService = new CSharpService();
-
         EndFlow = EndFlow.Successfully;
         ErrorMessage = new ActionInput();
     }
 
     public async Task Execute(SandBox sandBox)
     {
-        var errorMessageValue = await _cSharpService.EvaluateActionInput<string>(sandBox, ErrorMessage);
+        var errorMessageValue = await sandBox.EvaluateActionInput<string>(ErrorMessage);
         switch (EndFlow)
         {
             case EndFlow.Successfully:
@@ -33,6 +29,7 @@ public class StopFlow : IAction
                 sandBox.Exception = new Exception(errorMessageValue);
                 break;
         }
+
         sandBox.SandBoxStatus = SandBoxStatus.Stopping;
     }
 }

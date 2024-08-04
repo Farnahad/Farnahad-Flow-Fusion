@@ -1,14 +1,12 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
 using FarnahadFlowFusion.Action.MessageBox.DisplayInputDialogBase;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
 
 namespace FarnahadFlowFusion.Action.MessageBox;
 
 public class DisplayInputDialog : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Display input dialog";
 
     public ActionInput InputDialogTitle { get; set; }
@@ -21,8 +19,6 @@ public class DisplayInputDialog : IAction
 
     public DisplayInputDialog()
     {
-        _cSharpService = new CSharpService();
-
         InputDialogTitle = new ActionInput();
         InputDialogMessage = new ActionInput();
         DefaultValue = new ActionInput();
@@ -34,9 +30,9 @@ public class DisplayInputDialog : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var inputDialogTitleValue = await _cSharpService.EvaluateActionInput<string>(sandBox, InputDialogTitle);
-        var inputDialogMessageValue = await _cSharpService.EvaluateActionInput<string>(sandBox, InputDialogMessage);
-        var defaultValueValue = await _cSharpService.EvaluateActionInput<string>(sandBox, DefaultValue);
+        var inputDialogTitleValue = await sandBox.EvaluateActionInput<string>(InputDialogTitle);
+        var inputDialogMessageValue = await sandBox.EvaluateActionInput<string>(InputDialogMessage);
+        var defaultValueValue = await sandBox.EvaluateActionInput<string>(DefaultValue);
 
         switch (InputType)
         {
@@ -50,15 +46,12 @@ public class DisplayInputDialog : IAction
 
         if (KeepInputDialogAlwaysOnTop)
         {
-
         }
-
-
 
         UerInput.Value = "UerInput";
         ButtonPressed.Value = "ButtonPressed";
 
-        sandBox.Variables.Add(UerInput);
-        sandBox.Variables.Add(ButtonPressed);
+        sandBox.SetVariable(UerInput);
+        sandBox.SetVariable(ButtonPressed);
     }
 }

@@ -1,14 +1,12 @@
 ﻿using System.Text;
 using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
+using FarnahadFlowFusion.Action.Main.Action;
 using Encoding = FarnahadFlowFusion.Action.File.WriteToCsvFileBase.Encoding;
 
 namespace FarnahadFlowFusion.Action.File;
 
 public class WriteToCsvFile : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Write to csv file";
 
     public ActionInput VariableToWrite { get; set; }
@@ -17,8 +15,6 @@ public class WriteToCsvFile : IAction
 
     public WriteToCsvFile()
     {
-        _cSharpService = new CSharpService();
-
         VariableToWrite = new ActionInput();
         FilePath = new ActionInput();
         Encoding = Encoding.Utf8;
@@ -26,8 +22,8 @@ public class WriteToCsvFile : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var variableToWriteValue = await _cSharpService.EvaluateActionInput<string>(sandBox, VariableToWrite);
-        var filePathValue = await _cSharpService.EvaluateActionInput<string>(sandBox, FilePath);
+        var variableToWriteValue = await sandBox.EvaluateActionInput<string>(VariableToWrite);
+        var filePathValue = await sandBox.EvaluateActionInput<string>(FilePath);
 
         var encoding = Encoding switch
         {

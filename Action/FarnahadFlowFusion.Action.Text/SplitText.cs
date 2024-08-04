@@ -1,4 +1,5 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
 using FarnahadFlowFusion.Action.Text.SplitTextBase;
 
@@ -6,8 +7,6 @@ namespace FarnahadFlowFusion.Action.Text;
 
 public class SplitText : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Split text";
 
     public ActionInput TextToSplit { get; set; }
@@ -20,8 +19,6 @@ public class SplitText : IAction
 
     public SplitText()
     {
-        _cSharpService = new CSharpService();
-
         TextToSplit = new ActionInput();
         DelimiterType = DelimiterType.Standard;
         StandardDelimiter = StandardDelimiter.Space;
@@ -33,10 +30,10 @@ public class SplitText : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var textToSplitValue = await _cSharpService.EvaluateActionInput<string>(sandBox, TextToSplit);
-        var timesValue = await _cSharpService.EvaluateActionInput<int>(sandBox, Times);
-        var customDelimiterValue = await _cSharpService.EvaluateActionInput<string>(sandBox, CustomDelimiter);
-        var splitWidthValue = await _cSharpService.EvaluateActionInput<int>(sandBox, SplitWidth);
+        var textToSplitValue = await sandBox.EvaluateActionInput<string>(TextToSplit);
+        var timesValue = await sandBox.EvaluateActionInput<int>(Times);
+        var customDelimiterValue = await sandBox.EvaluateActionInput<string>(CustomDelimiter);
+        var splitWidthValue = await sandBox.EvaluateActionInput<int>(SplitWidth);
 
         var result = new List<string>();
 
@@ -77,6 +74,6 @@ public class SplitText : IAction
 
         TextList.Value = result;
 
-        sandBox.Variables.Add(TextList);
+        sandBox.SetVariable(TextList);
     }
 }

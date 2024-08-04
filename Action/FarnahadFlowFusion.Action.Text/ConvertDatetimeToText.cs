@@ -1,4 +1,5 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
 using FarnahadFlowFusion.Action.Text.ConvertDatetimeToTextBase;
 
@@ -6,8 +7,6 @@ namespace FarnahadFlowFusion.Action.Text;
 
 public class ConvertDatetimeToText : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Convert datetime to text";
 
     public ActionInput DatetimeToConvert { get; set; }
@@ -18,8 +17,6 @@ public class ConvertDatetimeToText : IAction
 
     public ConvertDatetimeToText()
     {
-        _cSharpService = new CSharpService();
-
         DatetimeToConvert = new ActionInput();
         FormatToUse = FormatToUse.Standard;
         StandardFormat = StandardFormat.ShortDate;
@@ -29,11 +26,11 @@ public class ConvertDatetimeToText : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var datetimeToConvertValue = await _cSharpService.EvaluateActionInput<global::System.DateTime>(sandBox, DatetimeToConvert);
+        var datetimeToConvertValue = await sandBox.EvaluateActionInput<global::System.DateTime>(DatetimeToConvert);
 
         if (FormatToUse == FormatToUse.Custom)
         {
-            var customFormat = await _cSharpService.EvaluateActionInput<string>(sandBox, CustomFormat);
+            var customFormat = await sandBox.EvaluateActionInput<string>(CustomFormat);
             FormattedDateTime.Value = datetimeToConvertValue.ToString(customFormat);
         }
         else if (FormatToUse == FormatToUse.Standard)
@@ -53,6 +50,6 @@ public class ConvertDatetimeToText : IAction
             };
         }
 
-        sandBox.Variables.Add(FormattedDateTime);
+        sandBox.SetVariable(FormattedDateTime);
     }
 }

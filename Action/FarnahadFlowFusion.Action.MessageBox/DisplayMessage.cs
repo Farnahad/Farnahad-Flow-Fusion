@@ -1,14 +1,13 @@
-﻿using FarnahadFlowFusion.Action.Main;
+﻿using System.Windows;
+using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
 using FarnahadFlowFusion.Action.MessageBox.DisplayMessageBase;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
 
 namespace FarnahadFlowFusion.Action.MessageBox;
 
 public class DisplayMessage : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Display message";
 
     public ActionInput MessageBoxTitle { get; set; }
@@ -22,8 +21,6 @@ public class DisplayMessage : IAction
 
     public DisplayMessage()
     {
-        _cSharpService = new CSharpService();
-
         MessageBoxTitle = new ActionInput();
         MessageToDisplay = new ActionInput();
         MessageBoxIcon = MessageBoxIcon.None;
@@ -36,8 +33,8 @@ public class DisplayMessage : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var messageBoxTitleValue = await _cSharpService.EvaluateActionInput<string>(sandBox, MessageBoxTitle);
-        var messageToDisplayValue = await _cSharpService.EvaluateActionInput<string>(sandBox, MessageToDisplay);
+        var messageBoxTitleValue = await sandBox.EvaluateActionInput<string>(MessageBoxTitle);
+        var messageToDisplayValue = await sandBox.EvaluateActionInput<string>(MessageToDisplay);
 
         var messageBoxImage = MessageBoxIcon switch
         {
@@ -100,6 +97,6 @@ public class DisplayMessage : IAction
             //timer.Start();
         }
 
-        sandBox.Variables.Add(ButtonPressed);
+        sandBox.SetVariable(ButtonPressed);
     }
 }

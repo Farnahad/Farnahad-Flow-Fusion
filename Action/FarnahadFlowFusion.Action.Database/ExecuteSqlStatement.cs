@@ -2,15 +2,13 @@
 using System.Data.SqlClient;
 using FarnahadFlowFusion.Action.Database.ExecuteSqlStatementBase;
 using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
 
 namespace FarnahadFlowFusion.Action.Database;
 
 public class ExecuteSqlStatement : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Execute SQL statement";
 
     public GetConnectionBy GetConnectionBy { get; set; }
@@ -22,8 +20,6 @@ public class ExecuteSqlStatement : IAction
 
     public ExecuteSqlStatement()
     {
-        _cSharpService = new CSharpService();
-
         GetConnectionBy = GetConnectionBy.SqlConnectionVariable;
         SqlConnection = new ActionInput();
         ConnectionString = new ActionInput();
@@ -34,10 +30,10 @@ public class ExecuteSqlStatement : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var sqlConnectionValue = await _cSharpService.EvaluateActionInput<string>(sandBox, SqlConnection);
-        var connectionStringValue = await _cSharpService.EvaluateActionInput<string>(sandBox, ConnectionString);
-        var sqlStatementValue = await _cSharpService.EvaluateActionInput<string>(sandBox, SqlStatement);
-        var timeoutValue = await _cSharpService.EvaluateActionInput<int>(sandBox, Timeout);
+        var sqlConnectionValue = await sandBox.EvaluateActionInput<string>(SqlConnection);
+        var connectionStringValue = await sandBox.EvaluateActionInput<string>(ConnectionString);
+        var sqlStatementValue = await sandBox.EvaluateActionInput<string>(SqlStatement);
+        var timeoutValue = await sandBox.EvaluateActionInput<int>(Timeout);
 
         var sqlConnection = new SqlConnection();
 
@@ -47,7 +43,7 @@ public class ExecuteSqlStatement : IAction
                 sqlConnection = new SqlConnection(connectionStringValue);
                 break;
             case GetConnectionBy.SqlConnectionVariable:
-                sqlConnection = await _cSharpService.EvaluateActionInput<SqlConnection>(sandBox, SqlConnection);
+                sqlConnection = await sandBox.EvaluateActionInput<SqlConnection>(SqlConnection);
                 break;
         }
 
@@ -66,6 +62,6 @@ public class ExecuteSqlStatement : IAction
 
         QueryResult.Value = dataTable;
 
-        sandBox.Variables.Add(QueryResult);
+        sandBox.SetVariable(QueryResult);
     }
 }

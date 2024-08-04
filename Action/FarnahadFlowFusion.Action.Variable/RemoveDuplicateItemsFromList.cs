@@ -1,11 +1,10 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 
 namespace FarnahadFlowFusion.Action.Variable;
 
 public class RemoveDuplicateItemsFromList : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Remove Duplicate Items From List";
 
     public ActionInput ListToRemoveDuplicateItemsFrom { get; set; }
@@ -13,15 +12,12 @@ public class RemoveDuplicateItemsFromList : IAction
 
     public RemoveDuplicateItemsFromList()
     {
-        _cSharpService = new CSharpService();
-
         ListToRemoveDuplicateItemsFrom = new ActionInput();
     }
 
     public async Task Execute(SandBox sandBox)
     {
-        var listToRemoveDuplicateItemsFrom = await _cSharpService.EvaluateActionInput<List<object>>(
-            sandBox, ListToRemoveDuplicateItemsFrom);
+        var listToRemoveDuplicateItemsFrom = await sandBox.EvaluateActionInput<List<object>>(ListToRemoveDuplicateItemsFrom);
 
         listToRemoveDuplicateItemsFrom = listToRemoveDuplicateItemsFrom
             .GroupBy(item => item).Select(g => g.First()).ToList();

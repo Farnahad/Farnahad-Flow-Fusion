@@ -1,11 +1,11 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
 
 namespace FarnahadFlowFusion.Action.Text;
 
 public class ConvertTextToNumber : IAction
 {
-    private readonly CSharpService _cSharpService;
     private readonly VariableService _variableService;
 
     public string Name => "Convert text to number";
@@ -15,7 +15,6 @@ public class ConvertTextToNumber : IAction
 
     public ConvertTextToNumber()
     {
-        _cSharpService = new CSharpService();
         _variableService = new VariableService();
 
         TextToConvert = new ActionInput();
@@ -24,7 +23,7 @@ public class ConvertTextToNumber : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var textToConvertValue = await _cSharpService.EvaluateActionInput<string>(sandBox, TextToConvert);
+        var textToConvertValue = await sandBox.EvaluateActionInput<string>(TextToConvert);
 
         var variableType = _variableService.GetVariableType(textToConvertValue);
         TextAsNumber.Value = variableType switch
@@ -34,6 +33,6 @@ public class ConvertTextToNumber : IAction
             _ => TextAsNumber.Value
         };
 
-        sandBox.Variables.Add(TextAsNumber);
+        sandBox.SetVariable(TextAsNumber);
     }
 }

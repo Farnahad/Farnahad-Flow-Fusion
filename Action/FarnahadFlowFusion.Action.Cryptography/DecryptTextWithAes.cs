@@ -3,15 +3,11 @@ using FarnahadFlowFusion.Action.Cryptography.DecryptTextWithAesBase;
 using FarnahadFlowFusion.Action.Main;
 using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
-using FarnahadFlowFusion.Service.Main.CSharp;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
 
 namespace FarnahadFlowFusion.Action.Cryptography;
 
 public class DecryptTextWithAes : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Decrypt text with AES";
 
     public Encoding Encoding { get; set; }
@@ -21,8 +17,6 @@ public class DecryptTextWithAes : IAction
 
     public DecryptTextWithAes()
     {
-        _cSharpService = new CSharpService();
-
         Encoding = Encoding.Unicode;
         TextToDecrypt = new ActionInput();
         DecryptionKey = new ActionInput();
@@ -31,8 +25,8 @@ public class DecryptTextWithAes : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var textToDecryptValue = await _cSharpService.EvaluateActionInput<string>(sandBox, TextToDecrypt);
-        var decryptionKeyValue = await _cSharpService.EvaluateActionInput<string>(sandBox, DecryptionKey);
+        var textToDecryptValue = await sandBox.EvaluateActionInput<string>(TextToDecrypt);
+        var decryptionKeyValue = await sandBox.EvaluateActionInput<string>(DecryptionKey);
 
         var realEncoding = Encoding switch
         {
@@ -66,6 +60,6 @@ public class DecryptTextWithAes : IAction
 
         DecryptedText.Value = realEncoding.GetString(memoryStream.ToArray());
 
-        sandBox.Variables.Add(DecryptedText);
+        sandBox.SetVariable(DecryptedText);
     }
 }

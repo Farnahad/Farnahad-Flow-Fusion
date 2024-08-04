@@ -1,13 +1,11 @@
 ﻿using System.IO.Compression;
 using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
+using FarnahadFlowFusion.Action.Main.Action;
 
 namespace FarnahadFlowFusion.Action.Compression;
 
 public class UnzipFiles : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Unzip files";
 
     public ActionInput ArchivePath { get; set; }
@@ -18,8 +16,6 @@ public class UnzipFiles : IAction
 
     public UnzipFiles()
     {
-        _cSharpService = new CSharpService();
-
         ArchivePath = new ActionInput();
         DestinationFolder = new ActionInput();
         Password = new ActionInput();
@@ -29,11 +25,11 @@ public class UnzipFiles : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var archivePathValue = await _cSharpService.EvaluateActionInput<string>(sandBox, ArchivePath);
-        var destinationFolderValue = await _cSharpService.EvaluateActionInput<string>(sandBox, DestinationFolder);
-        var passwordValue = await _cSharpService.EvaluateActionInput<string>(sandBox, Password);
-        var includeMaskValue = await _cSharpService.EvaluateActionInput<string>(sandBox, IncludeMask);
-        var excludeMaskValue = await _cSharpService.EvaluateActionInput<string>(sandBox, ExcludeMask);
+        var archivePathValue = await sandBox.EvaluateActionInput<string>(ArchivePath);
+        var destinationFolderValue = await sandBox.EvaluateActionInput<string>(DestinationFolder);
+        var passwordValue = await sandBox.EvaluateActionInput<string>(Password);
+        var includeMaskValue = await sandBox.EvaluateActionInput<string>(IncludeMask);
+        var excludeMaskValue = await sandBox.EvaluateActionInput<string>(ExcludeMask);
 
         using (var archive = ZipFile.Open(archivePathValue, ZipArchiveMode.Read))
         {
@@ -50,7 +46,6 @@ public class UnzipFiles : IAction
                 {
                     continue;
                 }
-
 
                 var destinationPath = Path.Combine(destinationFolderValue, entry.FullName);
                 Directory.CreateDirectory(Path.GetDirectoryName(destinationPath) ?? string.Empty);

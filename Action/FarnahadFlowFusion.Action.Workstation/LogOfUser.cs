@@ -1,10 +1,11 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
+using FarnahadFlowFusion.Service.Workstation.Workstation;
 
 namespace FarnahadFlowFusion.Action.Workstation;
 
 public class LogOfUser : IAction
 {
-    private readonly CSharpService _cSharpService;
     private readonly WorkstationService _workstationService;
 
     public string Name => "Log of user";
@@ -13,7 +14,6 @@ public class LogOfUser : IAction
 
     public LogOfUser()
     {
-        _cSharpService = new CSharpService();
         _workstationService = new WorkstationService();
 
         Force = false;

@@ -60,7 +60,7 @@ public class SandBox
         return default;
     }
 
-    public void SetValue(Variable.Variable variable)
+    public void SetVariable(Variable.Variable variable)
     {
         if (variable.Enable)
         {
@@ -77,7 +77,7 @@ public class SandBox
         }
     }
 
-    public async Task<T> EvaluateActionInput<T>(SandBox sandBox, ActionInput actionInput)
+    public async Task<T> EvaluateActionInput<T>(ActionInput actionInput)
     {
         return Task.FromResult(new T());
     }

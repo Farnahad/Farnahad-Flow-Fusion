@@ -1,10 +1,11 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
+using FarnahadFlowFusion.Service.Workstation.Workstation;
 
 namespace FarnahadFlowFusion.Action.Workstation;
 
 public class SetDefaultPrinter : IAction
 {
-    private readonly CSharpService _cSharpService;
     private readonly WorkstationService _workstationService;
 
     public string Name => "Set default printer";
@@ -13,7 +14,6 @@ public class SetDefaultPrinter : IAction
 
     public SetDefaultPrinter()
     {
-        _cSharpService = new CSharpService();
         _workstationService = new WorkstationService();
 
         PrinterName = new ActionInput();
@@ -21,7 +21,7 @@ public class SetDefaultPrinter : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var printerNameValue = await _cSharpService.EvaluateActionInput<string>(sandBox, PrinterName);
+        var printerNameValue = await sandBox.EvaluateActionInput<string>(PrinterName);
 
         _workstationService.SetDefaultPrinter(printerNameValue);
     }

@@ -1,13 +1,11 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
 
 namespace FarnahadFlowFusion.Action.MessageBox;
 
 public class DisplaySelectFromListDialog : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Display select from list dialog";
 
     public ActionInput DialogTitle { get; set; }
@@ -23,8 +21,6 @@ public class DisplaySelectFromListDialog : IAction
 
     public DisplaySelectFromListDialog()
     {
-        _cSharpService = new CSharpService();
-
         DialogTitle = new ActionInput();
         DialogMessage = new ActionInput();
         ListChooseFrom = new ActionInput();
@@ -39,9 +35,9 @@ public class DisplaySelectFromListDialog : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var dialogTitleValue = await _cSharpService.EvaluateActionInput<string>(sandBox, DialogTitle);
-        var dialogMessageValue = await _cSharpService.EvaluateActionInput<string>(sandBox, DialogMessage);
-        var listChooseFromValue = await _cSharpService.EvaluateActionInput<List<string>>(sandBox, ListChooseFrom);
+        var dialogTitleValue = await sandBox.EvaluateActionInput<string>(DialogTitle);
+        var dialogMessageValue = await sandBox.EvaluateActionInput<string>(DialogMessage);
+        var listChooseFromValue = await sandBox.EvaluateActionInput<List<string>>(ListChooseFrom);
 
         if (KeepSelectDialogAlwaysOnTop)
         {
@@ -67,7 +63,7 @@ public class DisplaySelectFromListDialog : IAction
         SelectedIndex.Value = "SelectedIndex";
         ButtonPressed.Value = "ButtonPressed";
 
-        sandBox.Variables.Add(SelectedIndex);
-        sandBox.Variables.Add(ButtonPressed);
+        sandBox.SetVariable(SelectedIndex);
+        sandBox.SetVariable(ButtonPressed);
     }
 }

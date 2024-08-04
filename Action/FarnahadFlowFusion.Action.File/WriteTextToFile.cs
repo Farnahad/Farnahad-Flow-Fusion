@@ -1,13 +1,11 @@
 ﻿using System.Text;
 using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
+using FarnahadFlowFusion.Action.Main.Action;
 
 namespace FarnahadFlowFusion.Action.File;
 
 public class WriteTextToFile : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Write text to file";
 
     public ActionInput FilePtah { get; set; }
@@ -18,8 +16,6 @@ public class WriteTextToFile : IAction
 
     public WriteTextToFile()
     {
-        _cSharpService = new CSharpService();
-
         FilePtah = new ActionInput();
         TextToWrite = new ActionInput();
         AppendNewLine = true;
@@ -29,8 +25,8 @@ public class WriteTextToFile : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var filePtahValue = await _cSharpService.EvaluateActionInput<string>(sandBox, FilePtah);
-        var textToWriteValue = await _cSharpService.EvaluateActionInput<string>(sandBox, TextToWrite);
+        var filePtahValue = await sandBox.EvaluateActionInput<string>(FilePtah);
+        var textToWriteValue = await sandBox.EvaluateActionInput<string>(TextToWrite);
 
         var encoding = Encoding switch
         {

@@ -1,13 +1,12 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
+using Microsoft.Win32;
 
 namespace FarnahadFlowFusion.Action.MessageBox;
 
 public class DisplaySelectFileDialog : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Display select file dialog";
 
     public ActionInput DialogTitle { get; set; }
@@ -21,8 +20,6 @@ public class DisplaySelectFileDialog : IAction
 
     public DisplaySelectFileDialog()
     {
-        _cSharpService = new CSharpService();
-
         DialogTitle = new ActionInput();
         InitialFolder = new ActionInput();
         FileFilter = new ActionInput();
@@ -35,9 +32,9 @@ public class DisplaySelectFileDialog : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var dialogTitleValue = await _cSharpService.EvaluateActionInput<string>(sandBox, DialogTitle);
-        var initialFolderValue = await _cSharpService.EvaluateActionInput<string>(sandBox, InitialFolder);
-        var fileFilterValue = await _cSharpService.EvaluateActionInput<string>(sandBox, FileFilter);
+        var dialogTitleValue = await sandBox.EvaluateActionInput<string>(DialogTitle);
+        var initialFolderValue = await sandBox.EvaluateActionInput<string>(InitialFolder);
+        var fileFilterValue = await sandBox.EvaluateActionInput<string>(FileFilter);
 
         var openFileDialog = new OpenFileDialog
         {
@@ -64,7 +61,7 @@ public class DisplaySelectFileDialog : IAction
             ButtonPressed.Value = "Cancel";
         }
 
-        sandBox.Variables.Add(SelectedFile);
-        sandBox.Variables.Add(ButtonPressed);
+        sandBox.SetVariable(SelectedFile);
+        sandBox.SetVariable(ButtonPressed);
     }
 }

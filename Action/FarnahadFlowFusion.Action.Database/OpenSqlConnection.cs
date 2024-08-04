@@ -1,14 +1,12 @@
 ﻿using System.Data.SqlClient;
 using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
 
 namespace FarnahadFlowFusion.Action.Database;
 
 public class OpenSqlConnection : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Open SQL connection";
 
     public ActionInput ConnectionString { get; set; }
@@ -16,7 +14,6 @@ public class OpenSqlConnection : IAction
 
     public OpenSqlConnection()
     {
-        _cSharpService = new CSharpService();
 
         ConnectionString = new ActionInput();
         SqlConnection = new Variable();
@@ -24,13 +21,13 @@ public class OpenSqlConnection : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var connectionStringValue = await _cSharpService.EvaluateActionInput<string>(sandBox, ConnectionString);
+        var connectionStringValue = await sandBox.EvaluateActionInput<string>(ConnectionString);
 
         var sqlConnection = new SqlConnection(connectionStringValue);
         sqlConnection.Open();
 
         SqlConnection.Value = sqlConnection;
 
-        sandBox.Variables.Add(SqlConnection);
+        sandBox.SetVariable(SqlConnection);
     }
 }

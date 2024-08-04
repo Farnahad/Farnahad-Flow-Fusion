@@ -1,13 +1,11 @@
 ﻿using FarnahadFlowFusion.Action.File.IfFileExistsBase;
 using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
+using FarnahadFlowFusion.Action.Main.Action;
 
 namespace FarnahadFlowFusion.Action.File;
 
 public class IfFileExists : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "If File Exists";
 
     public IfFile IfFile { get; set; }
@@ -16,8 +14,6 @@ public class IfFileExists : IAction
 
     public IfFileExists()
     {
-        _cSharpService = new CSharpService();
-
         IfFile = IfFile.Exists;
         FilePath = new ActionInput();
         Actions = new List<IAction>();
@@ -25,7 +21,7 @@ public class IfFileExists : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var filePath = await _cSharpService.EvaluateActionInput<string>(sandBox, FilePath);
+        var filePath = await sandBox.EvaluateActionInput<string>(FilePath);
 
         var result = false;
 

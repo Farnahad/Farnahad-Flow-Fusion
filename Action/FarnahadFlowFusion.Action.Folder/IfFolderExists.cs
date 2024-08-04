@@ -1,13 +1,11 @@
 ﻿using FarnahadFlowFusion.Action.Folder.IfFolderExistsBase;
 using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
+using FarnahadFlowFusion.Action.Main.Action;
 
 namespace FarnahadFlowFusion.Action.Folder;
 
 public class IfFolderExists : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "If folder exists";
 
     public IfFolder IfFolder { get; set; }
@@ -16,8 +14,6 @@ public class IfFolderExists : IAction
 
     public IfFolderExists()
     {
-        _cSharpService = new CSharpService();
-
         IfFolder = IfFolder.Exists;
         FolderPath = new ActionInput();
         Actions = new List<IAction>();
@@ -25,7 +21,7 @@ public class IfFolderExists : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var folderPathValue = await _cSharpService.EvaluateActionInput<string>(sandBox, FolderPath);
+        var folderPathValue = await sandBox.EvaluateActionInput<string>(FolderPath);
 
         var directoryInfo = new DirectoryInfo(folderPathValue);
 

@@ -1,6 +1,5 @@
 ﻿using ManaErp.Module.Main.RibbonPage;
 using ManaErp.Module.Main.View.StatusBar;
-using ManaErp.Service.Main.Navigation;
 using Prism.Ioc;
 using Prism.Modularity;
 

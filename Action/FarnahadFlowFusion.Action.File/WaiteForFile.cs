@@ -1,13 +1,11 @@
 ﻿using FarnahadFlowFusion.Action.File.WaiteForFileBase;
 using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
+using FarnahadFlowFusion.Action.Main.Action;
 
 namespace FarnahadFlowFusion.Action.File;
 
 public class WaiteForFile : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Waite for file";
 
     public WaiteForFileToBe WaiteForFileToBe { get; set; }
@@ -17,8 +15,6 @@ public class WaiteForFile : IAction
 
     public WaiteForFile()
     {
-        _cSharpService = new CSharpService();
-
         WaiteForFileToBe = WaiteForFileToBe.Created;
         FilePath = new ActionInput();
         FailWithTimeoutError = false;
@@ -27,8 +23,8 @@ public class WaiteForFile : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var filePathValue = await _cSharpService.EvaluateActionInput<string>(sandBox, FilePath);
-        var durationValue = await _cSharpService.EvaluateActionInput<int>(sandBox, Duration);
+        var filePathValue = await sandBox.EvaluateActionInput<string>(FilePath);
+        var durationValue = await sandBox.EvaluateActionInput<int>(Duration);
 
         var timeout = TimeSpan.FromMilliseconds(durationValue);
 

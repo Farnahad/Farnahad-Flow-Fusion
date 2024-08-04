@@ -1,9 +1,4 @@
-﻿using ManaErp.Core.Main.Mvvm;
-using ManaErp.Service.Core.Container;
-using ManaErp.Service.Main.MessageBox;
-using ManaErp.Service.Main.Navigation;
-using ManaErp.Service.Main.Window;
-using Prism.Events;
+﻿using Prism.Events;
 
 namespace ManaErp.Module.Core.General
 {

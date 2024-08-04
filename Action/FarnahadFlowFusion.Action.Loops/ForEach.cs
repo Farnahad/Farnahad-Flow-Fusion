@@ -1,13 +1,11 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
 
 namespace FarnahadFlowFusion.Action.Loops;
 
 public class ForEach : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "For each";
 
     public ActionInput ValueToIterate { get; set; }
@@ -16,8 +14,6 @@ public class ForEach : IAction
 
     public ForEach()
     {
-        _cSharpService = new CSharpService();
-
         ValueToIterate = new ActionInput();
         CurrentItem = new Variable();
         Actions = new List<IAction>();
@@ -25,7 +21,7 @@ public class ForEach : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var valueToIterateValues = await _cSharpService.EvaluateActionInput<List<object>>(sandBox, ValueToIterate);
+        var valueToIterateValues = await sandBox.EvaluateActionInput<List<object>>(ValueToIterate);
 
         foreach (var valueToIterate in valueToIterateValues)
         {
@@ -35,6 +31,6 @@ public class ForEach : IAction
                 await action.Execute(sandBox);
         }
 
-        sandBox.Variables.Add(CurrentItem);
+        sandBox.SetVariable(CurrentItem);
     }
 }

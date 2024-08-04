@@ -1,8 +1,4 @@
-﻿using ManaErp.Core.Main.Method;
-using ManaErp.Core.Main.Mvvm;
-using ManaErp.DataAccess.Model;
-
-namespace ManaErp.Service.Main.MessageBox
+﻿namespace ManaErp.Service.Main.MessageBox
 {
     public interface IMessageBoxService : IService
     {

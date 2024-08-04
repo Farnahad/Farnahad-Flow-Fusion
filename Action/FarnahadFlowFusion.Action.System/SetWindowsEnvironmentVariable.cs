@@ -1,12 +1,11 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using Type = FarnahadFlowFusion.Action.System.SetWindowsEnvironmentVariableBase.Type;
 
 namespace FarnahadFlowFusion.Action.System;
 
 public class SetWindowsEnvironmentVariable : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Set Windows environment variable";
 
     public ActionInput EnvironmentVariableName { get; set; }
@@ -15,8 +14,6 @@ public class SetWindowsEnvironmentVariable : IAction
 
     public SetWindowsEnvironmentVariable()
     {
-        _cSharpService = new CSharpService();
-
         EnvironmentVariableName = new ActionInput();
         NewEnvironmentVariableValue = new ActionInput();
         Type = Type.User;
@@ -24,7 +21,7 @@ public class SetWindowsEnvironmentVariable : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var environmentVariableNameValue = await _cSharpService.EvaluateActionInput<string>(sandBox, EnvironmentVariableName);
+        var environmentVariableNameValue = await sandBox.EvaluateActionInput<string>(EnvironmentVariableName);
 
         switch (Type)
         {

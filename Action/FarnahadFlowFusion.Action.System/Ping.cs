@@ -1,12 +1,11 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
 
 namespace FarnahadFlowFusion.Action.System;
 
 public class Ping : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Ping";
 
     public ActionInput HostName { get; set; }
@@ -16,8 +15,6 @@ public class Ping : IAction
 
     public Ping()
     {
-        _cSharpService = new CSharpService();
-
         HostName = new ActionInput();
         TimeOut = new ActionInput();
         PingResult = new Variable();
@@ -26,8 +23,8 @@ public class Ping : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var hostNameValue = await _cSharpService.EvaluateActionInput<string>(sandBox, HostName);
-        var timeOutValue = await _cSharpService.EvaluateActionInput<int>(sandBox, TimeOut);
+        var hostNameValue = await sandBox.EvaluateActionInput<string>(HostName);
+        var timeOutValue = await sandBox.EvaluateActionInput<int>(TimeOut);
 
         var ping = new global::System.Net.NetworkInformation.Ping();
         var reply = await ping.SendPingAsync(hostNameValue, timeOutValue * 1000);
@@ -38,7 +35,7 @@ public class Ping : IAction
         if (RoundTripTime != null)
             RoundTripTime.Value = reply.RoundtripTime.ToString();
 
-        sandBox.Variables.Add(PingResult);
-        sandBox.Variables.Add(RoundTripTime);
+        sandBox.SetVariable(PingResult);
+        sandBox.SetVariable(RoundTripTime);
     }
 }

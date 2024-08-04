@@ -1,14 +1,12 @@
 ﻿using FarnahadFlowFusion.Action.FlowControl.OnBlockErrorBase;
 using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
+using FarnahadFlowFusion.Action.Main.Action;
 using Type = FarnahadFlowFusion.Action.FlowControl.OnBlockErrorBase.Type;
 
 namespace FarnahadFlowFusion.Action.FlowControl;
 
 public class OnBlockError : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "On block error";
 
     public string _Name { get; set; }
@@ -21,8 +19,6 @@ public class OnBlockError : IAction
 
     public OnBlockError()
     {
-        _cSharpService = new CSharpService();
-
         _Name = "";
         SetVariables = new List<SetVariable>();
         RunSubflows = new List<OnBlockErrorBase.RunSubflow>();
@@ -35,7 +31,7 @@ public class OnBlockError : IAction
     public async Task Execute(SandBox sandBox)
     {
         foreach (var setVariable in SetVariables.OrderBy(item => item.Order))
-            setVariable.Variable.Value = await _cSharpService.EvaluateActionInput<object>(sandBox, setVariable.Value);
+            setVariable.Variable.Value = await sandBox.EvaluateActionInput<object>(setVariable.Value);
 
         foreach (var runSubflow in RunSubflows.OrderBy(item => item.Order))
             await new SandBox(runSubflow.WorkFlow).Run();

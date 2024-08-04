@@ -1,15 +1,13 @@
 ﻿using System.Diagnostics;
 using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
 using FarnahadFlowFusion.Action.System.RunApplicationBase;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
 
 namespace FarnahadFlowFusion.Action.System;
 
 public class RunApplication : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Run application";
 
     public ActionInput ApplicationPath { get; set; }
@@ -22,8 +20,6 @@ public class RunApplication : IAction
 
     public RunApplication()
     {
-        _cSharpService = new CSharpService();
-
         ApplicationPath = new ActionInput();
         CommandLineArguments = new ActionInput();
         WorkingFolder = new ActionInput();
@@ -35,10 +31,10 @@ public class RunApplication : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var applicationPathValue = await _cSharpService.EvaluateActionInput<string>(sandBox, ApplicationPath);
-        var commandLineArgumentsValue = await _cSharpService.EvaluateActionInput<string>(sandBox, CommandLineArguments);
-        var workingFolderValue = await _cSharpService.EvaluateActionInput<string>(sandBox, WorkingFolder);
-        var timeoutValue = await _cSharpService.EvaluateActionInput<int>(sandBox, Timeout);
+        var applicationPathValue = await sandBox.EvaluateActionInput<string>(ApplicationPath);
+        var commandLineArgumentsValue = await sandBox.EvaluateActionInput<string>(CommandLineArguments);
+        var workingFolderValue = await sandBox.EvaluateActionInput<string>(WorkingFolder);
+        var timeoutValue = await sandBox.EvaluateActionInput<int>(Timeout);
 
 
         var processWindowStyle = ProcessWindowStyle.Normal;
@@ -104,6 +100,6 @@ public class RunApplication : IAction
             }
         }
 
-        sandBox.Variables.Add(AppProcessId);
+        sandBox.SetVariable(AppProcessId);
     }
 }

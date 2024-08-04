@@ -1,8 +1,8 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
 using Encoding = FarnahadFlowFusion.Action.Cryptography.HashTextBase.Encoding;
 using HashAlgorithm = FarnahadFlowFusion.Action.Cryptography.HashTextBase.HashAlgorithm;
 
@@ -10,8 +10,6 @@ namespace FarnahadFlowFusion.Action.Cryptography;
 
 public class HashText : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Hash text";
 
     public HashAlgorithm HashAlgorithm { get; set; }
@@ -21,8 +19,6 @@ public class HashText : IAction
 
     public HashText()
     {
-        _cSharpService = new CSharpService();
-
         HashAlgorithm = HashAlgorithm.Sha256;
         Encoding = Encoding.Unicode;
         TextToHash = new ActionInput();
@@ -31,7 +27,7 @@ public class HashText : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var textToHashValue = await _cSharpService.EvaluateActionInput<string>(sandBox, TextToHash);
+        var textToHashValue = await sandBox.EvaluateActionInput<string>(TextToHash);
 
         var realEncoding = Encoding switch
         {
@@ -62,6 +58,6 @@ public class HashText : IAction
 
         HashedText.Value = stringBuilder.ToString();
 
-        sandBox.Variables.Add(HashedText);
+        sandBox.SetVariable(HashedText);
     }
 }

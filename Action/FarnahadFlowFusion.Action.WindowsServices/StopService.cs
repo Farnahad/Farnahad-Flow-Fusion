@@ -1,10 +1,11 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
+using FarnahadFlowFusion.Service.WindowsServices.WindowsService;
 
 namespace FarnahadFlowFusion.Action.WindowsServices;
 
 public class StopService : IAction
 {
-    private readonly CSharpService _cSharpService;
     private readonly WindowsServiceService _windowsServiceService;
 
     public string Name => "Stop service";
@@ -13,7 +14,6 @@ public class StopService : IAction
 
     public StopService()
     {
-        _cSharpService = new CSharpService();
         _windowsServiceService = new WindowsServiceService();
 
         ServiceToStop = new ActionInput();
@@ -21,7 +21,7 @@ public class StopService : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var serviceToStopValue = await _cSharpService.EvaluateActionInput<string>(sandBox, ServiceToStop);
+        var serviceToStopValue = await sandBox.EvaluateActionInput<string>(ServiceToStop);
         _windowsServiceService.Stop(serviceToStopValue);
     }
 }

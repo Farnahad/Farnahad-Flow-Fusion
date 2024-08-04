@@ -1,11 +1,12 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Workstation.ControlScreenSaverBase;
+using FarnahadFlowFusion.Service.Workstation.Workstation;
 
 namespace FarnahadFlowFusion.Action.Workstation;
 
 public class ControlScreenSaver : IAction
 {
-    private readonly CSharpService _cSharpService;
     private readonly WorkstationService _workstationService;
 
     public string Name => "Control screen saver";
@@ -14,7 +15,6 @@ public class ControlScreenSaver : IAction
 
     public ControlScreenSaver()
     {
-        _cSharpService = new CSharpService();
         _workstationService = new WorkstationService();
 
         ScreenSaverAction = ScreenSaverAction.Enable;

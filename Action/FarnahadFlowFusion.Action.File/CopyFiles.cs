@@ -1,13 +1,11 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
 
 namespace FarnahadFlowFusion.Action.File;
 
 public class CopyFiles : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Copy file(s)";
 
     public ActionInput FilesToCopy { get; set; }
@@ -17,8 +15,6 @@ public class CopyFiles : IAction
 
     public CopyFiles()
     {
-        _cSharpService = new CSharpService();
-
         FilesToCopy = new ActionInput();
         DestinationFolder = new ActionInput();
         IfFileExists = CopyFilesBase.IfFileExists.DoNothing;
@@ -27,8 +23,8 @@ public class CopyFiles : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var filesToCopyValue = await _cSharpService.EvaluateActionInput<List<string>>(sandBox, FilesToCopy);
-        var destinationFolder = await _cSharpService.EvaluateActionInput<string>(sandBox, DestinationFolder);
+        var filesToCopyValue = await sandBox.EvaluateActionInput<List<string>>(FilesToCopy);
+        var destinationFolder = await sandBox.EvaluateActionInput<string>(DestinationFolder);
 
         var copiedFiles = new List<string>();
 
@@ -46,6 +42,6 @@ public class CopyFiles : IAction
 
         CopiedFiles.Value = copiedFiles;
 
-        sandBox.Variables.Add(CopiedFiles);
+        sandBox.SetVariable(CopiedFiles);
     }
 }

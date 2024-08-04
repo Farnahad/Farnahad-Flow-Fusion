@@ -1,14 +1,12 @@
 ﻿using System.Diagnostics;
 using System.Text.RegularExpressions;
 using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
+using FarnahadFlowFusion.Action.Main.Action;
 
 namespace FarnahadFlowFusion.Action.CmdSession;
 
 public class WaiteForTextOnCmdSession : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Waite for text on CMD session";
 
     public ActionInput CmdSession { get; set; }
@@ -19,7 +17,6 @@ public class WaiteForTextOnCmdSession : IAction
 
     public WaiteForTextOnCmdSession()
     {
-        _cSharpService = new CSharpService();
 
         CmdSession = new ActionInput();
         TextToWait = new ActionInput();
@@ -30,9 +27,9 @@ public class WaiteForTextOnCmdSession : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var cmdSessionValue = await _cSharpService.EvaluateActionInput<Process>(sandBox, CmdSession);
-        var textToWaitValue = await _cSharpService.EvaluateActionInput<string>(sandBox, TextToWait);
-        var timeoutValue = await _cSharpService.EvaluateActionInput<int>(sandBox, Timeout);
+        var cmdSessionValue = await sandBox.EvaluateActionInput<Process>(CmdSession);
+        var textToWaitValue = await sandBox.EvaluateActionInput<string>(TextToWait);
+        var timeoutValue = await sandBox.EvaluateActionInput<int>(Timeout);
 
         var output = string.Empty;
         cmdSessionValue.OutputDataReceived += (sender, args) =>

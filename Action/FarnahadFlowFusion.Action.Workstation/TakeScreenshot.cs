@@ -1,12 +1,11 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Workstation.TakeScreenshotBase;
 
 namespace FarnahadFlowFusion.Action.Workstation;
 
 public class TakeScreenshot : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Take screenshot";
 
     public Capture Capture { get; set; }
@@ -15,8 +14,6 @@ public class TakeScreenshot : IAction
 
     public TakeScreenshot()
     {
-        _cSharpService = new CSharpService();
-
         Capture = Capture.AllScreens;
         SaveScreenshotTo = SaveScreenshotTo.Clipboard;
         ScreenToCapture = new ActionInput();
@@ -24,11 +21,11 @@ public class TakeScreenshot : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var minimumVaXXXXXXXXXXXXlue = await _cSharpService.EvaluateActionInput<int>(sandBox, XXXXXXXXXXXX);
-        var XXXXXXXXXXXX = await _cSharpService.EvaluateActionInput<int>(sandBox, XXXXXXXXXXXX);
+        var minimumVaXXXXXXXXXXXXlue = await sandBox.EvaluateActionInput<int>(XXXXXXXXXXXX);
+        var XXXXXXXXXXXX = await sandBox.EvaluateActionInput<int>(XXXXXXXXXXXX);
 
         XXXXXXXXXXXX.Value = new Random().Next(XXXXXXXXXXXX, XXXXXXXXXXXX);
 
-        sandBox.Variables.Add(XXXXXXXXXXXX);
+        sandBox.SetVariable(XXXXXXXXXXXX);
     }
 }

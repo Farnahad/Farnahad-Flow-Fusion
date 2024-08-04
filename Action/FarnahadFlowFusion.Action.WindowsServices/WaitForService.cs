@@ -1,12 +1,13 @@
 ﻿using System.ServiceProcess;
 using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.WindowsServices.WaitForServiceBase;
+using FarnahadFlowFusion.Service.WindowsServices.WindowsService;
 
 namespace FarnahadFlowFusion.Action.WindowsServices;
 
 public class WaitForService : IAction
 {
-    private readonly CSharpService _cSharpService;
     private readonly WindowsServiceService _windowsServiceService;
 
     public string Name => "Wait for service";
@@ -18,7 +19,6 @@ public class WaitForService : IAction
 
     public WaitForService()
     {
-        _cSharpService = new CSharpService();
         _windowsServiceService = new WindowsServiceService();
 
         WaitForServiceTo = WaitForServiceTo.Start;
@@ -29,11 +29,11 @@ public class WaitForService : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var serviceNameValue = await _cSharpService.EvaluateActionInput<string>(sandBox, ServiceName);
+        var serviceNameValue = await sandBox.EvaluateActionInput<string>(ServiceName);
 
         if (FailWithTimeoutError)
         {
-            var durationValue = await _cSharpService.EvaluateActionInput<int>(sandBox, Duration);
+            var durationValue = await sandBox.EvaluateActionInput<int>(Duration);
 
             switch (WaitForServiceTo)
             {

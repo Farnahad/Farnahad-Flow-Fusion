@@ -1,14 +1,12 @@
 ﻿using System.Diagnostics;
 using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
 
 namespace FarnahadFlowFusion.Action.CmdSession;
 
 public class OpenCmdSession : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Open CMD session";
 
     public ActionInput WorkingDirectory { get; set; }
@@ -17,8 +15,6 @@ public class OpenCmdSession : IAction
 
     public OpenCmdSession()
     {
-        _cSharpService = new CSharpService();
-
         WorkingDirectory = new ActionInput();
         ChangeCodePage = false;
         CmdSession = new Variable();
@@ -26,7 +22,7 @@ public class OpenCmdSession : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var workingDirectoryValue = await _cSharpService.EvaluateActionInput<string>(sandBox, WorkingDirectory);
+        var workingDirectoryValue = await sandBox.EvaluateActionInput<string>(WorkingDirectory);
 
         var startInfo = new ProcessStartInfo
         {
@@ -46,7 +42,6 @@ public class OpenCmdSession : IAction
             await process.StandardInput.WriteLineAsync("chcp 65001"); // Change code page to UTF-8
         }
 
-
         // ReSharper disable once PossibleNullReferenceException
         process.OutputDataReceived += (sender, args) =>
         {
@@ -60,6 +55,6 @@ public class OpenCmdSession : IAction
 
         CmdSession.Value = process;
 
-        sandBox.Variables.Add(CmdSession);
+        sandBox.SetVariable(CmdSession);
     }
 }

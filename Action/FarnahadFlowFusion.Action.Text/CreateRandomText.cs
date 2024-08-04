@@ -1,13 +1,12 @@
 ﻿using System.Text;
 using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
 
 namespace FarnahadFlowFusion.Action.Text;
 
 public class CreateRandomText : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Create random text";
 
     public bool UserUppercaseLetters { get; set; }
@@ -22,7 +21,6 @@ public class CreateRandomText : IAction
 
     public CreateRandomText()
     {
-        _cSharpService = new CSharpService();
         _random = Random.Shared;
 
         UserUppercaseLetters = true;
@@ -36,8 +34,8 @@ public class CreateRandomText : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var minimumLengthValue = await _cSharpService.EvaluateActionInput<int>(sandBox, MinimumLength);
-        var maximumLengthValue = await _cSharpService.EvaluateActionInput<int>(sandBox, MaximumLength);
+        var minimumLengthValue = await sandBox.EvaluateActionInput<int>(MinimumLength);
+        var maximumLengthValue = await sandBox.EvaluateActionInput<int>(MaximumLength);
 
         var stringBuilder = new StringBuilder();
 
@@ -66,6 +64,6 @@ public class CreateRandomText : IAction
         RandomText.Value = new string(Enumerable.Repeat(stringBuilder.ToString(), length)
             .Select(s => s[_random.Next(s.Length)]).ToArray());
 
-        sandBox.Variables.Add(RandomText);
+        sandBox.SetVariable(RandomText);
     }
 }

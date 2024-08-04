@@ -1,14 +1,12 @@
 ﻿using FarnahadFlowFusion.Action.File.ReadTextFromFileBase;
 using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
 
 namespace FarnahadFlowFusion.Action.File;
 
 public class ReadTextFromFile : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Read text from file";
 
     public ActionInput FilePath { get; set; }
@@ -18,8 +16,6 @@ public class ReadTextFromFile : IAction
 
     public ReadTextFromFile()
     {
-        _cSharpService = new CSharpService();
-
         FilePath = new ActionInput();
         StoreContentAs = StoreContentAs.SingleTextValue;
         Encoding = Encoding.Utf8;
@@ -28,7 +24,7 @@ public class ReadTextFromFile : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var filePathValue = await _cSharpService.EvaluateActionInput<string>(sandBox, FilePath);
+        var filePathValue = await sandBox.EvaluateActionInput<string>(FilePath);
 
         var realEncoding = Encoding switch
         {
@@ -49,6 +45,6 @@ public class ReadTextFromFile : IAction
             _ => FileContents.Value
         };
 
-        sandBox.Variables.Add(FileContents);
+        sandBox.SetVariable(FileContents);
     }
 }

@@ -1,13 +1,11 @@
 ﻿using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
 
 namespace FarnahadFlowFusion.Action.Folder;
 
 public class CopyFolder : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Copy folder";
 
     public ActionInput FolderToCopy { get; set; }
@@ -17,8 +15,6 @@ public class CopyFolder : IAction
 
     public CopyFolder()
     {
-        _cSharpService = new CSharpService();
-
         FolderToCopy = new ActionInput();
         DestinationFolder = new ActionInput();
         IfFolderExists = CopyFolderBase.IfFolderExists.DoNothing;
@@ -27,8 +23,8 @@ public class CopyFolder : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var folderToCopyValue = await _cSharpService.EvaluateActionInput<string>(sandBox, FolderToCopy);
-        var destinationFolderValue = await _cSharpService.EvaluateActionInput<string>(sandBox, DestinationFolder);
+        var folderToCopyValue = await sandBox.EvaluateActionInput<string>(FolderToCopy);
+        var destinationFolderValue = await sandBox.EvaluateActionInput<string>(DestinationFolder);
 
         var destinationFolderIsExists = Directory.Exists(destinationFolderValue);
         if ((destinationFolderIsExists && IfFolderExists == CopyFolderBase.IfFolderExists.Overwrite) ||
@@ -39,7 +35,7 @@ public class CopyFolder : IAction
 
         CopiedFolder.Value = destinationFolderValue;
 
-        sandBox.Variables.Add(CopiedFolder);
+        sandBox.SetVariable(CopiedFolder);
     }
 
     private static async Task CopyFolderAsync(string sourceFolder, string targetFolder)
@@ -47,12 +43,12 @@ public class CopyFolder : IAction
         var sourceDirectory = new DirectoryInfo(sourceFolder);
         var targetDirectory = new DirectoryInfo(targetFolder);
 
-        if (!sourceDirectory.Exists)
+        if (sourceDirectory.Exists == false)
         {
             throw new DirectoryNotFoundException($"Source directory '{sourceFolder}' not found.");
         }
 
-        if (!targetDirectory.Exists)
+        if (targetDirectory.Exists == false)
         {
             targetDirectory.Create();
             Console.WriteLine($"Target directory '{targetFolder}' created.");

@@ -1,13 +1,12 @@
 ﻿using System.Diagnostics;
 using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.System.TerminateProcessBase;
 
 namespace FarnahadFlowFusion.Action.System;
 
 public class TerminateProcess : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Terminate process";
 
     public SpecifyProcessBy SpecifyProcessBy { get; set; }
@@ -16,8 +15,6 @@ public class TerminateProcess : IAction
 
     public TerminateProcess()
     {
-        _cSharpService = new CSharpService();
-
         SpecifyProcessBy = SpecifyProcessBy.ProcessName;
         ProcessName = new ActionInput();
         ProcessId = new ActionInput();
@@ -25,8 +22,8 @@ public class TerminateProcess : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var processNameValue = await _cSharpService.EvaluateActionInput<string>(sandBox, ProcessName);
-        var processIdValue = await _cSharpService.EvaluateActionInput<int>(sandBox, ProcessId);
+        var processNameValue = await sandBox.EvaluateActionInput<string>(ProcessName);
+        var processIdValue = await sandBox.EvaluateActionInput<int>(ProcessId);
 
         switch (SpecifyProcessBy)
         {

@@ -1,15 +1,13 @@
 ﻿using System.IO.Compression;
 using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
 using CompressionLevel = FarnahadFlowFusion.Action.Compression.ZipFilesBase.CompressionLevel;
 
 namespace FarnahadFlowFusion.Action.Compression;
 
 public class ZipFiles : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Zip files";
 
     public ActionInput ArchivePath { get; set; }
@@ -21,8 +19,6 @@ public class ZipFiles : IAction
 
     public ZipFiles()
     {
-        _cSharpService = new CSharpService();
-
         ArchivePath = new ActionInput();
         FilesToZip = new ActionInput();
         CompressionLevel = CompressionLevel.BestBalanceOfSpeedAndCompression;
@@ -33,10 +29,10 @@ public class ZipFiles : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var archivePathValue = await _cSharpService.EvaluateActionInput<string>(sandBox, ArchivePath);
-        var filesToZipValue = await _cSharpService.EvaluateActionInput<List<string>>(sandBox, FilesToZip);
-        var passwordValue = await _cSharpService.EvaluateActionInput<string>(sandBox, Password);
-        var archiveCommentValue = await _cSharpService.EvaluateActionInput<string>(sandBox, ArchiveComment);
+        var archivePathValue = await sandBox.EvaluateActionInput<string>(ArchivePath);
+        var filesToZipValue = await sandBox.EvaluateActionInput<List<string>>(FilesToZip);
+        var passwordValue = await sandBox.EvaluateActionInput<string>(Password);
+        var archiveCommentValue = await sandBox.EvaluateActionInput<string>(ArchiveComment);
 
         using (var archive = global::System.IO.Compression.ZipFile.Open(archivePathValue, ZipArchiveMode.Create))
         {
@@ -74,6 +70,6 @@ public class ZipFiles : IAction
 
         ZipFile.Value = archivePathValue;
 
-        sandBox.Variables.Add(ZipFile);
+        sandBox.SetVariable(ZipFile);
     }
 }

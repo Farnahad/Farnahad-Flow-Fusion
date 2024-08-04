@@ -1,11 +1,13 @@
-﻿using FarnahadFlowFusion.Action.Main;
+﻿using System.Media;
+using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Workstation.PlaySoundBase;
+using FarnahadFlowFusion.Service.Workstation.Workstation;
 
 namespace FarnahadFlowFusion.Action.Workstation;
 
 public class PlaySound : IAction
 {
-    private readonly CSharpService _cSharpService;
     private readonly WorkstationService _workstationService;
 
     public string Name => "Play sound";
@@ -16,7 +18,6 @@ public class PlaySound : IAction
 
     public PlaySound()
     {
-        _cSharpService = new CSharpService();
         _workstationService = new WorkstationService();
 
         PlaySoundFrom = PlaySoundFrom.System;
@@ -49,7 +50,7 @@ public class PlaySound : IAction
         }
         else if (PlaySoundFrom == PlaySoundFrom.WavFile)
         {
-            var fileToPlayValue = await _cSharpService.EvaluateActionInput<string>(sandBox, FileToPlay);
+            var fileToPlayValue = await sandBox.EvaluateActionInput<string>(FileToPlay);
             using var player = new SoundPlayer(fileToPlayValue);
             player.Play();
         }

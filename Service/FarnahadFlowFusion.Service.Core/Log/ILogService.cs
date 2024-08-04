@@ -1,6 +1,4 @@
-﻿using ManaErp.Core.Main.Mvvm;
-
-namespace ManaErp.Service.Main.Log
+﻿namespace ManaErp.Service.Main.Log
 {
     public interface ILogService : IService
     {

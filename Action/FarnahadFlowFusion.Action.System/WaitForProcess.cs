@@ -1,13 +1,12 @@
 ﻿using System.Diagnostics;
 using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.System.WaitForProcessBase;
 
 namespace FarnahadFlowFusion.Action.System;
 
 public class WaitForProcess : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Wait for process";
 
     public ActionInput ProcessName { get; set; }
@@ -17,8 +16,6 @@ public class WaitForProcess : IAction
 
     public WaitForProcess()
     {
-        _cSharpService = new CSharpService();
-
         ProcessName = new ActionInput();
         WaitForProcessTo = WaitForProcessTo.Start;
         FailWithTimeoutError = false;
@@ -27,8 +24,8 @@ public class WaitForProcess : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var processNameValue = await _cSharpService.EvaluateActionInput<string>(sandBox, ProcessName);
-        var durationValue = await _cSharpService.EvaluateActionInput<int>(sandBox, Duration);
+        var processNameValue = await sandBox.EvaluateActionInput<string>(ProcessName);
+        var durationValue = await sandBox.EvaluateActionInput<int>(Duration);
 
 
         var endTime = global::System.DateTime.UtcNow.AddSeconds(durationValue);
@@ -54,9 +51,8 @@ public class WaitForProcess : IAction
 
         if (FailWithTimeoutError && waiteResult == false)
         {
-            throw new TimeoutException($"Timeout waiting for process '{ProcessName.Value}' to {WaitCondition}.");
+            throw new TimeoutException($"Timeout waiting for process '{processNameValue}' to {WaitCondition}.");
         }
-
     }
 
     private bool ProcessExists(string processName)

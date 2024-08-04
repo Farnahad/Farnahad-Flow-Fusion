@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using FarnahadFlowFusion.Action.Main;
+using FarnahadFlowFusion.Action.Main.Action;
 using FarnahadFlowFusion.Action.Main.Variable;
-using FarnahadFlowFusion.Service.Scripting.CSharp;
 using Encoding = FarnahadFlowFusion.Action.Cryptography.HashTextWithKeyBase.Encoding;
 using HashAlgorithm = FarnahadFlowFusion.Action.Cryptography.HashTextWithKeyBase.HashAlgorithm;
 
@@ -9,8 +9,6 @@ namespace FarnahadFlowFusion.Action.Cryptography;
 
 public class HashTextWithKey : IAction
 {
-    private readonly CSharpService _cSharpService;
-
     public string Name => "Hash text with key";
 
     public HashAlgorithm HashAlgorithm { get; set; }
@@ -21,8 +19,6 @@ public class HashTextWithKey : IAction
 
     public HashTextWithKey()
     {
-        _cSharpService = new CSharpService();
-
         HashAlgorithm = HashAlgorithm.HamcSha256;
         Encoding = Encoding.Unicode;
         TextToHash = new ActionInput();
@@ -32,8 +28,8 @@ public class HashTextWithKey : IAction
 
     public async Task Execute(SandBox sandBox)
     {
-        var textToHashValue = await _cSharpService.EvaluateActionInput<string>(sandBox, TextToHash);
-        var hashKeyValue = await _cSharpService.EvaluateActionInput<string>(sandBox, HashKey);
+        var textToHashValue = await sandBox.EvaluateActionInput<string>(TextToHash);
+        var hashKeyValue = await sandBox.EvaluateActionInput<string>(HashKey);
 
         var key = global::System.Text.Encoding.UTF8.GetBytes(hashKeyValue);
 
@@ -57,6 +53,6 @@ public class HashTextWithKey : IAction
             _ => HashedText.Value
         };
 
-        sandBox.Variables.Add(HashedText);
+        sandBox.SetVariable(HashedText);
     }
 }

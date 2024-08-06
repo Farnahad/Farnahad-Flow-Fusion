@@ -10,4 +10,8 @@
 		<PackageReference Include="Prism.Wpf" Version="8.1.97" />
 		<PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Core\FlowFusion.Core.Main\FlowFusion.Core.Main.csproj" />
+	</ItemGroup>
 </Project>

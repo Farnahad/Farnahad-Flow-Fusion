@@ -1,19 +1,16 @@
 ﻿using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
+using FlowFusion.Service.Clipboard.ClipboardService;
 
 namespace FlowFusion.Action.Clipboard;
 
-public class ClearClipboardContents : IAction //XXXXXXXXXXXX
+public class ClearClipboardContents(IClipboardService clipboardService) : IAction
 {
     public string Name => "Clear clipboard contents";
 
-    public ClearClipboardContents()
-    {
-    }
-
     public async Task Execute(SandBox sandBox)
     {
-        global::System.Windows.Clipboard.Clear();
+        clipboardService.Clear();
         await Task.CompletedTask;
     }
 }

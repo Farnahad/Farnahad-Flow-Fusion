@@ -10,4 +10,8 @@
 		<PackageReference Include="MailKit" Version="4.7.1.1" />
 		<PackageReference Include="Prism.Wpf" Version="8.1.97" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Core\FlowFusion.Core.Main\FlowFusion.Core.Main.csproj" />
+	</ItemGroup>
 </Project>

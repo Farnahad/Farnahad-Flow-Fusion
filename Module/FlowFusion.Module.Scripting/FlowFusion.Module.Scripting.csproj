@@ -15,6 +15,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\..\Core\FlowFusion.Core.Main\FlowFusion.Core.Main.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<Reference Include="DevExpress.Charts.v22.1.Core">
 			<HintPath>..\..\DevExpress 22.1\DevExpress.Charts.v22.1.Core.dll</HintPath>
 		</Reference>

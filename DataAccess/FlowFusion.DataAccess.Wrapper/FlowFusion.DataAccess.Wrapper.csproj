@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>disable</Nullable>
+		<BaseOutputPath>..\..\Module\FlowFusion.Module.Main\bin\</BaseOutputPath>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\FlowFusion.DataAccess.Model\FlowFusion.DataAccess.Model.csproj" />
+	</ItemGroup>
+
+</Project>

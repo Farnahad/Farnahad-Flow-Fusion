@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>disable</Nullable>
+		<BaseOutputPath>..\..\Module\FlowFusion.Module.Main\bin\</BaseOutputPath>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference
+			Include="..\..\Service\FlowFusion.Service.Workstation\FlowFusion.Service.Workstation.csproj" />
+		<ProjectReference Include="..\FlowFusion.Action.Main\FlowFusion.Action.Main.csproj" />
+	</ItemGroup>
+</Project>

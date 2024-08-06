@@ -1,9 +1,9 @@
-﻿using ManaErp.Module.Main.RibbonPage;
-using ManaErp.Module.Main.View.StatusBar;
+﻿using FlowFusion.Module.Main.RibbonPage;
+using FlowFusion.Module.Main.View.StatusBar;
 using Prism.Ioc;
 using Prism.Modularity;
 
-namespace ManaErp.Module.Main
+namespace FlowFusion.Module.Main
 {
     public class MainModule : IModule
     {

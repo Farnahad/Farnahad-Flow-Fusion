@@ -1,16 +1,16 @@
-﻿using ManaErp.Service.Main.DateTime;
-using ManaErp.Service.Main.Log;
-using ManaErp.Service.Main.MessageBox;
-using ManaErp.Service.Main.Navigation;
-using ManaErp.Service.Main.Session;
-using ManaErp.Service.Main.Text;
-using ManaErp.Service.Main.Timer;
-using ManaErp.Service.Main.Utility;
-using ManaErp.Service.Main.Window;
+﻿using FlowFusion.Service.Core.DateTime;
+using FlowFusion.Service.Core.Log;
+using FlowFusion.Service.Core.MessageBox;
+using FlowFusion.Service.Core.Navigation;
+using FlowFusion.Service.Core.Session;
+using FlowFusion.Service.Core.Text;
+using FlowFusion.Service.Core.Timer;
+using FlowFusion.Service.Core.Utility;
+using FlowFusion.Service.Core.Window;
 using Prism.Ioc;
 using Prism.Modularity;
 
-namespace ManaErp.Service.Main
+namespace FlowFusion.Service.Core
 {
     public class MainServiceModule : IModule
     {

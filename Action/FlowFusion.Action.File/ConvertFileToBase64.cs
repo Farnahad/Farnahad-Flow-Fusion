@@ -4,7 +4,7 @@ using FlowFusion.Action.Main.Variable;
 
 namespace FlowFusion.Action.File;
 
-public class ConvertFileToBase64 : IAction
+public class ConvertFileToBase64 : IAction //XXXXXXXXXXXX
 {
     public string Name => "Convert file to Base64";
 

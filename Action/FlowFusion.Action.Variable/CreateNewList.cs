@@ -4,7 +4,7 @@ using FlowFusion.Action.Main.Variable;
 
 namespace FlowFusion.Action.Variable;
 
-public class CreateNewList : IAction
+public class CreateNewList : IAction //XXXXXXXXXXXX
 {
     public string Name => "Create New List";
 

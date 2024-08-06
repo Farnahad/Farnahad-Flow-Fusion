@@ -6,7 +6,7 @@ using FlowFusion.Action.Scripting.RunPythonScriptBase;
 
 namespace FlowFusion.Action.Scripting;
 
-public class RunPythonScript : IAction
+public class RunPythonScript : IAction //XXXXXXXXXXXX
 {
     public string Name => "Run Python script";
 

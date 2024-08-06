@@ -4,7 +4,7 @@ using FlowFusion.Action.Main.Action;
 
 namespace FlowFusion.Action.Compression;
 
-public class UnzipFiles : IAction
+public class UnzipFiles : IAction //XXXXXXXXXXXX
 {
     public string Name => "Unzip files";
 

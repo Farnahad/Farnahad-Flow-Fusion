@@ -4,7 +4,7 @@ using FlowFusion.Action.Workstation.TakeScreenshotBase;
 
 namespace FlowFusion.Action.Workstation;
 
-public class TakeScreenshot : IAction
+public class TakeScreenshot : IAction //XXXXXXXXXXXX
 {
     public string Name => "Take screenshot";
 

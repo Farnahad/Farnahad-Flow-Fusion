@@ -3,7 +3,7 @@ using FlowFusion.Action.Main.Action;
 
 namespace FlowFusion.Action.Variable;
 
-public class GenerateRandomNumber : IAction
+public class GenerateRandomNumber : IAction //XXXXXXXXXXXX
 {
     public string Name => "Generate Random Number";
 

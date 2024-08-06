@@ -5,7 +5,7 @@ using FlowFusion.Action.Main.Variable;
 
 namespace FlowFusion.Action.Text;
 
-public class EscapeTextForRegularExpression : IAction
+public class EscapeTextForRegularExpression : IAction //XXXXXXXXXXXX
 {
     public string Name => "Escape text for regular expression";
 

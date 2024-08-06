@@ -4,7 +4,7 @@ using Type = FlowFusion.Action.System.DeleteWindowsEnvironmentVariableBase.Type;
 
 namespace FlowFusion.Action.System;
 
-public class DeleteWindowsEnvironmentVariable : IAction
+public class DeleteWindowsEnvironmentVariable : IAction //XXXXXXXXXXXX
 {
     public string Name => "Delete Windows environment variable";
 

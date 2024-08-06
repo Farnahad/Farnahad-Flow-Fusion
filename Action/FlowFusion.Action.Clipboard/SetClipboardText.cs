@@ -3,7 +3,7 @@ using FlowFusion.Action.Main.Action;
 
 namespace FlowFusion.Action.Clipboard;
 
-public class SetClipboardText : IAction
+public class SetClipboardText : IAction //XXXXXXXXXXXX
 {
     public string Name => "Set clipboard text";
 

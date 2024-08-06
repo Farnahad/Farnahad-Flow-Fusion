@@ -5,7 +5,7 @@ using FlowFusion.Action.Main.Variable;
 
 namespace FlowFusion.Action.Folder;
 
-public class GetSpecialFolder : IAction
+public class GetSpecialFolder : IAction //XXXXXXXXXXXX
 {
     public string Name => "Get special folder";
 

@@ -3,7 +3,7 @@ using FlowFusion.Action.Main.Action;
 
 namespace FlowFusion.Action.Variable;
 
-public class ShuffleList : IAction
+public class ShuffleList : IAction //XXXXXXXXXXXX
 {
     public string Name => "Shuffle List";
 

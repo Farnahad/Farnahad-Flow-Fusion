@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace ManaErp.Service.Main.MessageBox
+namespace FlowFusion.Service.Core.MessageBox
 {
     public class MessageBoxService : IMessageBoxService
     {

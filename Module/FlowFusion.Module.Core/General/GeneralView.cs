@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace ManaErp.Module.Core.General
+namespace FlowFusion.Module.Core.General
 {
     public class GeneralView : View
     {

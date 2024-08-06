@@ -4,7 +4,7 @@ using FlowFusion.Action.Main.Variable;
 
 namespace FlowFusion.Action.Loops;
 
-public class ForEach : IAction
+public class ForEach : IAction //XXXXXXXXXXXX
 {
     public string Name => "For each";
 

@@ -5,7 +5,7 @@ using FlowFusion.Action.Main.Variable;
 
 namespace FlowFusion.Action.Text;
 
-public class CreateRandomText : IAction
+public class CreateRandomText : IAction //XXXXXXXXXXXX
 {
     public string Name => "Create random text";
 

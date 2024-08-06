@@ -6,7 +6,7 @@ using TimeZone = FlowFusion.Action.DateTime.GetCurrentDateAndTimeBase.TimeZone;
 
 namespace FlowFusion.Action.DateTime;
 
-public class GetCurrentDateAndTime : IAction
+public class GetCurrentDateAndTime : IAction //XXXXXXXXXXXX
 {
     public string Name => "Get current date and time";
 

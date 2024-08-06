@@ -4,7 +4,7 @@ using FlowFusion.Action.Main.Variable;
 
 namespace FlowFusion.Action.File;
 
-public class GetFilePathPart : IAction
+public class GetFilePathPart : IAction //XXXXXXXXXXXX
 {
     public string Name => "Get file path part";
 

@@ -3,7 +3,7 @@ using FlowFusion.Action.Main.Action;
 
 namespace FlowFusion.Action.Variable;
 
-public class RemoveDuplicateItemsFromList : IAction
+public class RemoveDuplicateItemsFromList : IAction //XXXXXXXXXXXX
 {
     public string Name => "Remove Duplicate Items From List";
 

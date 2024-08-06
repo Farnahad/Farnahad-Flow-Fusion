@@ -5,7 +5,7 @@ using FlowFusion.Action.Main.Action;
 
 namespace FlowFusion.Action.Email;
 
-public class SendEmail : IAction
+public class SendEmail : IAction //XXXXXXXXXXXX
 {
     public string Name => "Send email";
 

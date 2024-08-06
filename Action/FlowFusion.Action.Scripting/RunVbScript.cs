@@ -5,7 +5,7 @@ using FlowFusion.Action.Main.Variable;
 
 namespace FlowFusion.Action.Scripting;
 
-public class RunVbScript : IAction
+public class RunVbScript : IAction //XXXXXXXXXXXX
 {
     public string Name => "Run VBScript";
 

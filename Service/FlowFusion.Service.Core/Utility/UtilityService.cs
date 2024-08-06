@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace ManaErp.Service.Main.Utility
+namespace FlowFusion.Service.Core.Utility
 {
     public class UtilityService : IUtilityService
     {

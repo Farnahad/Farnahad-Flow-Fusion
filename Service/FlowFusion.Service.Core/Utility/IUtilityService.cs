@@ -1,4 +1,4 @@
-﻿namespace ManaErp.Service.Main.Utility
+﻿namespace FlowFusion.Service.Core.Utility
 {
     public interface IUtilityService : IService
     {

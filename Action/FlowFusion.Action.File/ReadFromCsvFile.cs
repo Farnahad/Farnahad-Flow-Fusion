@@ -5,7 +5,7 @@ using FlowFusion.Action.Main.Variable;
 
 namespace FlowFusion.Action.File;
 
-public class ReadFromCsvFile : IAction
+public class ReadFromCsvFile : IAction //XXXXXXXXXXXX
 {
     public string Name => "Read from CSV file";
 

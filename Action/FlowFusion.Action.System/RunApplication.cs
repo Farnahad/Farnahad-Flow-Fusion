@@ -6,7 +6,7 @@ using FlowFusion.Action.System.RunApplicationBase;
 
 namespace FlowFusion.Action.System;
 
-public class RunApplication : IAction
+public class RunApplication : IAction //XXXXXXXXXXXX
 {
     public string Name => "Run application";
 

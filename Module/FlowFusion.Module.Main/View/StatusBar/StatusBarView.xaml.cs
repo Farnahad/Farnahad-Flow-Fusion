@@ -1,4 +1,4 @@
-﻿namespace ManaErp.Module.Main.View.StatusBar
+﻿namespace FlowFusion.Module.Main.View.StatusBar
 {
     public partial class StatusBarView
     {

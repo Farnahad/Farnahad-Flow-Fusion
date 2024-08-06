@@ -4,7 +4,7 @@ using FlowFusion.Action.Main.Variable;
 
 namespace FlowFusion.Action.Clipboard;
 
-public class GetClipboardText : IAction
+public class GetClipboardText : IAction //XXXXXXXXXXXX
 {
 
     public string Name => "Get clipboard text";

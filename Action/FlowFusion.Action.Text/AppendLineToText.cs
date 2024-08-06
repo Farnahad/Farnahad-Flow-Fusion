@@ -5,7 +5,7 @@ using FlowFusion.Action.Main.Variable;
 
 namespace FlowFusion.Action.Text;
 
-public class AppendLineToText : IAction
+public class AppendLineToText : IAction //XXXXXXXXXXXX
 {
     public string Name => "Append line to text";
 

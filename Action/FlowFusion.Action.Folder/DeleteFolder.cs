@@ -3,7 +3,7 @@ using FlowFusion.Action.Main.Action;
 
 namespace FlowFusion.Action.Folder;
 
-public class DeleteFolder : IAction
+public class DeleteFolder : IAction //XXXXXXXXXXXX
 {
     public string Name => "Delete folder";
 

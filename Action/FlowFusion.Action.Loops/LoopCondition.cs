@@ -4,7 +4,7 @@ using FlowFusion.Action.Main.Action;
 
 namespace FlowFusion.Action.Loops;
 
-public class LoopCondition : IAction
+public class LoopCondition : IAction //XXXXXXXXXXXX
 {
     public string Name => "Loop condition";
 

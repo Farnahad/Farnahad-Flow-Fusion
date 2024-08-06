@@ -8,7 +8,7 @@ using HashAlgorithm = FlowFusion.Action.Cryptography.HashTextBase.HashAlgorithm;
 
 namespace FlowFusion.Action.Cryptography;
 
-public class HashText : IAction
+public class HashText : IAction //XXXXXXXXXXXX
 {
     public string Name => "Hash text";
 

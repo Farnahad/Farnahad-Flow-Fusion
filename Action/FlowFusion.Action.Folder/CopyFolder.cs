@@ -4,7 +4,7 @@ using FlowFusion.Action.Main.Variable;
 
 namespace FlowFusion.Action.Folder;
 
-public class CopyFolder : IAction
+public class CopyFolder : IAction //XXXXXXXXXXXX
 {
     public string Name => "Copy folder";
 

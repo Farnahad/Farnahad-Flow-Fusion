@@ -4,7 +4,7 @@ using FlowFusion.Action.Main.Variable;
 
 namespace FlowFusion.Action.Scripting;
 
-public class RunJavaScript : IAction
+public class RunJavaScript : IAction //XXXXXXXXXXXX
 {
     public string Name => "Run JavaScript";
 

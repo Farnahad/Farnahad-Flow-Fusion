@@ -5,7 +5,7 @@ using FlowFusion.Action.Text.CropTextBase;
 
 namespace FlowFusion.Action.Text;
 
-public class CropText : IAction
+public class CropText : IAction //XXXXXXXXXXXX
 {
     public string Name => "Crop text";
 

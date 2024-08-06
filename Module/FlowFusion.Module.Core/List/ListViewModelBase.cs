@@ -1,8 +1,8 @@
 ﻿using System.Collections.ObjectModel;
-using ManaErp.Module.Core.Edit;
-using ManaErp.Module.Core.General;
+using FlowFusion.Module.Core.Edit;
+using FlowFusion.Module.Core.General;
 
-namespace ManaErp.Module.Core.List
+namespace FlowFusion.Module.Core.List
 {
     public abstract class ListViewModelBase<TModel, TModelWrapper, TEditView> : GeneralViewModel
         where TModel : IDbModel, new()

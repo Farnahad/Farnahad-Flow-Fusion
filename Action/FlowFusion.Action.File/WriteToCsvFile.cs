@@ -5,7 +5,7 @@ using Encoding = FlowFusion.Action.File.WriteToCsvFileBase.Encoding;
 
 namespace FlowFusion.Action.File;
 
-public class WriteToCsvFile : IAction
+public class WriteToCsvFile : IAction //XXXXXXXXXXXX
 {
     public string Name => "Write to csv file";
 

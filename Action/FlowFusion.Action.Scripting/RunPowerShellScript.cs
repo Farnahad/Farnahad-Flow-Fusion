@@ -5,7 +5,7 @@ using FlowFusion.Action.Main.Variable;
 
 namespace FlowFusion.Action.Scripting;
 
-public class RunPowerShellScript : IAction
+public class RunPowerShellScript : IAction //XXXXXXXXXXXX
 {
     public string Name => "Run PowerShell script";
 

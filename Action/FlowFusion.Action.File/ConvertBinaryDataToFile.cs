@@ -3,7 +3,7 @@ using FlowFusion.Action.Main.Action;
 
 namespace FlowFusion.Action.File;
 
-public class ConvertBinaryDataToFile : IAction
+public class ConvertBinaryDataToFile : IAction //XXXXXXXXXXXX
 {
     public string Name => "Convert binary data to file";
 

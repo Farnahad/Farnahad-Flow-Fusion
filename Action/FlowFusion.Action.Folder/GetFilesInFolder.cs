@@ -4,7 +4,7 @@ using FlowFusion.Action.Main.Variable;
 
 namespace FlowFusion.Action.Folder;
 
-public class GetFilesInFolder : IAction
+public class GetFilesInFolder : IAction //XXXXXXXXXXXX
 {
     public string Name => "Get files in folder";
 

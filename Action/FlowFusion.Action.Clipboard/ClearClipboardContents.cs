@@ -3,7 +3,7 @@ using FlowFusion.Action.Main.Action;
 
 namespace FlowFusion.Action.Clipboard;
 
-public class ClearClipboardContents : IAction
+public class ClearClipboardContents : IAction //XXXXXXXXXXXX
 {
     public string Name => "Clear clipboard contents";
 

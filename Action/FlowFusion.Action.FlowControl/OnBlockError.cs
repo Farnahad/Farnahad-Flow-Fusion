@@ -5,7 +5,7 @@ using Type = FlowFusion.Action.FlowControl.OnBlockErrorBase.Type;
 
 namespace FlowFusion.Action.FlowControl;
 
-public class OnBlockError : IAction
+public class OnBlockError : IAction //XXXXXXXXXXXX
 {
     public string Name => "On block error";
 

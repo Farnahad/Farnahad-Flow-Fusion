@@ -4,7 +4,7 @@ using FlowFusion.Action.Main.Action;
 
 namespace FlowFusion.Action.FlowControl;
 
-public class StopFlow : IAction
+public class StopFlow : IAction //XXXXXXXXXXXX
 {
     public string Name => "Stop flow";
 

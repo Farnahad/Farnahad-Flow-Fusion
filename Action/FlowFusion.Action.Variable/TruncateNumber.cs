@@ -4,7 +4,7 @@ using FlowFusion.Action.Variable.TruncateNumberBase;
 
 namespace FlowFusion.Action.Variable;
 
-public class TruncateNumber : IAction
+public class TruncateNumber : IAction //XXXXXXXXXXXX
 {
     public string Name => "Truncate Number";
 

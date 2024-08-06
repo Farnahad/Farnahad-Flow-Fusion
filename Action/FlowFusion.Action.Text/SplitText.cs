@@ -5,7 +5,7 @@ using FlowFusion.Action.Text.SplitTextBase;
 
 namespace FlowFusion.Action.Text;
 
-public class SplitText : IAction
+public class SplitText : IAction //XXXXXXXXXXXX
 {
     public string Name => "Split text";
 

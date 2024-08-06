@@ -5,7 +5,7 @@ using FlowFusion.Action.System.TerminateProcessBase;
 
 namespace FlowFusion.Action.System;
 
-public class TerminateProcess : IAction
+public class TerminateProcess : IAction //XXXXXXXXXXXX
 {
     public string Name => "Terminate process";
 

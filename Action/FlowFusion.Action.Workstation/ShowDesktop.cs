@@ -4,7 +4,7 @@ using FlowFusion.Action.Workstation.ShowDesktopBase;
 
 namespace FlowFusion.Action.Workstation;
 
-public class ShowDesktop : IAction
+public class ShowDesktop : IAction //XXXXXXXXXXXX
 {
     public string Name => "Show desktop";
 

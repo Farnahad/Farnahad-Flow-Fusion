@@ -7,7 +7,7 @@ using Prism.Modularity;
 using Prism.Mvvm;
 using Prism.Regions;
 
-namespace ManaErp.Module.Main
+namespace FlowFusion.Module.Main
 {
     public partial class App
     {

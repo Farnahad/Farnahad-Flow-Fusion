@@ -5,7 +5,7 @@ using FlowFusion.Action.Main.Variable;
 
 namespace FlowFusion.Action.Text;
 
-public class ParseText : IAction
+public class ParseText : IAction //XXXXXXXXXXXX
 {
     public string Name => "Parse text";
 

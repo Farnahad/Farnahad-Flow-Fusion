@@ -1,4 +1,4 @@
-﻿namespace ManaErp.Module.Main
+﻿namespace FlowFusion.Module.Main
 {
     public partial class ManaErpSplashScreen
     {

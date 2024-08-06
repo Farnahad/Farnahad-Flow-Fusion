@@ -1,4 +1,4 @@
-﻿namespace ManaErp.Service.Main.Navigation
+﻿namespace FlowFusion.Service.Core.Navigation
 {
     public interface INavigationService : IService
     {

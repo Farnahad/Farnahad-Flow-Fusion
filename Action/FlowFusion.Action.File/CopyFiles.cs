@@ -4,7 +4,7 @@ using FlowFusion.Action.Main.Variable;
 
 namespace FlowFusion.Action.File;
 
-public class CopyFiles : IAction
+public class CopyFiles : IAction //XXXXXXXXXXXX
 {
     public string Name => "Copy file(s)";
 

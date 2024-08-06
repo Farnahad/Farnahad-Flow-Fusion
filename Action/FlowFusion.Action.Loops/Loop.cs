@@ -4,7 +4,7 @@ using FlowFusion.Action.Main.Variable;
 
 namespace FlowFusion.Action.Loops;
 
-public class Loop : IAction
+public class Loop : IAction //XXXXXXXXXXXX
 {
     public string Name => "Loop";
 

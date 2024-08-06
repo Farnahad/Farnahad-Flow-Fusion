@@ -5,7 +5,7 @@ using FlowFusion.Action.Main.Action;
 
 namespace FlowFusion.Action.CmdSession;
 
-public class WaiteForTextOnCmdSession : IAction
+public class WaiteForTextOnCmdSession : IAction //XXXXXXXXXXXX
 {
     public string Name => "Waite for text on CMD session";
 

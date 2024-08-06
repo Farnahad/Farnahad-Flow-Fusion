@@ -6,7 +6,7 @@ using FlowFusion.Service.WindowsServices.WindowsService;
 
 namespace FlowFusion.Action.WindowsServices;
 
-public class WaitForService : IAction
+public class WaitForService : IAction //XXXXXXXXXXXX
 {
     private readonly WindowsServiceService _windowsServiceService;
 

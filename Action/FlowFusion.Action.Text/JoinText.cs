@@ -5,7 +5,7 @@ using FlowFusion.Action.Text.JoinTextBase;
 
 namespace FlowFusion.Action.Text;
 
-public class JoinText : IAction
+public class JoinText : IAction //XXXXXXXXXXXX
 {
     public string Name => "Join text";
 

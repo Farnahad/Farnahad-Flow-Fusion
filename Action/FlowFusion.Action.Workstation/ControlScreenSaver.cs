@@ -5,7 +5,7 @@ using FlowFusion.Service.Workstation.Workstation;
 
 namespace FlowFusion.Action.Workstation;
 
-public class ControlScreenSaver : IAction
+public class ControlScreenSaver : IAction //XXXXXXXXXXXX
 {
     private readonly WorkstationService _workstationService;
 

@@ -1,4 +1,4 @@
-﻿namespace ManaErp.Service.Main.Window
+﻿namespace FlowFusion.Service.Core.Window
 {
     public interface IWindowService : IService
     {

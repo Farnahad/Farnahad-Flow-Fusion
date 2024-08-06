@@ -4,7 +4,7 @@ using FlowFusion.Service.Workstation.Workstation;
 
 namespace FlowFusion.Action.Workstation;
 
-public class EmptyRecycleBin : IAction
+public class EmptyRecycleBin : IAction //XXXXXXXXXXXX
 {
     private readonly WorkstationService _workstationService;
 

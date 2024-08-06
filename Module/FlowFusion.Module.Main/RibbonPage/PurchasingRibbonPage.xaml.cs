@@ -1,6 +1,6 @@
 ﻿using Prism.Ioc;
 
-namespace ManaErp.Module.Main.RibbonPage
+namespace FlowFusion.Module.Main.RibbonPage
 {
     public partial class PurchasingRibbonPage
     {

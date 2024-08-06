@@ -3,7 +3,7 @@ using FlowFusion.Action.Main.Action;
 
 namespace FlowFusion.Action.File;
 
-public class DeleteFiles : IAction
+public class DeleteFiles : IAction //XXXXXXXXXXXX
 {
     public string Name => "Delete file(s)";
 

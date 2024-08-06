@@ -4,7 +4,7 @@ using FlowFusion.Action.Main.Action;
 
 namespace FlowFusion.Action.File;
 
-public class WriteTextToFile : IAction
+public class WriteTextToFile : IAction //XXXXXXXXXXXX
 {
     public string Name => "Write text to file";
 

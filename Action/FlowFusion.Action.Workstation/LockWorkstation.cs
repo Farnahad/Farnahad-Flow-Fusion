@@ -4,7 +4,7 @@ using FlowFusion.Service.Workstation.Workstation;
 
 namespace FlowFusion.Action.Workstation;
 
-public class LockWorkstation : IAction
+public class LockWorkstation : IAction //XXXXXXXXXXXX
 {
     private readonly WorkstationService _workstationService;
 

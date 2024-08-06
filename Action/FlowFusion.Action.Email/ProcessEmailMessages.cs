@@ -6,7 +6,7 @@ using MailKit.Net.Imap;
 
 namespace FlowFusion.Action.Email;
 
-public class ProcessEmailMessages : IAction
+public class ProcessEmailMessages : IAction //XXXXXXXXXXXX
 {
     public string Name => "Process email messages";
 

@@ -1,6 +1,6 @@
 ﻿using Prism.Events;
 
-namespace ManaErp.Module.Core.General
+namespace FlowFusion.Module.Core.General
 {
     public class GeneralViewModel : ViewModel
     {

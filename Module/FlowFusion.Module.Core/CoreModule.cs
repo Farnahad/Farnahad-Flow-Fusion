@@ -1,7 +1,7 @@
 ﻿using Prism.Ioc;
 using Prism.Modularity;
 
-namespace ManaErp.Module.Core
+namespace FlowFusion.Module.Core
 {
     public class CoreModule : IModule
     {

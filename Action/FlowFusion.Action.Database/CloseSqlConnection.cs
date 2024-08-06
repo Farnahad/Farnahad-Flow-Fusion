@@ -4,7 +4,7 @@ using FlowFusion.Action.Main.Action;
 
 namespace FlowFusion.Action.Database;
 
-public class CloseSqlConnection : IAction
+public class CloseSqlConnection : IAction //XXXXXXXXXXXX
 {
     public string Name => "Close SQL connection";
 

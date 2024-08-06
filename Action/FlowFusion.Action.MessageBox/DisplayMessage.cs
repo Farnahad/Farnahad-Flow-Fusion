@@ -6,7 +6,7 @@ using FlowFusion.Action.MessageBox.DisplayMessageBase;
 
 namespace FlowFusion.Action.MessageBox;
 
-public class DisplayMessage : IAction
+public class DisplayMessage : IAction //XXXXXXXXXXXX
 {
     public string Name => "Display message";
 

@@ -1,6 +1,6 @@
 ﻿using Prism.Regions;
 
-namespace ManaErp.Service.Main.Navigation
+namespace FlowFusion.Service.Core.Navigation
 {
     public class NavigationService : INavigationService
     {

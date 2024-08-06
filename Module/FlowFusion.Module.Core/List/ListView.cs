@@ -1,6 +1,6 @@
-﻿using ManaErp.Module.Core.General;
+﻿using FlowFusion.Module.Core.General;
 
-namespace ManaErp.Module.Core.List
+namespace FlowFusion.Module.Core.List
 {
     public class ListView : GeneralView
     {

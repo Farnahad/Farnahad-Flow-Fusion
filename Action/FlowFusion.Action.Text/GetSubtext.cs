@@ -5,7 +5,7 @@ using FlowFusion.Action.Text.GetSubtextBase;
 
 namespace FlowFusion.Action.Text;
 
-public class GetSubtext : IAction
+public class GetSubtext : IAction //XXXXXXXXXXXX
 {
     public string Name => "Get subtext";
 

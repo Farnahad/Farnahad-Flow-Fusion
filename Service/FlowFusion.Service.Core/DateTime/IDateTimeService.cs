@@ -1,4 +1,4 @@
-﻿namespace ManaErp.Service.Main.DateTime
+﻿namespace FlowFusion.Service.Core.DateTime
 {
     public interface IDateTimeService : IService
     {

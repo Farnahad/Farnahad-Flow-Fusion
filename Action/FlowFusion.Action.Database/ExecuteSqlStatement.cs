@@ -7,7 +7,7 @@ using FlowFusion.Action.Main.Variable;
 
 namespace FlowFusion.Action.Database;
 
-public class ExecuteSqlStatement : IAction
+public class ExecuteSqlStatement : IAction //XXXXXXXXXXXX
 {
     public string Name => "Execute SQL statement";
 

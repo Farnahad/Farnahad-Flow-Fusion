@@ -5,7 +5,7 @@ using FlowFusion.Action.Main.Variable;
 
 namespace FlowFusion.Action.CmdSession;
 
-public class OpenCmdSession : IAction
+public class OpenCmdSession : IAction //XXXXXXXXXXXX
 {
     public string Name => "Open CMD session";
 

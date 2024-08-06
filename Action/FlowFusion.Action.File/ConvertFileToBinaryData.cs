@@ -4,7 +4,7 @@ using FlowFusion.Action.Main.Variable;
 
 namespace FlowFusion.Action.File;
 
-public class ConvertFileToBinaryData : IAction
+public class ConvertFileToBinaryData : IAction //XXXXXXXXXXXX
 {
     public string Name => "Convert file to binary data";
 

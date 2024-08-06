@@ -5,7 +5,7 @@ using FlowFusion.Action.Text.TrimTextBase;
 
 namespace FlowFusion.Action.Text;
 
-public class TrimText : IAction
+public class TrimText : IAction //XXXXXXXXXXXX
 {
     public string Name => "Trim text";
 

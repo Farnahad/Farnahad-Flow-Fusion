@@ -1,6 +1,6 @@
-﻿using ManaErp.Module.Core.General;
+﻿using FlowFusion.Module.Core.General;
 
-namespace ManaErp.Module.Core.Edit
+namespace FlowFusion.Module.Core.Edit
 {
     public abstract class EditViewModelBase<TModel, TModelWrapper> : GeneralViewModel
         where TModel : IDbModel, new()

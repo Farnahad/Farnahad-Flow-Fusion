@@ -3,7 +3,7 @@ using FlowFusion.Action.Main.Action;
 
 namespace FlowFusion.Action.Folder;
 
-public class EmptyFolder : IAction
+public class EmptyFolder : IAction //XXXXXXXXXXXX
 {
     public string Name => "Empty folder";
 

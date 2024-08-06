@@ -5,7 +5,7 @@ using FlowFusion.Action.Main.Variable;
 
 namespace FlowFusion.Action.File;
 
-public class ReadTextFromFile : IAction
+public class ReadTextFromFile : IAction //XXXXXXXXXXXX
 {
     public string Name => "Read text from file";
 

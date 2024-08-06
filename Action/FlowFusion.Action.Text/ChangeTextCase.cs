@@ -6,7 +6,7 @@ using FlowFusion.Action.Text.ChangeTextCaseBase;
 
 namespace FlowFusion.Action.Text;
 
-public class ChangeTextCase : IAction
+public class ChangeTextCase : IAction //XXXXXXXXXXXX
 {
     public string Name => "Change text case";
 

@@ -5,7 +5,7 @@ using FlowFusion.Action.Main.Variable;
 
 namespace FlowFusion.Action.Database;
 
-public class OpenSqlConnection : IAction
+public class OpenSqlConnection : IAction //XXXXXXXXXXXX
 {
     public string Name => "Open SQL connection";
 

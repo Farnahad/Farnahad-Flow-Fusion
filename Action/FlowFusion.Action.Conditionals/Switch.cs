@@ -3,7 +3,7 @@ using FlowFusion.Action.Main.Action;
 
 namespace FlowFusion.Action.Conditionals;
 
-public class Switch : IAction
+public class Switch : IAction //XXXXXXXXXXXX
 {
     public string Name => "Switch";
 

@@ -4,7 +4,7 @@ using FlowFusion.Action.Main.Action;
 
 namespace FlowFusion.Action.Folder;
 
-public class IfFolderExists : IAction
+public class IfFolderExists : IAction //XXXXXXXXXXXX
 {
     public string Name => "If folder exists";
 

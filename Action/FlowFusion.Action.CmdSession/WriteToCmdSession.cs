@@ -4,7 +4,7 @@ using FlowFusion.Action.Main.Action;
 
 namespace FlowFusion.Action.CmdSession;
 
-public class WriteToCmdSession : IAction
+public class WriteToCmdSession : IAction //XXXXXXXXXXXX
 {
     public string Name => "Write to CMD session";
 

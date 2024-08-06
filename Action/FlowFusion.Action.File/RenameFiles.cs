@@ -4,7 +4,7 @@ using FlowFusion.Action.Main.Action;
 
 namespace FlowFusion.Action.File;
 
-public class RenameFiles : IAction
+public class RenameFiles : IAction //XXXXXXXXXXXX
 {
     public string Name => "Rename file(s)";
 

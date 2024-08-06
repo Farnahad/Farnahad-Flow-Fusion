@@ -6,7 +6,7 @@ using CompressionLevel = FlowFusion.Action.Compression.ZipFilesBase.CompressionL
 
 namespace FlowFusion.Action.Compression;
 
-public class ZipFiles : IAction
+public class ZipFiles : IAction //XXXXXXXXXXXX
 {
     public string Name => "Zip files";
 

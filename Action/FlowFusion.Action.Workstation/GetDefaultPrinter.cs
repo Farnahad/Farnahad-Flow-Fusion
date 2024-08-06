@@ -5,7 +5,7 @@ using FlowFusion.Service.Workstation.Workstation;
 
 namespace FlowFusion.Action.Workstation;
 
-public class GetDefaultPrinter : IAction
+public class GetDefaultPrinter : IAction //XXXXXXXXXXXX
 {
     private readonly WorkstationService _workstationService;
 

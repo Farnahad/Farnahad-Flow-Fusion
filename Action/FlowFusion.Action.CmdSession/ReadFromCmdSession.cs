@@ -5,7 +5,7 @@ using FlowFusion.Action.Main.Variable;
 
 namespace FlowFusion.Action.CmdSession;
 
-public class ReadFromCmdSession : IAction
+public class ReadFromCmdSession : IAction //XXXXXXXXXXXX
 {
     public string Name => "Read from CMD session";
 

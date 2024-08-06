@@ -4,7 +4,7 @@ using FlowFusion.Action.Main.Action;
 
 namespace FlowFusion.Action.File;
 
-public class WaiteForFile : IAction
+public class WaiteForFile : IAction //XXXXXXXXXXXX
 {
     public string Name => "Waite for file";
 

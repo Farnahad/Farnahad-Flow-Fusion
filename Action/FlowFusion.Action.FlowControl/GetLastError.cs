@@ -4,7 +4,7 @@ using FlowFusion.Action.Main.Variable;
 
 namespace FlowFusion.Action.FlowControl;
 
-public class GetLastError : IAction
+public class GetLastError : IAction //XXXXXXXXXXXX
 {
     public string Name => "Get last error";
 

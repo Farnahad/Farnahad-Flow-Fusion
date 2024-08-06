@@ -4,7 +4,7 @@ using FlowFusion.Service.WindowsServices.WindowsService;
 
 namespace FlowFusion.Action.WindowsServices;
 
-public class PauseService : IAction
+public class PauseService : IAction //XXXXXXXXXXXX
 {
     private readonly WindowsServiceService _windowsServiceService;
 

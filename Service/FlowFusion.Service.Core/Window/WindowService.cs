@@ -1,7 +1,7 @@
 ﻿using Prism.Ioc;
 using Prism.Services.Dialogs;
 
-namespace ManaErp.Service.Main.Window
+namespace FlowFusion.Service.Core.Window
 {
     public class WindowService : IWindowService
     {

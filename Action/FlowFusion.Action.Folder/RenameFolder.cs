@@ -4,7 +4,7 @@ using FlowFusion.Action.Main.Variable;
 
 namespace FlowFusion.Action.Folder;
 
-public class RenameFolder : IAction
+public class RenameFolder : IAction //XXXXXXXXXXXX
 {
     public string Name => "Rename folder";
 

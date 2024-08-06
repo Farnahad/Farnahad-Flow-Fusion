@@ -1,4 +1,4 @@
-﻿namespace ManaErp.Service.Main.Text
+﻿namespace FlowFusion.Service.Core.Text
 {
     public class TextService : ITextService
     {

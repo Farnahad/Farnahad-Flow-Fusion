@@ -5,7 +5,7 @@ using FlowFusion.Service.Workstation.Workstation;
 
 namespace FlowFusion.Action.Workstation;
 
-public class GetScreenResolution : IAction
+public class GetScreenResolution : IAction //XXXXXXXXXXXX
 {
     private readonly WorkstationService _workstationService;
 

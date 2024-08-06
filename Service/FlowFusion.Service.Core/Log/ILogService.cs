@@ -1,4 +1,4 @@
-﻿namespace ManaErp.Service.Main.Log
+﻿namespace FlowFusion.Service.Core.Log
 {
     public interface ILogService : IService
     {

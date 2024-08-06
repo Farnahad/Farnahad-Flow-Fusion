@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.Scripting;
 
 namespace FlowFusion.Action.Scripting;
 
-public class RunDotNetScript : IAction
+public class RunDotNetScript : IAction //XXXXXXXXXXXX
 {
     public string Name => "Run .NET script";
 

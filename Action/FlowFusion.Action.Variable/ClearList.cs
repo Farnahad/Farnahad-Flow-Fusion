@@ -3,7 +3,7 @@ using FlowFusion.Action.Main.Action;
 
 namespace FlowFusion.Action.Variable;
 
-public class ClearList : IAction
+public class ClearList : IAction //XXXXXXXXXXXX
 {
     public string Name => "Clear List";
 

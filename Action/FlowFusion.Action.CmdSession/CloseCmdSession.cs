@@ -4,7 +4,7 @@ using FlowFusion.Action.Main.Action;
 
 namespace FlowFusion.Action.CmdSession;
 
-public class CloseCmdSession : IAction
+public class CloseCmdSession : IAction //XXXXXXXXXXXX
 {
     public string Name => "Close CMD session";
 

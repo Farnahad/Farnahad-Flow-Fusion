@@ -7,7 +7,7 @@ using HashAlgorithm = FlowFusion.Action.Cryptography.HashFromFileBase.HashAlgori
 
 namespace FlowFusion.Action.Cryptography;
 
-public class HashFromFile : IAction
+public class HashFromFile : IAction //XXXXXXXXXXXX
 {
     public string Name => "Hash from file";
 

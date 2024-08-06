@@ -1,6 +1,6 @@
-﻿using ManaErp.Module.Core.General;
+﻿using FlowFusion.Module.Core.General;
 
-namespace ManaErp.Module.Core.Edit
+namespace FlowFusion.Module.Core.Edit
 {
     public class EditView : GeneralView
     {

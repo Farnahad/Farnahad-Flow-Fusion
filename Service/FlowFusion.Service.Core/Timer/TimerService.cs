@@ -1,4 +1,4 @@
-﻿namespace ManaErp.Service.Main.Timer
+﻿namespace FlowFusion.Service.Core.Timer
 {
     public class TimerService : ITimerService
     {

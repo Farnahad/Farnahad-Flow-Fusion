@@ -1,4 +1,4 @@
-﻿namespace ManaErp.Service.Main.Session
+﻿namespace FlowFusion.Service.Core.Session
 {
     public interface ISessionService : IService
     {

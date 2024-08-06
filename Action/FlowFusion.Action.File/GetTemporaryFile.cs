@@ -4,7 +4,7 @@ using FlowFusion.Action.Main.Variable;
 
 namespace FlowFusion.Action.File;
 
-public class GetTemporaryFile : IAction
+public class GetTemporaryFile : IAction //XXXXXXXXXXXX
 {
     public string Name => "Get temporary file";
 

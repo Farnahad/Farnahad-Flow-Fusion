@@ -1,5 +1,0 @@
-﻿<button:FffSimpleButton x:Class="FarnahadFlowFusion.Core.Control.Button.FffSimpleDesignReportButton"
-                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                        xmlns:button="clr-namespace:FarnahadFlowFusion.Core.Control.Button"
-                        Content="Design Report" />

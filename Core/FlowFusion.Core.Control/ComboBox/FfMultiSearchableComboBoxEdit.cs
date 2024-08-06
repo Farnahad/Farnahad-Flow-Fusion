@@ -1,6 +1,6 @@
 ﻿using DevExpress.Xpf.Editors;
 
-namespace FarnahadFlowFusion.Core.Control.ComboBox;
+namespace FlowFusion.Core.Control.ComboBox;
 
 public class FfMultiSearchableComboBoxEdit : FfSearchableComboBoxEdit
 {

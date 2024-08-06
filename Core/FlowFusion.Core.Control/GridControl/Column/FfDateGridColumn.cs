@@ -1,8 +1,8 @@
 ﻿using System.Windows;
 using DevExpress.Xpf.Editors.Settings;
-using FarnahadFlowFusion.Core.Main.Converter;
+using FlowFusion.Core.Main.Converter;
 
-namespace FarnahadFlowFusion.Core.Control.GridControl.Column;
+namespace FlowFusion.Core.Control.GridControl.Column;
 
 public class FfDateGridColumn : FfGridColumn
 {

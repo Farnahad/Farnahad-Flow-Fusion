@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace FarnahadFlowFusion.DataAccess.Wrapper.Core;
+namespace FlowFusion.DataAccess.Wrapper.Core;
 
 public class NotifyPropertyChangedBase : INotifyPropertyChanged
 {

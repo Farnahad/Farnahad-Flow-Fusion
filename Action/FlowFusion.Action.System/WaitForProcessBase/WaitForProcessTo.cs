@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.System.WaitForProcessBase;
+﻿namespace FlowFusion.Action.System.WaitForProcessBase;
 
 public enum WaitForProcessTo
 {

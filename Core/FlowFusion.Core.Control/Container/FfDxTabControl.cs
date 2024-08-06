@@ -1,7 +1,7 @@
 using System.Windows;
 using DevExpress.Xpf.Core;
 
-namespace FarnahadFlowFusion.Core.Control.Container;
+namespace FlowFusion.Core.Control.Container;
 
 public class FfDxTabControl : DXTabControl
 {

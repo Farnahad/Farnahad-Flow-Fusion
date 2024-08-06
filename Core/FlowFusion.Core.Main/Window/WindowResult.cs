@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Core.Main.Window;
+﻿namespace FlowFusion.Core.Main.Window;
 
 public enum WindowResult
 {

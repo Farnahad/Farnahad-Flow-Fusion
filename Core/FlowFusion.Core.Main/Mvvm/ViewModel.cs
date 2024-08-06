@@ -1,10 +1,10 @@
-﻿using FarnahadFlowFusion.Core.Main.Window;
-using FarnahadFlowFusion.DataAccess.Wrapper.Core;
+﻿using FlowFusion.Core.Main.Window;
+using FlowFusion.DataAccess.Wrapper.Core;
 using Prism;
 using Prism.Regions;
 using Prism.Services.Dialogs;
 
-namespace FarnahadFlowFusion.Core.Main.Mvvm;
+namespace FlowFusion.Core.Main.Mvvm;
 
 public abstract class ViewModel : NotifyPropertyChangedBase, IActiveAware,
     IConfirmNavigationRequest, IDialogAware, IRegionMemberLifetime, IDisposable

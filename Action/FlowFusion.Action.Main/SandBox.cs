@@ -1,6 +1,6 @@
-﻿using FarnahadFlowFusion.Action.Main.Action;
+﻿using FlowFusion.Action.Main.Action;
 
-namespace FarnahadFlowFusion.Action.Main;
+namespace FlowFusion.Action.Main;
 
 public class SandBox
 {

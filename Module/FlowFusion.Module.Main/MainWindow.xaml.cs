@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace FarnahadFlowFusion.Module.Main;
+namespace FlowFusion.Module.Main;
 
 public partial class MainWindow : Window
 {

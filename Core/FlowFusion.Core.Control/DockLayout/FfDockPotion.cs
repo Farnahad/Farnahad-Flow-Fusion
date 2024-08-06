@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Core.Control.DockLayout;
+﻿namespace FlowFusion.Core.Control.DockLayout;
 
 public enum FfDockPotion
 {

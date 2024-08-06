@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.Text.TrimTextBase;
+﻿namespace FlowFusion.Action.Text.TrimTextBase;
 
 public enum WhatToTrim
 {

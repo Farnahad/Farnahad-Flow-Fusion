@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace FarnahadFlowFusion.Service.Main.Utility;
+namespace FlowFusion.Service.Main.Utility;
 
 public class UtilityService
 {

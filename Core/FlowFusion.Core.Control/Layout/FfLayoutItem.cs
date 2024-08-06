@@ -1,6 +1,6 @@
 ﻿using DevExpress.Xpf.LayoutControl;
 
-namespace FarnahadFlowFusion.Core.Control.Layout;
+namespace FlowFusion.Core.Control.Layout;
 
 public class FfLayoutItem : LayoutItem
 {

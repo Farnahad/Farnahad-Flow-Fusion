@@ -1,10 +1,10 @@
 ﻿using System.Media;
-using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Action.Main.Action;
-using FarnahadFlowFusion.Action.Workstation.PlaySoundBase;
-using FarnahadFlowFusion.Service.Workstation.Workstation;
+using FlowFusion.Action.Main;
+using FlowFusion.Action.Main.Action;
+using FlowFusion.Action.Workstation.PlaySoundBase;
+using FlowFusion.Service.Workstation.Workstation;
 
-namespace FarnahadFlowFusion.Action.Workstation;
+namespace FlowFusion.Action.Workstation;
 
 public class PlaySound : IAction
 {

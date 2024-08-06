@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.Workstation.ShutdownComputerBase;
+﻿namespace FlowFusion.Action.Workstation.ShutdownComputerBase;
 
 public enum ActionToPerform
 {

@@ -1,6 +1,6 @@
-﻿using FarnahadFlowFusion.DataAccess.Model.Core;
+﻿using FlowFusion.DataAccess.Model.Core;
 
-namespace FarnahadFlowFusion.Core.Main.Event;
+namespace FlowFusion.Core.Main.Event;
 
 public class AfterModelDeletedEventArgs
 {

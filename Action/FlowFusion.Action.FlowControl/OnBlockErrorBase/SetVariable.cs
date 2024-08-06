@@ -1,6 +1,6 @@
-﻿using FarnahadFlowFusion.Action.Main.Variable;
+﻿using FlowFusion.Action.Main.Variable;
 
-namespace FarnahadFlowFusion.Action.FlowControl.OnBlockErrorBase;
+namespace FlowFusion.Action.FlowControl.OnBlockErrorBase;
 
 public class SetVariable
 {

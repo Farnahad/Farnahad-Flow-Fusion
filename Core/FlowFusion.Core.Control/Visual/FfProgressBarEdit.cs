@@ -1,6 +1,6 @@
 ﻿using DevExpress.Xpf.Editors;
 
-namespace FarnahadFlowFusion.Core.Control.Visual;
+namespace FlowFusion.Core.Control.Visual;
 
 public class FfProgressBarEdit : ProgressBarEdit
 {

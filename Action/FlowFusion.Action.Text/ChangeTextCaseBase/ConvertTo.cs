@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.Text.ChangeTextCaseBase;
+﻿namespace FlowFusion.Action.Text.ChangeTextCaseBase;
 
 public enum ConvertTo
 {

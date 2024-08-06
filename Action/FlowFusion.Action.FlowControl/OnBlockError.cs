@@ -1,9 +1,9 @@
-﻿using FarnahadFlowFusion.Action.FlowControl.OnBlockErrorBase;
-using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Action.Main.Action;
-using Type = FarnahadFlowFusion.Action.FlowControl.OnBlockErrorBase.Type;
+﻿using FlowFusion.Action.FlowControl.OnBlockErrorBase;
+using FlowFusion.Action.Main;
+using FlowFusion.Action.Main.Action;
+using Type = FlowFusion.Action.FlowControl.OnBlockErrorBase.Type;
 
-namespace FarnahadFlowFusion.Action.FlowControl;
+namespace FlowFusion.Action.FlowControl;
 
 public class OnBlockError : IAction
 {

@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.File.ReadFromCsvFileBase;
+﻿namespace FlowFusion.Action.File.ReadFromCsvFileBase;
 
 public enum Encoding
 {

@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.Variable.RemoveItemFromListBase;
+﻿namespace FlowFusion.Action.Variable.RemoveItemFromListBase;
 
 public enum RemoveItemBy
 {

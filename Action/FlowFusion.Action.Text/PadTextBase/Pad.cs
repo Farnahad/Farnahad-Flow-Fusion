@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.Text.PadTextBase;
+﻿namespace FlowFusion.Action.Text.PadTextBase;
 
 public enum Pad
 {

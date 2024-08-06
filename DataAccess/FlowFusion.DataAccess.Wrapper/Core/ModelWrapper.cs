@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Runtime.CompilerServices;
-using FarnahadFlowFusion.DataAccess.Model.Core;
+using FlowFusion.DataAccess.Model.Core;
 
-namespace FarnahadFlowFusion.DataAccess.Wrapper.Core;
+namespace FlowFusion.DataAccess.Wrapper.Core;
 
 public class ModelWrapper<T> : NotifyDataErrorInfoBase, IValidatableObject where T : IDbModel
 {

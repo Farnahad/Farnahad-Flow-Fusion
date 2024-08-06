@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.Text.SplitTextBase;
+﻿namespace FlowFusion.Action.Text.SplitTextBase;
 
 public enum DelimiterType
 {

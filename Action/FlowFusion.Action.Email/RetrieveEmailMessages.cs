@@ -1,13 +1,13 @@
-﻿using FarnahadFlowFusion.Action.Email.RetrieveEmailMessagesBase;
-using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Action.Main.Action;
-using FarnahadFlowFusion.Action.Main.Variable;
+﻿using FlowFusion.Action.Email.RetrieveEmailMessagesBase;
+using FlowFusion.Action.Main;
+using FlowFusion.Action.Main.Action;
+using FlowFusion.Action.Main.Variable;
 using MailKit;
 using MailKit.Net.Imap;
 using MailKit.Search;
 using MimeKit;
 
-namespace FarnahadFlowFusion.Action.Email;
+namespace FlowFusion.Action.Email;
 
 public class RetrieveEmailMessages : IAction
 {

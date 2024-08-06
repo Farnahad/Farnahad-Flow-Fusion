@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.Main.Variable;
+﻿namespace FlowFusion.Action.Main.Variable;
 
 public enum VariableType
 {

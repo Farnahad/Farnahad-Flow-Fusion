@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.Cryptography.DecryptToFileWithAesBase;
+﻿namespace FlowFusion.Action.Cryptography.DecryptToFileWithAesBase;
 
 public enum IfFileExists
 {

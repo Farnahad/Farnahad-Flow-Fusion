@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.DateTime.SubtractDatesBase;
+﻿namespace FlowFusion.Action.DateTime.SubtractDatesBase;
 
 public enum GetDifferenceIn
 {

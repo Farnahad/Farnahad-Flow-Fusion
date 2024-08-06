@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Core.Control.TextBoxLayoutItem;
+﻿namespace FlowFusion.Core.Control.TextBoxLayoutItem;
 
 public partial class FfTimeMaskTexLayoutItem
 {

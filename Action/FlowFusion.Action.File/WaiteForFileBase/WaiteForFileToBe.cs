@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.File.WaiteForFileBase;
+﻿namespace FlowFusion.Action.File.WaiteForFileBase;
 
 public enum WaiteForFileToBe
 {

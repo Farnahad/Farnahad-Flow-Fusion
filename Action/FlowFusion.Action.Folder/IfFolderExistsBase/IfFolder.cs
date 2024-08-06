@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.Folder.IfFolderExistsBase;
+﻿namespace FlowFusion.Action.Folder.IfFolderExistsBase;
 
 public enum IfFolder
 {

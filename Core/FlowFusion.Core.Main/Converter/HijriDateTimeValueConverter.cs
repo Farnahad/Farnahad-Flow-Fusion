@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using System.Windows.Data;
 
-namespace FarnahadFlowFusion.Core.Main.Converter;
+namespace FlowFusion.Core.Main.Converter;
 
 public class HijriDateTimeValueConverter : IValueConverter
 {

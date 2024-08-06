@@ -1,8 +1,8 @@
 ﻿using DevExpress.Xpf.Ribbon.Internal;
-using FarnahadFlowFusion.Core.Control.Ribbon;
+using FlowFusion.Core.Control.Ribbon;
 using Prism.Regions;
 
-namespace FarnahadFlowFusion.Core.Control.Mvvm;
+namespace FlowFusion.Core.Control.Mvvm;
 
 public class FfRibbonControlRegionAdapter : RegionAdapterBase<FfRibbonControl>
 {

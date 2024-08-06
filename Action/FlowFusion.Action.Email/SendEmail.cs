@@ -1,9 +1,9 @@
 ﻿using System.Net;
 using System.Net.Mail;
-using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Action.Main.Action;
+using FlowFusion.Action.Main;
+using FlowFusion.Action.Main.Action;
 
-namespace FarnahadFlowFusion.Action.Email;
+namespace FlowFusion.Action.Email;
 
 public class SendEmail : IAction
 {

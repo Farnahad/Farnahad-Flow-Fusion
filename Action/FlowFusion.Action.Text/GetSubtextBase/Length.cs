@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.Text.GetSubtextBase;
+﻿namespace FlowFusion.Action.Text.GetSubtextBase;
 
 public enum Length
 {

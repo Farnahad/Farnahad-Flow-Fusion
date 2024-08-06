@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Service.Workstation.Workstation.Windows;
+﻿namespace FlowFusion.Service.Workstation.Workstation.Windows;
 
 // RecycleFlags enumeration for flags used in SHEmptyRecycleBin
 [Flags]

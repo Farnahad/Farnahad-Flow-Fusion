@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.System.DeleteWindowsEnvironmentVariableBase;
+﻿namespace FlowFusion.Action.System.DeleteWindowsEnvironmentVariableBase;
 
 public enum Type
 {

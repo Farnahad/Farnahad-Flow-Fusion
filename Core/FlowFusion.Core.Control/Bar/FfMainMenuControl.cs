@@ -1,6 +1,6 @@
 ﻿using DevExpress.Xpf.Bars;
 
-namespace FarnahadFlowFusion.Core.Control.Bar;
+namespace FlowFusion.Core.Control.Bar;
 
 public class FfMainMenuControl : MainMenuControl
 {

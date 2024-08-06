@@ -1,6 +1,6 @@
 ﻿using DevExpress.Xpf.Editors;
 
-namespace FarnahadFlowFusion.Core.Control.List;
+namespace FlowFusion.Core.Control.List;
 
 public class FfCheckedListBoxEdit : FfListBoxEdit
 {

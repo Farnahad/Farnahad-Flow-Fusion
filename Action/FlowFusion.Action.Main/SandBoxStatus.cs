@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.Main;
+﻿namespace FlowFusion.Action.Main;
 
 public enum SandBoxStatus
 {

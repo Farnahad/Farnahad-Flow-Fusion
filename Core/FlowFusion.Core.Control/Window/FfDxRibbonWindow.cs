@@ -1,9 +1,9 @@
 ﻿using System.Windows;
 using DevExpress.Xpf.Ribbon;
-using FarnahadFlowFusion.Core.Control.Core;
+using FlowFusion.Core.Control.Core;
 using Prism.Services.Dialogs;
 
-namespace FarnahadFlowFusion.Core.Control.Window;
+namespace FlowFusion.Core.Control.Window;
 
 public class FfDxRibbonWindow : DXRibbonWindow, IDialogWindow
 {

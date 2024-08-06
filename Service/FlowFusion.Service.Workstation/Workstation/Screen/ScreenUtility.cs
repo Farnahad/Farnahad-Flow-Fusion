@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace FarnahadFlowFusion.Service.Workstation.Workstation.Screen;
+namespace FlowFusion.Service.Workstation.Workstation.Screen;
 
 public class ScreenUtility
 {

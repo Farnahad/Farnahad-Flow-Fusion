@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.File.WriteTextToFileBase;
+﻿namespace FlowFusion.Action.File.WriteTextToFileBase;
 
 public enum IfFileExists
 {

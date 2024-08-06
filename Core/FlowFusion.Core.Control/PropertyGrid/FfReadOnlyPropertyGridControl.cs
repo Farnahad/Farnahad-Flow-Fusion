@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Core.Control.PropertyGrid;
+﻿namespace FlowFusion.Core.Control.PropertyGrid;
 
 public class FfReadOnlyPropertyGridControl : FfPropertyGridControl
 {

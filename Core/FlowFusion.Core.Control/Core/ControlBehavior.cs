@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Media;
 using DevExpress.Xpf.Grid;
 
-namespace FarnahadFlowFusion.Core.Control.Core;
+namespace FlowFusion.Core.Control.Core;
 
 public static partial class ControlBehavior
 {

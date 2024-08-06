@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.File.ConvertBinaryDataToFileBase;
+﻿namespace FlowFusion.Action.File.ConvertBinaryDataToFileBase;
 
 public enum IfFileExists
 {

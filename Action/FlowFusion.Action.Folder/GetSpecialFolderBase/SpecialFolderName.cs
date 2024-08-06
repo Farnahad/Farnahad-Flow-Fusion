@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.Folder.GetSpecialFolderBase;
+﻿namespace FlowFusion.Action.Folder.GetSpecialFolderBase;
 
 public enum SpecialFolderName
 {

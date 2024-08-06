@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.FlowControl.OnBlockErrorBase;
+﻿namespace FlowFusion.Action.FlowControl.OnBlockErrorBase;
 
 public enum ContinueFlowRun
 {

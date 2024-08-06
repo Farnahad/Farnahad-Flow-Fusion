@@ -1,7 +1,7 @@
 ﻿using System.Runtime.InteropServices;
 using System.Text;
 
-namespace FarnahadFlowFusion.Service.Workstation.Workstation.Printer;
+namespace FlowFusion.Service.Workstation.Workstation.Printer;
 
 public class PrinterUtility
 {

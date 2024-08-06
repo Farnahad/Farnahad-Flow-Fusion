@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Core.Main.Method;
+﻿namespace FlowFusion.Core.Main.Method;
 
 public class MethodResult<T> : MethodResult
 {

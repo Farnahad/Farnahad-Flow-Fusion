@@ -1,6 +1,6 @@
 ﻿using DevExpress.Xpf.LayoutControl;
 
-namespace FarnahadFlowFusion.Core.Control.Tile;
+namespace FlowFusion.Core.Control.Tile;
 
 public class FfExtraLargeTile : FfTile
 {

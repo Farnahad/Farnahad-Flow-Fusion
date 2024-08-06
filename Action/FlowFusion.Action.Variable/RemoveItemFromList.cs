@@ -1,8 +1,8 @@
-﻿using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Action.Main.Action;
-using FarnahadFlowFusion.Action.Variable.RemoveItemFromListBase;
+﻿using FlowFusion.Action.Main;
+using FlowFusion.Action.Main.Action;
+using FlowFusion.Action.Variable.RemoveItemFromListBase;
 
-namespace FarnahadFlowFusion.Action.Variable;
+namespace FlowFusion.Action.Variable;
 
 public class RemoveItemFromList : IAction
 {

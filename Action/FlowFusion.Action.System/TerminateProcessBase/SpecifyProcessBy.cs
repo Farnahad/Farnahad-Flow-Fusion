@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.System.TerminateProcessBase;
+﻿namespace FlowFusion.Action.System.TerminateProcessBase;
 
 public enum SpecifyProcessBy
 {

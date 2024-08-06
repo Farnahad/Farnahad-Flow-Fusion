@@ -1,6 +1,6 @@
 ﻿using System.Runtime.InteropServices;
 
-namespace FarnahadFlowFusion.Service.Workstation.Workstation.Windows;
+namespace FlowFusion.Service.Workstation.Workstation.Windows;
 
 public class WindowsUtility
 {

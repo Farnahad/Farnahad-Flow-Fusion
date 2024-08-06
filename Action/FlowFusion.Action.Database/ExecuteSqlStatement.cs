@@ -1,11 +1,11 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
-using FarnahadFlowFusion.Action.Database.ExecuteSqlStatementBase;
-using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Action.Main.Action;
-using FarnahadFlowFusion.Action.Main.Variable;
+using FlowFusion.Action.Database.ExecuteSqlStatementBase;
+using FlowFusion.Action.Main;
+using FlowFusion.Action.Main.Action;
+using FlowFusion.Action.Main.Variable;
 
-namespace FarnahadFlowFusion.Action.Database;
+namespace FlowFusion.Action.Database;
 
 public class ExecuteSqlStatement : IAction
 {

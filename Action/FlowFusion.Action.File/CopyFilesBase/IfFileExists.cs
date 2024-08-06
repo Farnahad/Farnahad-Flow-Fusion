@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.File.CopyFilesBase;
+﻿namespace FlowFusion.Action.File.CopyFilesBase;
 
 public enum IfFileExists
 {

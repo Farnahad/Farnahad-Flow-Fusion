@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.Text.CropTextBase;
+﻿namespace FlowFusion.Action.Text.CropTextBase;
 
 public enum Mode
 {

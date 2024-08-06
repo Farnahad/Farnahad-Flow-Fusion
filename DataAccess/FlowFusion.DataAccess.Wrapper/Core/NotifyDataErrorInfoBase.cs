@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.ComponentModel;
 
-namespace FarnahadFlowFusion.DataAccess.Wrapper.Core;
+namespace FlowFusion.DataAccess.Wrapper.Core;
 
 public class NotifyDataErrorInfoBase : NotifyPropertyChangedBase, INotifyDataErrorInfo
 {

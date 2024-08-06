@@ -1,8 +1,8 @@
-﻿using FarnahadFlowFusion.Action.File.RenameFilesBase;
-using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Action.Main.Action;
+﻿using FlowFusion.Action.File.RenameFilesBase;
+using FlowFusion.Action.Main;
+using FlowFusion.Action.Main.Action;
 
-namespace FarnahadFlowFusion.Action.File;
+namespace FlowFusion.Action.File;
 
 public class RenameFiles : IAction
 {

@@ -1,7 +1,7 @@
-﻿using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Action.Main.Action;
+﻿using FlowFusion.Action.Main;
+using FlowFusion.Action.Main.Action;
 
-namespace FarnahadFlowFusion.Action.Variable;
+namespace FlowFusion.Action.Variable;
 
 public class RemoveDuplicateItemsFromList : IAction
 {

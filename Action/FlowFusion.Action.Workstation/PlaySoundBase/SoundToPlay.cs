@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.Workstation.PlaySoundBase;
+﻿namespace FlowFusion.Action.Workstation.PlaySoundBase;
 
 public enum SoundToPlay
 {

@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.File.ConvertBase64ToFileBase;
+﻿namespace FlowFusion.Action.File.ConvertBase64ToFileBase;
 
 public enum IfFileExists
 {

@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
-namespace FarnahadFlowFusion.Core.Control.TextBox;
+namespace FlowFusion.Core.Control.TextBox;
 
 public class FfLargeTextEdit : FfTextEdit
 {

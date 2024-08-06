@@ -1,10 +1,10 @@
-﻿using FarnahadFlowFusion.Action.Email.ProcessEmailMessagesBase;
-using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Action.Main.Action;
+﻿using FlowFusion.Action.Email.ProcessEmailMessagesBase;
+using FlowFusion.Action.Main;
+using FlowFusion.Action.Main.Action;
 using MailKit;
 using MailKit.Net.Imap;
 
-namespace FarnahadFlowFusion.Action.Email;
+namespace FlowFusion.Action.Email;
 
 public class ProcessEmailMessages : IAction
 {

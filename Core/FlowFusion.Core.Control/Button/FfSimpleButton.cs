@@ -1,7 +1,7 @@
 ﻿using System.Windows;
 using DevExpress.Xpf.Core;
 
-namespace FarnahadFlowFusion.Core.Control.Button;
+namespace FlowFusion.Core.Control.Button;
 
 public class FfSimpleButton : SimpleButton
 {

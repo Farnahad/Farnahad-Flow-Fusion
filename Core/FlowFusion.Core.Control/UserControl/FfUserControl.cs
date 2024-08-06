@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Core.Control.UserControl;
+﻿namespace FlowFusion.Core.Control.UserControl;
 
 public class FfUserControl : System.Windows.Controls.UserControl
 {

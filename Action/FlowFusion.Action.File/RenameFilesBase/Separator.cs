@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.File.RenameFilesBase;
+﻿namespace FlowFusion.Action.File.RenameFilesBase;
 
 public enum Separator
 {

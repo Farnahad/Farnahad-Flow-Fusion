@@ -1,6 +1,6 @@
 ﻿using Prism.Commands;
 
-namespace FarnahadFlowFusion.Core.Main.Command;
+namespace FlowFusion.Core.Main.Command;
 
 public class FfCommand<T> : DelegateCommand<T>
 {

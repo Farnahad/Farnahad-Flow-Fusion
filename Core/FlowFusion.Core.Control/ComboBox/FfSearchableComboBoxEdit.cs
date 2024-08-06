@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Core.Control.ComboBox;
+﻿namespace FlowFusion.Core.Control.ComboBox;
 
 public class FfSearchableComboBoxEdit : FfComboBoxEdit
 {

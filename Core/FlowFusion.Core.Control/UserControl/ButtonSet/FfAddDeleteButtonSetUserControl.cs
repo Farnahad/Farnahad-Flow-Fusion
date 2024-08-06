@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Core.Control.UserControl.ButtonSet;
+﻿namespace FlowFusion.Core.Control.UserControl.ButtonSet;
 
 public partial class FfAddDeleteButtonSetUserControl
 {

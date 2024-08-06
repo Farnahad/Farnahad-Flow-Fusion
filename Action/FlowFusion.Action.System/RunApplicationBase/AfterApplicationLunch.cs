@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.System.RunApplicationBase;
+﻿namespace FlowFusion.Action.System.RunApplicationBase;
 
 public enum AfterApplicationLunch
 {

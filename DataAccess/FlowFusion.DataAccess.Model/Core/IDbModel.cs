@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.DataAccess.Model.Core;
+﻿namespace FlowFusion.DataAccess.Model.Core;
 
 public interface IDbModel
 {

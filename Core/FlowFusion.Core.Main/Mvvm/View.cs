@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
 using Prism.Mvvm;
 
-namespace FarnahadFlowFusion.Core.Main.Mvvm;
+namespace FlowFusion.Core.Main.Mvvm;
 
 public abstract class View : UserControl
 {

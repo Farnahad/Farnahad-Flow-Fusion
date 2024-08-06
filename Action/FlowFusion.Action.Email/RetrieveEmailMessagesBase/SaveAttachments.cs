@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.Email.RetrieveEmailMessagesBase;
+﻿namespace FlowFusion.Action.Email.RetrieveEmailMessagesBase;
 
 public enum SaveAttachments
 {

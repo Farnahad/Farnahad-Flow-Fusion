@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Service.Main.Variable;
+﻿namespace FlowFusion.Service.Main.Variable;
 
 class VariableService
 {

@@ -1,11 +1,11 @@
 ﻿using System.Diagnostics;
 using System.Runtime.InteropServices;
-using FarnahadFlowFusion.Service.Workstation.Workstation.Printer;
-using FarnahadFlowFusion.Service.Workstation.Workstation.Screen;
-using FarnahadFlowFusion.Service.Workstation.Workstation.User;
-using FarnahadFlowFusion.Service.Workstation.Workstation.Windows;
+using FlowFusion.Service.Workstation.Workstation.Printer;
+using FlowFusion.Service.Workstation.Workstation.Screen;
+using FlowFusion.Service.Workstation.Workstation.User;
+using FlowFusion.Service.Workstation.Workstation.Windows;
 
-namespace FarnahadFlowFusion.Service.Workstation.Workstation;
+namespace FlowFusion.Service.Workstation.Workstation;
 
 public class WorkstationService
 {

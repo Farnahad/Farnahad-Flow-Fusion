@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.MessageBox.DisplayMessageBase;
+﻿namespace FlowFusion.Action.MessageBox.DisplayMessageBase;
 
 public enum DefaultButton
 {

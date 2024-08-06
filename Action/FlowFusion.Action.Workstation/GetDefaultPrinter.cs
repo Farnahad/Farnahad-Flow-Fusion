@@ -1,9 +1,9 @@
-﻿using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Action.Main.Action;
-using FarnahadFlowFusion.Action.Main.Variable;
-using FarnahadFlowFusion.Service.Workstation.Workstation;
+﻿using FlowFusion.Action.Main;
+using FlowFusion.Action.Main.Action;
+using FlowFusion.Action.Main.Variable;
+using FlowFusion.Service.Workstation.Workstation;
 
-namespace FarnahadFlowFusion.Action.Workstation;
+namespace FlowFusion.Action.Workstation;
 
 public class GetDefaultPrinter : IAction
 {

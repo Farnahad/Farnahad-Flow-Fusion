@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Core.Main.Event;
+﻿namespace FlowFusion.Core.Main.Event;
 
 public class AfterModelDeletedEvent : FfPubSubEvent<AfterModelDeletedEventArgs>
 {

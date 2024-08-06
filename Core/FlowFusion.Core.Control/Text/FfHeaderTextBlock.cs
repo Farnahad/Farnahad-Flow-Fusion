@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Core.Control.Text;
+﻿namespace FlowFusion.Core.Control.Text;
 
 public class FfHeaderTextBlock : FfTextBlock
 {

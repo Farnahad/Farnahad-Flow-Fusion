@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.System.SetWindowsEnvironmentVariableBase;
+﻿namespace FlowFusion.Action.System.SetWindowsEnvironmentVariableBase;
 
 public enum Type
 {

@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.Variable.TruncateNumberBase;
+﻿namespace FlowFusion.Action.Variable.TruncateNumberBase;
 
 public enum Operation
 {

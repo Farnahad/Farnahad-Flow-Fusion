@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.Scripting.RunDotNetScriptBase;
+﻿namespace FlowFusion.Action.Scripting.RunDotNetScriptBase;
 
 public class ScriptParameter
 {

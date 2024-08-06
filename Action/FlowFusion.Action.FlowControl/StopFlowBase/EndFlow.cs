@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.FlowControl.StopFlowBase;
+﻿namespace FlowFusion.Action.FlowControl.StopFlowBase;
 
 public enum EndFlow
 {

@@ -1,9 +1,9 @@
 ﻿using DevExpress.Utils;
 using DevExpress.Xpf.Editors.Settings;
 using DevExpress.Xpf.Grid;
-using FarnahadFlowFusion.Core.Control.Core;
+using FlowFusion.Core.Control.Core;
 
-namespace FarnahadFlowFusion.Core.Control.GridControl.Column;
+namespace FlowFusion.Core.Control.GridControl.Column;
 
 public abstract class FfGridColumn : GridColumn
 {

@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.System.GetWindowsEnvironmentVariableBase;
+﻿namespace FlowFusion.Action.System.GetWindowsEnvironmentVariableBase;
 
 public enum Scope
 {

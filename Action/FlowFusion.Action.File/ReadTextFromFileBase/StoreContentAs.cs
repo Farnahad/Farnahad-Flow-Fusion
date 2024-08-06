@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.File.ReadTextFromFileBase;
+﻿namespace FlowFusion.Action.File.ReadTextFromFileBase;
 
 public enum StoreContentAs
 {

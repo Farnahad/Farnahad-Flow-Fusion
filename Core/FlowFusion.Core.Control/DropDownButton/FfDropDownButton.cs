@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace FarnahadFlowFusion.Core.Control.DropDownButton;
+namespace FlowFusion.Core.Control.DropDownButton;
 
 public class FfDropDownButton : DevExpress.Xpf.Core.DropDownButton
 {

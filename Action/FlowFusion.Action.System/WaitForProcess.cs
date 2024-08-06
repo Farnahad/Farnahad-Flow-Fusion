@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics;
-using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Action.Main.Action;
-using FarnahadFlowFusion.Action.System.WaitForProcessBase;
+using FlowFusion.Action.Main;
+using FlowFusion.Action.Main.Action;
+using FlowFusion.Action.System.WaitForProcessBase;
 
-namespace FarnahadFlowFusion.Action.System;
+namespace FlowFusion.Action.System;
 
 public class WaitForProcess : IAction
 {

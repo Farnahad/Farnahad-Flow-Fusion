@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.Workstation.ShowDesktopBase;
+﻿namespace FlowFusion.Action.Workstation.ShowDesktopBase;
 
 public enum Operation
 {

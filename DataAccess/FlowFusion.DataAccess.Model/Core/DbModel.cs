@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace FarnahadFlowFusion.DataAccess.Model.Core;
+namespace FlowFusion.DataAccess.Model.Core;
 
 public abstract class DbModel : IDbModel
 {

@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Core.Control.DateTimeLayoutItem;
+﻿namespace FlowFusion.Core.Control.DateTimeLayoutItem;
 
 public partial class FfDatePickerLayoutItem
 {

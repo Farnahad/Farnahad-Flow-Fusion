@@ -1,8 +1,8 @@
-﻿using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Action.Main.Action;
-using Type = FarnahadFlowFusion.Action.System.SetWindowsEnvironmentVariableBase.Type;
+﻿using FlowFusion.Action.Main;
+using FlowFusion.Action.Main.Action;
+using Type = FlowFusion.Action.System.SetWindowsEnvironmentVariableBase.Type;
 
-namespace FarnahadFlowFusion.Action.System;
+namespace FlowFusion.Action.System;
 
 public class SetWindowsEnvironmentVariable : IAction
 {

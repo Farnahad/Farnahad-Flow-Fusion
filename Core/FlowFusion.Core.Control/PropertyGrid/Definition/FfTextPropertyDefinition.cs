@@ -1,6 +1,6 @@
 ﻿using DevExpress.Xpf.Editors.Settings;
 
-namespace FarnahadFlowFusion.Core.Control.PropertyGrid.Definition;
+namespace FlowFusion.Core.Control.PropertyGrid.Definition;
 
 public class FfTextPropertyDefinition : FfPropertyDefinition
 {

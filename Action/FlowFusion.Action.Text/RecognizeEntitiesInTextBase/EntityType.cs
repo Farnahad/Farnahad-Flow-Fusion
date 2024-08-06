@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.Text.RecognizeEntitiesInTextBase;
+﻿namespace FlowFusion.Action.Text.RecognizeEntitiesInTextBase;
 
 public enum EntityType
 {

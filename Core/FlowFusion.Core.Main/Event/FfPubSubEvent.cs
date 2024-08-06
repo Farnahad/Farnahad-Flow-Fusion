@@ -1,6 +1,6 @@
 ﻿using Prism.Events;
 
-namespace FarnahadFlowFusion.Core.Main.Event;
+namespace FlowFusion.Core.Main.Event;
 
 public class FfPubSubEvent : PubSubEvent
 {

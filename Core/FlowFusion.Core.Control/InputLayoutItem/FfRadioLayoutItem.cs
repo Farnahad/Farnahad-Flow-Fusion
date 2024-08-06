@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Core.Control.InputLayoutItem;
+﻿namespace FlowFusion.Core.Control.InputLayoutItem;
 
 public partial class FfRadioLayoutItem
 {

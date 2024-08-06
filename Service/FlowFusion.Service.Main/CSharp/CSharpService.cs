@@ -1,12 +1,12 @@
 ﻿using System.Text;
-using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Action.Main.Action;
-using FarnahadFlowFusion.Service.Main.TemplateEngine;
+using FlowFusion.Action.Main;
+using FlowFusion.Action.Main.Action;
+using FlowFusion.Service.Main.TemplateEngine;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
 
-namespace FarnahadFlowFusion.Service.Main.CSharp;
+namespace FlowFusion.Service.Main.CSharp;
 
 public class CSharpService
 {

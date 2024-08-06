@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.Email.ProcessEmailMessagesBase;
+﻿namespace FlowFusion.Action.Email.ProcessEmailMessagesBase;
 
 public enum Operation
 {

@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Service.Workstation.Workstation.Screen;
+﻿namespace FlowFusion.Service.Workstation.Workstation.Screen;
 
 [Flags]
 public enum DisplayDeviceStateFlags : int

@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace FarnahadFlowFusion.Core.Control.Layout;
+namespace FlowFusion.Core.Control.Layout;
 
 public class FfHorizontalLayoutGroup : FfLayoutGroup
 {

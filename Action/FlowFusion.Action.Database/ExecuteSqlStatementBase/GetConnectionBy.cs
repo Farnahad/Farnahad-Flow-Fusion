@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.Database.ExecuteSqlStatementBase;
+﻿namespace FlowFusion.Action.Database.ExecuteSqlStatementBase;
 
 public enum GetConnectionBy
 {

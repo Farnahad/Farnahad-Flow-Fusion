@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Core.Control.Button;
+﻿namespace FlowFusion.Core.Control.Button;
 
 public partial class FfSimpleOkButton
 {

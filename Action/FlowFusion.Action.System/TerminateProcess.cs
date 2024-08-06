@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics;
-using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Action.Main.Action;
-using FarnahadFlowFusion.Action.System.TerminateProcessBase;
+using FlowFusion.Action.Main;
+using FlowFusion.Action.Main.Action;
+using FlowFusion.Action.System.TerminateProcessBase;
 
-namespace FarnahadFlowFusion.Action.System;
+namespace FlowFusion.Action.System;
 
 public class TerminateProcess : IAction
 {

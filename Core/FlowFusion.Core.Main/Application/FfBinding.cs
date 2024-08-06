@@ -1,6 +1,6 @@
 ﻿using System.Windows.Data;
 
-namespace FarnahadFlowFusion.Core.Main.Application;
+namespace FlowFusion.Core.Main.Application;
 
 public class FfBinding : Binding
 {

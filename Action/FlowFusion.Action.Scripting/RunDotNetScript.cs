@@ -1,10 +1,10 @@
-﻿using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Action.Main.Action;
-using FarnahadFlowFusion.Action.Scripting.RunDotNetScriptBase;
+﻿using FlowFusion.Action.Main;
+using FlowFusion.Action.Main.Action;
+using FlowFusion.Action.Scripting.RunDotNetScriptBase;
 using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
 
-namespace FarnahadFlowFusion.Action.Scripting;
+namespace FlowFusion.Action.Scripting;
 
 public class RunDotNetScript : IAction
 {

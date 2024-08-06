@@ -1,6 +1,6 @@
 ﻿using DevExpress.Xpf.Bars;
 
-namespace FarnahadFlowFusion.Core.Control.Ribbon;
+namespace FlowFusion.Core.Control.Ribbon;
 
 public class FfSmallRibbonBarButtonItem : FfRibbonBarButtonItem
 {

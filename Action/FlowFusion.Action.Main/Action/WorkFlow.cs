@@ -1,6 +1,6 @@
-﻿using FarnahadFlowFusion.Action.Main.Variable;
+﻿using FlowFusion.Action.Main.Variable;
 
-namespace FarnahadFlowFusion.Action.Main.Action;
+namespace FlowFusion.Action.Main.Action;
 
 public class WorkFlow
 {

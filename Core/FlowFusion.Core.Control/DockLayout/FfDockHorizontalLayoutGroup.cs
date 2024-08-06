@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace FarnahadFlowFusion.Core.Control.DockLayout;
+namespace FlowFusion.Core.Control.DockLayout;
 
 public class FfDockHorizontalLayoutGroup : FfDockLayoutGroup
 {

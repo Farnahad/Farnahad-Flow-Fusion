@@ -1,6 +1,6 @@
 ﻿using DevExpress.Xpf.Editors;
 
-namespace FarnahadFlowFusion.Core.Control.TextBox;
+namespace FlowFusion.Core.Control.TextBox;
 
 public class FfTimeMaskTextEdit : FfMaskTextEdit
 {

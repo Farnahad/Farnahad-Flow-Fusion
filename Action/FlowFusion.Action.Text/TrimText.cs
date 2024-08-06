@@ -1,9 +1,9 @@
-﻿using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Action.Main.Action;
-using FarnahadFlowFusion.Action.Main.Variable;
-using FarnahadFlowFusion.Action.Text.TrimTextBase;
+﻿using FlowFusion.Action.Main;
+using FlowFusion.Action.Main.Action;
+using FlowFusion.Action.Main.Variable;
+using FlowFusion.Action.Text.TrimTextBase;
 
-namespace FarnahadFlowFusion.Action.Text;
+namespace FlowFusion.Action.Text;
 
 public class TrimText : IAction
 {

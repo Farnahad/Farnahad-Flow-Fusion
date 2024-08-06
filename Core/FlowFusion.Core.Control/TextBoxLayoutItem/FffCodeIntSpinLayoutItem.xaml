@@ -1,11 +1,11 @@
-﻿<layout:FfAutoLayoutItem x:Class="FarnahadFlowFusion.Core.Control.TextBoxLayoutItem.FfCodeIntSpinLayoutItem"
+﻿<layout:FfAutoLayoutItem x:Class="FlowFusion.Core.Control.TextBoxLayoutItem.FfCodeIntSpinLayoutItem"
                           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                          xmlns:layout="clr-namespace:FarnahadFlowFusion.Core.Control.Layout"
-                          xmlns:textBox="clr-namespace:FarnahadFlowFusion.Core.Control.TextBox"
-                          xmlns:ff="FarnahadFlowFusion" mc:Ignorable="d" d:DesignWidth="800"
+                          xmlns:layout="clr-namespace:FlowFusion.Core.Control.Layout"
+                          xmlns:textBox="clr-namespace:FlowFusion.Core.Control.TextBox"
+                          xmlns:ff="FlowFusion" mc:Ignorable="d" d:DesignWidth="800"
                           x:Name="MainFfAutoLayoutItem">
     <textBox:FfCodeIntSpinEdit EditValue="{ff:FfBinding Path=EditValue, ElementName=MainFfAutoLayoutItem}" />
 </layout:FfAutoLayoutItem>

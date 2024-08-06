@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Core.Main.Lookup;
+﻿namespace FlowFusion.Core.Main.Lookup;
 
 public class NullLookupItem : LookupItem
 {

@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.DataAccess.Model.Core;
+﻿namespace FlowFusion.DataAccess.Model.Core;
 
 [AttributeUsage(AttributeTargets.Property, Inherited = false, AllowMultiple = false)]
 sealed class DbModelLabelAttribute : Attribute

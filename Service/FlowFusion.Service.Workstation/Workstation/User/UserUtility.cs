@@ -2,7 +2,7 @@
 
 // ReSharper disable InconsistentNaming
 
-namespace FarnahadFlowFusion.Service.Workstation.Workstation.User;
+namespace FlowFusion.Service.Workstation.Workstation.User;
 
 public class UserUtility
 {

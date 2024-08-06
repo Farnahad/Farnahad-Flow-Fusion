@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
-using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Action.Main.Action;
+using FlowFusion.Action.Main;
+using FlowFusion.Action.Main.Action;
 
-namespace FarnahadFlowFusion.Action.CmdSession;
+namespace FlowFusion.Action.CmdSession;
 
 public class CloseCmdSession : IAction
 {

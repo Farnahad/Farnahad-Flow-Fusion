@@ -1,8 +1,8 @@
-﻿using FarnahadFlowFusion.Action.Loops.LoopConditionBase;
-using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Action.Main.Action;
+﻿using FlowFusion.Action.Loops.LoopConditionBase;
+using FlowFusion.Action.Main;
+using FlowFusion.Action.Main.Action;
 
-namespace FarnahadFlowFusion.Action.Loops;
+namespace FlowFusion.Action.Loops;
 
 public class LoopCondition : IAction
 {

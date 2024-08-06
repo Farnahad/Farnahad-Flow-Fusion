@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.Compression.ZipFilesBase;
+﻿namespace FlowFusion.Action.Compression.ZipFilesBase;
 
 public enum CompressionLevel
 {

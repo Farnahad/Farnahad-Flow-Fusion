@@ -1,9 +1,9 @@
-﻿using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Action.Main.Action;
-using FarnahadFlowFusion.Action.Main.Variable;
-using FarnahadFlowFusion.Action.Text.SplitTextBase;
+﻿using FlowFusion.Action.Main;
+using FlowFusion.Action.Main.Action;
+using FlowFusion.Action.Main.Variable;
+using FlowFusion.Action.Text.SplitTextBase;
 
-namespace FarnahadFlowFusion.Action.Text;
+namespace FlowFusion.Action.Text;
 
 public class SplitText : IAction
 {

@@ -1,10 +1,10 @@
 ﻿using System.IO.Compression;
-using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Action.Main.Action;
-using FarnahadFlowFusion.Action.Main.Variable;
-using CompressionLevel = FarnahadFlowFusion.Action.Compression.ZipFilesBase.CompressionLevel;
+using FlowFusion.Action.Main;
+using FlowFusion.Action.Main.Action;
+using FlowFusion.Action.Main.Variable;
+using CompressionLevel = FlowFusion.Action.Compression.ZipFilesBase.CompressionLevel;
 
-namespace FarnahadFlowFusion.Action.Compression;
+namespace FlowFusion.Action.Compression;
 
 public class ZipFiles : IAction
 {

@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.System.IfProcessBase;
+﻿namespace FlowFusion.Action.System.IfProcessBase;
 
 public enum IfProcess
 {

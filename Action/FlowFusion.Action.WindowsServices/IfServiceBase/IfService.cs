@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.WindowsServices.IfServiceBase;
+﻿namespace FlowFusion.Action.WindowsServices.IfServiceBase;
 
 public enum IfService
 {

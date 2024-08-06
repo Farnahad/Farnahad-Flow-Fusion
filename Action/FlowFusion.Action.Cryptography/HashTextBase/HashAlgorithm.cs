@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.Cryptography.HashTextBase;
+﻿namespace FlowFusion.Action.Cryptography.HashTextBase;
 
 public enum HashAlgorithm
 {

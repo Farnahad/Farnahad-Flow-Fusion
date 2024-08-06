@@ -1,5 +1,5 @@
-﻿<button:FfSimpleButton x:Class="FarnahadFlowFusion.Core.Control.Button.FfSimpleDeleteButton"
+﻿<button:FfSimpleButton x:Class="FlowFusion.Core.Control.Button.FfSimpleDeleteButton"
                         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                        xmlns:button="clr-namespace:FarnahadFlowFusion.Core.Control.Button"
+                        xmlns:button="clr-namespace:FlowFusion.Core.Control.Button"
                         Content="Delete" />

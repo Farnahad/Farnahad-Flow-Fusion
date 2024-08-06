@@ -1,6 +1,6 @@
 ﻿using System.ServiceProcess;
 
-namespace FarnahadFlowFusion.Service.WindowsServices.WindowsService;
+namespace FlowFusion.Service.WindowsServices.WindowsService;
 
 public class WindowsServiceService
 {

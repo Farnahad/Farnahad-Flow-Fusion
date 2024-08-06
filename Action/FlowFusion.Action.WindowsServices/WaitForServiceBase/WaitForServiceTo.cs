@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.WindowsServices.WaitForServiceBase;
+﻿namespace FlowFusion.Action.WindowsServices.WaitForServiceBase;
 
 public enum WaitForServiceTo
 {

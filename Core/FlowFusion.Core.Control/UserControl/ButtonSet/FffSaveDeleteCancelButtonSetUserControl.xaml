@@ -1,11 +1,11 @@
 ﻿<userControl:FfUserControl
-    x:Class="FarnahadFlowFusion.Core.Control.UserControl.ButtonSet.FfSaveDeleteCancelButtonSetUserControl"
+    x:Class="FlowFusion.Core.Control.UserControl.ButtonSet.FfSaveDeleteCancelButtonSetUserControl"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:userControl="clr-namespace:FarnahadFlowFusion.Core.Control.UserControl"
-    xmlns:container="clr-namespace:FarnahadFlowFusion.Core.Control.Container"
-    xmlns:button="clr-namespace:FarnahadFlowFusion.Core.Control.Button"
-    xmlns:ff="FarnahadFlowFusion">
+    xmlns:userControl="clr-namespace:FlowFusion.Core.Control.UserControl"
+    xmlns:container="clr-namespace:FlowFusion.Core.Control.Container"
+    xmlns:button="clr-namespace:FlowFusion.Core.Control.Button"
+    xmlns:ff="FlowFusion">
     <container:FfWrapPanel HorizontalAlignment="Center">
         <button:FfSimpleSaveButton Command="{ff:FfBinding Path=SaveCommand}" />
         <button:FfSimpleDeleteButton Command="{ff:FfBinding Path=DeleteCommand}" />

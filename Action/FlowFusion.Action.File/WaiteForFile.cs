@@ -1,8 +1,8 @@
-﻿using FarnahadFlowFusion.Action.File.WaiteForFileBase;
-using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Action.Main.Action;
+﻿using FlowFusion.Action.File.WaiteForFileBase;
+using FlowFusion.Action.Main;
+using FlowFusion.Action.Main.Action;
 
-namespace FarnahadFlowFusion.Action.File;
+namespace FlowFusion.Action.File;
 
 public class WaiteForFile : IAction
 {

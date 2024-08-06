@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace FarnahadFlowFusion.Core.Control.DockLayout;
+namespace FlowFusion.Core.Control.DockLayout;
 
 public static partial class ControlBehavior
 {

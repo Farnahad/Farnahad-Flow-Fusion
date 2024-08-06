@@ -1,8 +1,8 @@
-﻿using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Action.Main.Action;
-using FarnahadFlowFusion.Action.Workstation.TakeScreenshotBase;
+﻿using FlowFusion.Action.Main;
+using FlowFusion.Action.Main.Action;
+using FlowFusion.Action.Workstation.TakeScreenshotBase;
 
-namespace FarnahadFlowFusion.Action.Workstation;
+namespace FlowFusion.Action.Workstation;
 
 public class TakeScreenshot : IAction
 {

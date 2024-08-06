@@ -1,6 +1,6 @@
 ﻿using DevExpress.Xpf.Navigation;
 
-namespace FarnahadFlowFusion.Core.Control.Utility;
+namespace FlowFusion.Core.Control.Utility;
 
 public class FfOfficeNavigationBar : OfficeNavigationBar
 {

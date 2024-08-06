@@ -1,9 +1,9 @@
 ﻿using System.ServiceProcess;
-using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Action.Main.Action;
-using FarnahadFlowFusion.Service.WindowsServices.WindowsService;
+using FlowFusion.Action.Main;
+using FlowFusion.Action.Main.Action;
+using FlowFusion.Service.WindowsServices.WindowsService;
 
-namespace FarnahadFlowFusion.Action.WindowsServices;
+namespace FlowFusion.Action.WindowsServices;
 
 public class IfService : IAction
 {

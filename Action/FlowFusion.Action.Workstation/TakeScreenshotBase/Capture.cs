@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.Workstation.TakeScreenshotBase;
+﻿namespace FlowFusion.Action.Workstation.TakeScreenshotBase;
 
 public enum Capture
 {

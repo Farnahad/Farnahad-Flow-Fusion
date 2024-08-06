@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.Scripting.RunPythonScriptBase;
+﻿namespace FlowFusion.Action.Scripting.RunPythonScriptBase;
 
 public enum PythonVersion
 {

@@ -1,6 +1,6 @@
 ﻿using DevExpress.Xpf.Ribbon;
 
-namespace FarnahadFlowFusion.Core.Control.Ribbon;
+namespace FlowFusion.Core.Control.Ribbon;
 
 public abstract class FfRibbonDefaultPageCategory : RibbonDefaultPageCategory
 {

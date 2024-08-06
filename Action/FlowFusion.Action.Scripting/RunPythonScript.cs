@@ -1,10 +1,10 @@
 ﻿using System.Diagnostics;
-using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Action.Main.Action;
-using FarnahadFlowFusion.Action.Main.Variable;
-using FarnahadFlowFusion.Action.Scripting.RunPythonScriptBase;
+using FlowFusion.Action.Main;
+using FlowFusion.Action.Main.Action;
+using FlowFusion.Action.Main.Variable;
+using FlowFusion.Action.Scripting.RunPythonScriptBase;
 
-namespace FarnahadFlowFusion.Action.Scripting;
+namespace FlowFusion.Action.Scripting;
 
 public class RunPythonScript : IAction
 {

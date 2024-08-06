@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace FarnahadFlowFusion.Core.Control.Text;
+namespace FlowFusion.Core.Control.Text;
 
 public class FfTextBlock : TextBlock
 {

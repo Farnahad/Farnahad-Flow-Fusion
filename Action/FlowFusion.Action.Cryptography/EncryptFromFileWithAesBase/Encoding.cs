@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.Cryptography.EncryptFromFileWithAesBase;
+﻿namespace FlowFusion.Action.Cryptography.EncryptFromFileWithAesBase;
 
 public enum Encoding
 {

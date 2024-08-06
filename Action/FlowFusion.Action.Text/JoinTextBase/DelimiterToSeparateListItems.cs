@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.Text.JoinTextBase;
+﻿namespace FlowFusion.Action.Text.JoinTextBase;
 
 public enum DelimiterToSeparateListItems
 {

@@ -1,6 +1,6 @@
 ﻿using DevExpress.Xpf.Editors.Settings;
 
-namespace FarnahadFlowFusion.Core.Control.GridControl.Column;
+namespace FlowFusion.Core.Control.GridControl.Column;
 
 public class FfIntGridColumn : FfGridColumn
 {

@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.File.WriteToCsvFileBase;
+﻿namespace FlowFusion.Action.File.WriteToCsvFileBase;
 
 public enum Encoding
 {

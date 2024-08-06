@@ -1,11 +1,11 @@
 ﻿using System.Security.Cryptography;
-using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Action.Main.Action;
-using FarnahadFlowFusion.Action.Main.Variable;
-using Encoding = FarnahadFlowFusion.Action.Cryptography.HashTextWithKeyBase.Encoding;
-using HashAlgorithm = FarnahadFlowFusion.Action.Cryptography.HashTextWithKeyBase.HashAlgorithm;
+using FlowFusion.Action.Main;
+using FlowFusion.Action.Main.Action;
+using FlowFusion.Action.Main.Variable;
+using Encoding = FlowFusion.Action.Cryptography.HashTextWithKeyBase.Encoding;
+using HashAlgorithm = FlowFusion.Action.Cryptography.HashTextWithKeyBase.HashAlgorithm;
 
-namespace FarnahadFlowFusion.Action.Cryptography;
+namespace FlowFusion.Action.Cryptography;
 
 public class HashTextWithKey : IAction
 {

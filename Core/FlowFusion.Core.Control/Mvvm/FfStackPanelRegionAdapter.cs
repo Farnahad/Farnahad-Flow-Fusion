@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Prism.Regions;
 
-namespace FarnahadFlowFusion.Core.Control.Mvvm;
+namespace FlowFusion.Core.Control.Mvvm;
 
 public class FfStackPanelRegionAdapter : RegionAdapterBase<StackPanel>
 {

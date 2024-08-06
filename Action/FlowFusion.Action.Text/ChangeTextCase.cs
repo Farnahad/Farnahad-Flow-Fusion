@@ -1,10 +1,10 @@
 ﻿using System.Globalization;
-using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Action.Main.Action;
-using FarnahadFlowFusion.Action.Main.Variable;
-using FarnahadFlowFusion.Action.Text.ChangeTextCaseBase;
+using FlowFusion.Action.Main;
+using FlowFusion.Action.Main.Action;
+using FlowFusion.Action.Main.Variable;
+using FlowFusion.Action.Text.ChangeTextCaseBase;
 
-namespace FarnahadFlowFusion.Action.Text;
+namespace FlowFusion.Action.Text;
 
 public class ChangeTextCase : IAction
 {

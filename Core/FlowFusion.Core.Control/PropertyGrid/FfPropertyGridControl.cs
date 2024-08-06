@@ -1,6 +1,6 @@
 ﻿using DevExpress.Xpf.PropertyGrid;
 
-namespace FarnahadFlowFusion.Core.Control.PropertyGrid;
+namespace FlowFusion.Core.Control.PropertyGrid;
 
 public class FfPropertyGridControl : PropertyGridControl
 {

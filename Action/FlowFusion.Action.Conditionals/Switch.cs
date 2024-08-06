@@ -1,7 +1,7 @@
-﻿using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Action.Main.Action;
+﻿using FlowFusion.Action.Main;
+using FlowFusion.Action.Main.Action;
 
-namespace FarnahadFlowFusion.Action.Conditionals;
+namespace FlowFusion.Action.Conditionals;
 
 public class Switch : IAction
 {

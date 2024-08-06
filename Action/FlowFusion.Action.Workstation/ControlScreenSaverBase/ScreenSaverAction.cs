@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.Workstation.ControlScreenSaverBase;
+﻿namespace FlowFusion.Action.Workstation.ControlScreenSaverBase;
 
 public enum ScreenSaverAction
 {

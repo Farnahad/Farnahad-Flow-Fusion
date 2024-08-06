@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 
-namespace FarnahadFlowFusion.Core.Main.HijriDateTime;
+namespace FlowFusion.Core.Main.HijriDateTime;
 
 public static class HijriDateTimeHelper
 {

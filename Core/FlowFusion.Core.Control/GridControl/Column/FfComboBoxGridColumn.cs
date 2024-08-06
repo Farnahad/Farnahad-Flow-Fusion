@@ -4,7 +4,7 @@ using DevExpress.Xpf.Editors;
 using DevExpress.Xpf.Editors.Settings;
 using DevExpress.Xpf.Grid;
 
-namespace FarnahadFlowFusion.Core.Control.GridControl.Column;
+namespace FlowFusion.Core.Control.GridControl.Column;
 
 public class FfComboBoxGridColumn : FfGridColumn
 {

@@ -1,10 +1,10 @@
 ﻿using System.Windows;
-using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Action.Main.Action;
-using FarnahadFlowFusion.Action.Main.Variable;
-using FarnahadFlowFusion.Action.MessageBox.DisplayMessageBase;
+using FlowFusion.Action.Main;
+using FlowFusion.Action.Main.Action;
+using FlowFusion.Action.Main.Variable;
+using FlowFusion.Action.MessageBox.DisplayMessageBase;
 
-namespace FarnahadFlowFusion.Action.MessageBox;
+namespace FlowFusion.Action.MessageBox;
 
 public class DisplayMessage : IAction
 {

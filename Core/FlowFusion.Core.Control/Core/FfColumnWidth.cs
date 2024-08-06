@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Core.Control.Core;
+﻿namespace FlowFusion.Core.Control.Core;
 
 public enum FfColumnWidth
 {

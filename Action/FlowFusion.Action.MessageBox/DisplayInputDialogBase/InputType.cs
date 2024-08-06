@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.MessageBox.DisplayInputDialogBase;
+﻿namespace FlowFusion.Action.MessageBox.DisplayInputDialogBase;
 
 public enum InputType
 {

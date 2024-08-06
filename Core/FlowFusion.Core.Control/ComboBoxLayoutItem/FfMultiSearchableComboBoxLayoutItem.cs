@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace FarnahadFlowFusion.Core.Control.ComboBoxLayoutItem;
+namespace FlowFusion.Core.Control.ComboBoxLayoutItem;
 
 public partial class FfMultiSearchableComboBoxLayoutItem
 {

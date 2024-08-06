@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.DateTime.GetCurrentDateAndTimeBase;
+﻿namespace FlowFusion.Action.DateTime.GetCurrentDateAndTimeBase;
 
 public enum TimeZone
 {

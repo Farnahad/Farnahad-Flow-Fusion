@@ -1,8 +1,8 @@
-﻿using FarnahadFlowFusion.Action.Main;
+﻿using FlowFusion.Action.Main;
 using Scriban;
 using Scriban.Syntax;
 
-namespace FarnahadFlowFusion.Service.Main.TemplateEngine;
+namespace FlowFusion.Service.Main.TemplateEngine;
 
 public class TemplateEngineService
 {

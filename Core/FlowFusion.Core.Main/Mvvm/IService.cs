@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Core.Main.Mvvm;
+﻿namespace FlowFusion.Core.Main.Mvvm;
 
 public interface IService : IDisposable
 {

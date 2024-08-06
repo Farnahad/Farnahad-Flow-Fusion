@@ -1,9 +1,9 @@
 ﻿using System.Windows;
 using DevExpress.Xpf.Editors;
 using DevExpress.XtraEditors.DXErrorProvider;
-using FarnahadFlowFusion.Core.Control.Core;
+using FlowFusion.Core.Control.Core;
 
-namespace FarnahadFlowFusion.Core.Control.ComboBox;
+namespace FlowFusion.Core.Control.ComboBox;
 
 public class FfComboBoxEdit : ComboBoxEdit
 {

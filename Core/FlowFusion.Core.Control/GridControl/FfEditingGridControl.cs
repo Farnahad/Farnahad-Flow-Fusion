@@ -1,6 +1,6 @@
 ﻿using DevExpress.Xpf.Grid;
 
-namespace FarnahadFlowFusion.Core.Control.GridControl;
+namespace FlowFusion.Core.Control.GridControl;
 
 public class FfEditingGridControl : FfGridControl
 {

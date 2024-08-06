@@ -1,8 +1,8 @@
-﻿using FarnahadFlowFusion.Action.Main;
-using FarnahadFlowFusion.Action.Main.Action;
-using FarnahadFlowFusion.Service.Workstation.Workstation;
+﻿using FlowFusion.Action.Main;
+using FlowFusion.Action.Main.Action;
+using FlowFusion.Service.Workstation.Workstation;
 
-namespace FarnahadFlowFusion.Action.Workstation;
+namespace FlowFusion.Action.Workstation;
 
 public class LockWorkstation : IAction
 {

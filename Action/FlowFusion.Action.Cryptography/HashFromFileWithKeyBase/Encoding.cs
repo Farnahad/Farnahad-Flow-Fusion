@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.Cryptography.HashFromFileWithKeyBase;
+﻿namespace FlowFusion.Action.Cryptography.HashFromFileWithKeyBase;
 
 public enum Encoding
 {

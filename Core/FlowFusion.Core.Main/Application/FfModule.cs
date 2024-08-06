@@ -1,7 +1,7 @@
 ﻿using Prism.Ioc;
 using Prism.Modularity;
 
-namespace FarnahadFlowFusion.Core.Main.Application;
+namespace FlowFusion.Core.Main.Application;
 
 public class FfModule : IModule
 {

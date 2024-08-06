@@ -10,7 +10,7 @@ using System.Windows.Markup;
                                                 // app, or any theme specific resource dictionaries)
 )]
 
-[assembly: XmlnsDefinition("FarnahadFlowFusion", "FarnahadFlowFusion.Core.Main.Application")]
-[assembly: XmlnsDefinition("FarnahadFlowFusion", "FarnahadFlowFusion.Core.Main.Command")]
-[assembly: XmlnsDefinition("FarnahadFlowFusion", "FarnahadFlowFusion.Core.Main.Converter")]
-[assembly: XmlnsDefinition("FarnahadFlowFusion", "FarnahadFlowFusion.Core.Main.Mvvm")]
+[assembly: XmlnsDefinition("FlowFusion", "FlowFusion.Core.Main.Application")]
+[assembly: XmlnsDefinition("FlowFusion", "FlowFusion.Core.Main.Command")]
+[assembly: XmlnsDefinition("FlowFusion", "FlowFusion.Core.Main.Converter")]
+[assembly: XmlnsDefinition("FlowFusion", "FlowFusion.Core.Main.Mvvm")]

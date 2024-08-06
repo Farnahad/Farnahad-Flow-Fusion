@@ -1,7 +1,7 @@
 ﻿using DevExpress.Xpf.Bars;
 using DevExpress.Xpf.Core;
 
-namespace FarnahadFlowFusion.Core.Control.Bar;
+namespace FlowFusion.Core.Control.Bar;
 
 public class FfBarManager : BarManager
 {

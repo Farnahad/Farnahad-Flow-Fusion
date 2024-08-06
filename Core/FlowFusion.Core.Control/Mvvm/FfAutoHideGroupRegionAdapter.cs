@@ -1,10 +1,10 @@
 ﻿using System.Collections.Specialized;
 using System.Windows;
-using FarnahadFlowFusion.Core.Control.DockLayout;
-using FarnahadFlowFusion.Core.Main.Mvvm;
+using FlowFusion.Core.Control.DockLayout;
+using FlowFusion.Core.Main.Mvvm;
 using Prism.Regions;
 
-namespace FarnahadFlowFusion.Core.Control.Mvvm;
+namespace FlowFusion.Core.Control.Mvvm;
 
 public class FfAutoHideGroupRegionAdapter : RegionAdapterBase<FfAutoHideGroup>
 {

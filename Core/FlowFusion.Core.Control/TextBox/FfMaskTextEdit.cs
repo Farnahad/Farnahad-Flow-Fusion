@@ -1,6 +1,6 @@
 ﻿using DevExpress.Xpf.Editors.Validation;
 
-namespace FarnahadFlowFusion.Core.Control.TextBox;
+namespace FlowFusion.Core.Control.TextBox;
 
 public abstract class FfMaskTextEdit : FfTextEdit
 {

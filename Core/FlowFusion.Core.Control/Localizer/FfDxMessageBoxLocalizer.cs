@@ -2,7 +2,7 @@
 using DevExpress.Xpf.Core;
 
 // ReSharper disable once IdentifierTypo
-namespace FarnahadFlowFusion.Core.Control.Localizer;
+namespace FlowFusion.Core.Control.Localizer;
 
 // ReSharper disable once IdentifierTypo
 public class FfDxMessageBoxLocalizer : DXMessageBoxLocalizer

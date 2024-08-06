@@ -1,4 +1,4 @@
-﻿namespace FarnahadFlowFusion.Action.MessageBox.DisplaySelectDateDialogBase;
+﻿namespace FlowFusion.Action.MessageBox.DisplaySelectDateDialogBase;
 
 public enum PromptFor
 {

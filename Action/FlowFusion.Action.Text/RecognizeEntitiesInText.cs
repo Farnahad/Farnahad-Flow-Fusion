@@ -1,34 +1,26 @@
 ﻿using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
 using FlowFusion.Action.Main.Variable;
-using FlowFusion.Action.Text.RecognizeEntitiesInTextBase;
+using FlowFusion.Service.Text.Text;
+using FlowFusion.Service.Text.Text.Base;
 
 namespace FlowFusion.Action.Text;
 
-public class RecognizeEntitiesInText : IAction //XXXXXXXXXXXX
+public class RecognizeEntitiesInText(ITextService textService) : IAction
 {
     public string Name => "Recognize entities in text";
 
-    public ActionInput TextToRecognizeFrom { get; set; }
-    public EntityType EntityType { get; set; }
-    public Language Language { get; set; }
-    public Variable RecognizedEntities { get; set; }
-
-    public RecognizeEntitiesInText()
-    {
-        TextToRecognizeFrom = new ActionInput();
-        EntityType = EntityType.Datetime;
-        Language = Language.English;
-        RecognizedEntities = new Variable();
-    }
+    public ActionInput TextToRecognizeFrom { get; set; } = new();
+    public EntityType EntityType { get; set; } = EntityType.Datetime;
+    public Language Language { get; set; } = Language.English;
+    public Variable RecognizedEntities { get; set; } = new();
 
     public async Task Execute(SandBox sandBox)
     {
-        var minimumVaXXXXXXXXXXXXlue = await sandBox.EvaluateActionInput<int>(XXXXXXXXXXXX);
-        var XXXXXXXXXXXX = await sandBox.EvaluateActionInput<int>(XXXXXXXXXXXX);
+        var textToRecognizeFromValue = await sandBox.EvaluateActionInput<string>(TextToRecognizeFrom);
 
-        XXXXXXXXXXXX.Value = new Random().Next(XXXXXXXXXXXX, XXXXXXXXXXXX);
+        RecognizedEntities.Value = textService.RecognizeEntitiesInText(textToRecognizeFromValue, EntityType, Language);
 
-        sandBox.SetVariable(XXXXXXXXXXXX);
+        sandBox.SetVariable(RecognizedEntities);
     }
 }

@@ -12,5 +12,6 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\Core\FlowFusion.Core.Main\FlowFusion.Core.Main.csproj" />
+	  <ProjectReference Include="..\FlowFusion.Service.Main\FlowFusion.Service.Main.csproj" />
 	</ItemGroup>
 </Project>

@@ -5,39 +5,25 @@ using FlowFusion.Service.Workstation.Workstation;
 
 namespace FlowFusion.Action.Workstation;
 
-public class GetScreenResolution : IAction //XXXXXXXXXXXX
+public class GetScreenResolution(IWorkstationService workstationService) : IAction
 {
-    private readonly WorkstationService _workstationService;
-
     public string Name => "Get screen resolution";
 
-    public ActionInput MonitorNumber { get; set; }
-    public Variable MonitorWidth { get; set; }
-    public Variable MonitorHeight { get; set; }
-    public Variable MonitorBitCount { get; set; }
-    public Variable MonitorFrequency { get; set; }
-
-    public GetScreenResolution()
-    {
-        _workstationService = new WorkstationService();
-
-        MonitorNumber = new ActionInput();
-        MonitorWidth = new Variable();
-        MonitorHeight = new Variable();
-        MonitorBitCount = new Variable();
-        MonitorFrequency = new Variable();
-    }
+    public ActionInput MonitorNumber { get; set; } = new();
+    public Variable MonitorWidth { get; set; } = new();
+    public Variable MonitorHeight { get; set; } = new();
+    public Variable MonitorBitCount { get; set; } = new();
+    public Variable MonitorFrequency { get; set; } = new();
 
     public async Task Execute(SandBox sandBox)
     {
         var monitorNumberValue = await sandBox.EvaluateActionInput<int>(MonitorNumber);
 
-        _workstationService.GetScreenResolution(monitorNumberValue,
-            out var monitorWidth, out var monitorHeight,out var monitorBitCount, out var monitorFrequency);
+        var resolution = workstationService.GetScreenResolution(monitorNumberValue);
 
-        MonitorWidth.Value = monitorWidth;
-        MonitorHeight.Value = monitorHeight;
-        MonitorBitCount.Value = monitorBitCount;
-        MonitorFrequency.Value = monitorFrequency;
+        MonitorWidth.Value = resolution.Item1;
+        MonitorHeight.Value = resolution.Item2;
+        MonitorBitCount.Value = resolution.Item3;
+        MonitorFrequency.Value = resolution.Item4;
     }
 }

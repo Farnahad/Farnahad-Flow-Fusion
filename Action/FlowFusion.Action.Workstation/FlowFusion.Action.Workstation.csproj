@@ -5,10 +5,12 @@
 		<Nullable>disable</Nullable>
 		<BaseOutputPath>..\..\Module\FlowFusion.Module.Main\bin\</BaseOutputPath>
 	</PropertyGroup>
+	<ItemGroup>
+	  <PackageReference Include="System.Drawing.Common" Version="8.0.7" />
+	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference
-			Include="..\..\Service\FlowFusion.Service.Workstation\FlowFusion.Service.Workstation.csproj" />
+		<ProjectReference Include="..\..\Service\FlowFusion.Service.Workstation\FlowFusion.Service.Workstation.csproj" />
 		<ProjectReference Include="..\FlowFusion.Action.Main\FlowFusion.Action.Main.csproj" />
 	</ItemGroup>
 </Project>

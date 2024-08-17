@@ -1,31 +1,22 @@
 ﻿using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
-using FlowFusion.Action.Workstation.TakeScreenshotBase;
+using FlowFusion.Service.Workstation.Workstation;
+using FlowFusion.Service.Workstation.Workstation.Base;
 
 namespace FlowFusion.Action.Workstation;
 
-public class TakeScreenshot : IAction //XXXXXXXXXXXX
+public class TakeScreenshot(IWorkstationService workstationService) : IAction
 {
     public string Name => "Take screenshot";
 
-    public Capture Capture { get; set; }
-    public SaveScreenshotTo SaveScreenshotTo { get; set; }
-    public ActionInput ScreenToCapture { get; set; }
-
-    public TakeScreenshot()
-    {
-        Capture = Capture.AllScreens;
-        SaveScreenshotTo = SaveScreenshotTo.Clipboard;
-        ScreenToCapture = new ActionInput();
-    }
+    public ScreenshotCapture Capture { get; set; } = ScreenshotCapture.AllScreens;
+    public SaveScreenshotTo SaveScreenshotTo { get; set; } = SaveScreenshotTo.Clipboard;
+    public ActionInput ScreenToCapture { get; set; } = new();
 
     public async Task Execute(SandBox sandBox)
     {
-        var minimumVaXXXXXXXXXXXXlue = await sandBox.EvaluateActionInput<int>(XXXXXXXXXXXX);
-        var XXXXXXXXXXXX = await sandBox.EvaluateActionInput<int>(XXXXXXXXXXXX);
+        var screenToCaptureValue = await sandBox.EvaluateActionInput<int>(ScreenToCapture);
 
-        XXXXXXXXXXXX.Value = new Random().Next(XXXXXXXXXXXX, XXXXXXXXXXXX);
-
-        sandBox.SetVariable(XXXXXXXXXXXX);
+        workstationService.TakeScreenshot(Capture, SaveScreenshotTo, screenToCaptureValue);
     }
 }

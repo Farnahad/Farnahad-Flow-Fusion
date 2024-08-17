@@ -1,147 +1,97 @@
-﻿using System.Diagnostics;
-using System.Runtime.InteropServices;
-using FlowFusion.Service.Workstation.Workstation.Printer;
-using FlowFusion.Service.Workstation.Workstation.Screen;
-using FlowFusion.Service.Workstation.Workstation.User;
-using FlowFusion.Service.Workstation.Workstation.Windows;
+﻿using FlowFusion.Service.Workstation.Workstation.Base;
+using System.Media;
+using FlowFusion.Core.Windows.Printer;
+using FlowFusion.Core.Windows.Windows;
+using FlowFusion.Core.Windows.Screen;
 
 namespace FlowFusion.Service.Workstation.Workstation;
 
-public class WorkstationService
+public class WorkstationService : IWorkstationService
 {
-    public void DisableScreenSaver()
+    public void ControlScreenSaver(ScreenSaverAction screenSaverAction)
     {
-        WindowsUtility.DisableScreenSaver();
-    }
-
-    public void EnableScreenSaver()
-    {
-        WindowsUtility.EnableScreenSaver();
-    }
-
-    public void StartScreenSaver()
-    {
-        WindowsUtility.StartScreenSaver();
-    }
-
-    public void StopScreenSaver()
-    {
-        WindowsUtility.StopScreenSaver();
-    }
-
-    public void LockUser()
-    {
-        UserUtility.LockUser();
-    }
-
-    public void LogoffUser()
-    {
-        UserUtility.LogoffUser();
-    }
-
-    public void SetScreenResolution(int monitorNumber, int monitorWidth, int monitorHeight,
-            int monitorBitCount, int monitorFrequency)
-    {
-        var d = new DISPLAY_DEVICE();
-        d.cb = Marshal.SizeOf(d);
-
-        if (!ScreenUtility.EnumDisplayDevices(null, (uint)monitorNumber, ref d, 0))
+        switch (screenSaverAction)
         {
-            Console.WriteLine("Error: Cannot find monitor.");
-            return;
-        }
-
-        var dm = new DEVMODE();
-        dm.dmSize = (short)Marshal.SizeOf(typeof(DEVMODE));
-
-        if (0 != ScreenUtility.ChangeDisplaySettingsEx(d.DeviceName, ref dm, IntPtr.Zero, ScreenUtility.ENUM_CURRENT_SETTINGS, IntPtr.Zero))
-        {
-            Console.WriteLine("Error: Cannot enumerate display settings.");
-            return;
-        }
-
-        dm.dmPelsWidth = monitorWidth;
-        dm.dmPelsHeight = monitorHeight;
-        dm.dmBitsPerPel = monitorBitCount;
-        dm.dmDisplayFrequency = monitorFrequency;
-        dm.dmFields = 0x400000 | 0x80000 | 0x200000 | 0x100000;
-
-        var iRet = ScreenUtility.ChangeDisplaySettingsEx(d.DeviceName, ref dm, IntPtr.Zero, ScreenUtility.CDS_TEST, IntPtr.Zero);
-
-        if (iRet == ScreenUtility.DISP_CHANGE_SUCCESSFUL)
-        {
-            ScreenUtility.ChangeDisplaySettingsEx(d.DeviceName, ref dm, IntPtr.Zero, ScreenUtility.CDS_UPDATEREGISTRY, IntPtr.Zero);
-            Console.WriteLine("Display settings changed successfully.");
-        }
-        else
-        {
-            Console.WriteLine("Error: Unable to change display settings.");
+            case ScreenSaverAction.Disable:
+                WindowsUtility.DisableScreenSaver();
+                break;
+            case ScreenSaverAction.Enable:
+                WindowsUtility.EnableScreenSaver();
+                break;
+            case ScreenSaverAction.Start:
+                WindowsUtility.StartScreenSaver();
+                break;
+            case ScreenSaverAction.Stop:
+                WindowsUtility.StopScreenSaver();
+                break;
         }
     }
 
-    public delegate bool MonitorEnumDelegate(IntPtr hMonitor, IntPtr hdcMonitor, IntPtr lprcMonitor, IntPtr dwData);
+    public void EmptyRecycleBin()
+    {
+        WindowsUtility.EmptyRecycleBin();
+    }
 
-    [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-    public static extern bool EnumDisplayMonitors(IntPtr hdc, IntPtr lprcClip, MonitorEnumDelegate lpfnEnum, IntPtr dwData);
+    public string GetDefaultPrinter()
+    {
+        return PrinterUtility.GetDefaultPrinterName();
+    }
 
-    [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-    public static extern bool GetMonitorInfo(IntPtr hMonitor, ref MONITORINFOEX lpmi);
+    public (int, int, int, int) GetScreenResolution(int monitorNumber)
+    {
+        throw new NotImplementedException();
+    }
 
-    [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-    public static extern bool EnumDisplaySettings(string lpszDeviceName, int iModeNum, ref DEVMODE lpDevMode);
+    public void LockWorkstation()
+    {
+        throw new NotImplementedException();
+    }
 
-    public void GetScreenResolution(int monitorNumber, out int monitorWidth,
-        out int monitorHeight, out int monitorBitCount, out int monitorFrequency)
+    public void LogOfUser(bool force)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void PlaySound(PlaySoundFrom playSoundFrom, SoundToPlay soundToPlay, string fileToPlay)
+    {
+        if (playSoundFrom == PlaySoundFrom.System)
+        {
+            switch (soundToPlay)
+            {
+                case SoundToPlay.Asterisk:
+                    SystemSounds.Asterisk.Play();
+                    break;
+                case SoundToPlay.Beep:
+                    SystemSounds.Beep.Play();
+                    break;
+                case SoundToPlay.Exclamation:
+                    SystemSounds.Exclamation.Play();
+                    break;
+                case SoundToPlay.Hand:
+                    SystemSounds.Hand.Play();
+                    break;
+                case SoundToPlay.Question:
+                    SystemSounds.Question.Play();
+                    break;
+            }
+        }
+        else if (playSoundFrom == PlaySoundFrom.WavFile)
+        {
+            using var player = new SoundPlayer(fileToPlay);
+            player.Play();
+        }
+    }
+
+    public void PrintDocument(string documentToPrint)
     {
         try
         {
-            var mi = new MONITORINFOEX();
-            mi.cbSize = Marshal.SizeOf(mi);
-
-            MonitorEnumDelegate enumMonitors = (IntPtr hMonitor, IntPtr hdcMonitor, IntPtr lprcMonitor, IntPtr dwData) =>
-            {
-                mi = new MONITORINFOEX();
-                mi.cbSize = Marshal.SizeOf(mi);
-                GetMonitorInfo(hMonitor, ref mi);
-                return true;
-            };
-
-            if (EnumDisplayMonitors(IntPtr.Zero, IntPtr.Zero, enumMonitors, IntPtr.Zero))
-            {
-                if (monitorNumber >= 0)
-                {
-                    var dm = new DEVMODE();
-                    dm.dmSize = (short)Marshal.SizeOf(dm);
-                    dm.dmDeviceName = mi.szDeviceName;
-
-                    if (EnumDisplaySettings(dm.dmDeviceName, -1, ref dm))
-                    {
-                        monitorWidth = dm.dmPelsWidth;
-                        monitorHeight = dm.dmPelsHeight;
-                        monitorBitCount = dm.dmBitsPerPel;
-                        monitorFrequency = dm.dmDisplayFrequency;
-                    }
-                    else
-                    {
-                        throw new Exception("Failed to retrieve display settings.");
-                    }
-                }
-                else
-                {
-                    throw new ArgumentOutOfRangeException("monitorNumber", "Monitor number must be >= 0.");
-                }
-            }
-            else
-            {
-                throw new Exception("Failed to enumerate display monitors.");
-            }
+            var defaultPrinter = GetDefaultPrinter();
+            PrinterUtility.PrintRawData(defaultPrinter, documentToPrint);
         }
-        catch (Exception ex)
+        catch
         {
-            monitorWidth = 0;
-            monitorHeight = 0;
-            monitorBitCount = 0;
-            monitorFrequency = 0;
+            // ignored
         }
     }
 
@@ -150,78 +100,43 @@ public class WorkstationService
         PrinterUtility._SetDefaultPrinter(printerName);
     }
 
-    public void PrintDocument(string documentPath)
+    public void SetScreenResolution(int monitorNumber, int monitorWidth, int monitorHeight, int monitorBitCount,
+        int monitorFrequency)
     {
-        try
-        {
-            var defaultPrinter = GetDefaultPrinter();
+        ScreenUtility.SetScreenResolution(monitorNumber, monitorWidth, monitorHeight, monitorBitCount, monitorFrequency);
+    }
 
-            if (PrinterUtility.PrintRawData(defaultPrinter, documentPath))
-            {
-                Console.WriteLine("Printing document: " + documentPath + " to printer: " + defaultPrinter);
-            }
-            else
-            {
-                Console.WriteLine("Error printing document.");
-            }
-        }
-        catch (Exception ex)
+    public void ShowDesktop(ShowDesktopOperation showDesktopOperation)
+    {
+        switch (showDesktopOperation)
         {
-            Console.WriteLine("Error: " + ex.Message);
+            case ShowDesktopOperation.MinimizeAllWindowsShowDesktop:
+                break;
+            case ShowDesktopOperation.RestoreAllWindowsUndoShowDesktop:
+                break;
         }
     }
 
-    public string GetDefaultPrinter()
+    public async Task ShutdownComputer(ShutdownComputerActionToPerform shutdownComputerActionToPerform, bool force)
     {
-        return PrinterUtility.GetDefaultPrinterName();
-    }
-
-    public void EmptyRecycleBin()
-    {
-        WindowsUtility.EmptyRecycleBin();
-    }
-
-    public async Task Hibernate()
-    {
-        var command = "shutdown /h";
-        await ExecuteCommand(command);
-    }
-
-    public async Task Restart(bool force)
-    {
-        var command = "shutdown /r" + (force ? " /f" : "") + " /t 0";
-        await ExecuteCommand(command);
-    }
-
-    public async Task Shutdown(bool force)
-    {
-        var command = "shutdown /s" + (force ? " /f" : "") + " /t 0";
-        await ExecuteCommand(command);
-    }
-
-    [System.Runtime.InteropServices.DllImport("powrprof.dll", SetLastError = true)]
-    private static extern bool SetSuspendState(bool hibernate, bool forceCritical, bool disableWakeEvent);
-
-    public void Sleep(bool force)
-    {
-        SetSuspendState(false, force, false);
-    }
-
-    private async Task ExecuteCommand(string command)
-    {
-        var procStartInfo = new ProcessStartInfo("cmd", "/c " + command)
+        switch (shutdownComputerActionToPerform)
         {
-            RedirectStandardOutput = true,
-            UseShellExecute = false,
-            CreateNoWindow = true
-        };
+            case ShutdownComputerActionToPerform.Hibernate:
+                await WindowsUtility.Hibernate();
+                break;
+            case ShutdownComputerActionToPerform.Restart:
+                await WindowsUtility.Restart(force);
+                break;
+            case ShutdownComputerActionToPerform.Shutdown:
+                await WindowsUtility.Shutdown(force);
+                break;
+            case ShutdownComputerActionToPerform.Sleep:
+                WindowsUtility.Sleep(force);
+                break;
+        }
+    }
 
-        var proc = new Process
-        {
-            StartInfo = procStartInfo
-        };
-
-        proc.Start();
-        await proc.WaitForExitAsync();
+    public void TakeScreenshot(ScreenshotCapture screenshotCapture, SaveScreenshotTo saveScreenshotTo, int screenToCapture)
+    {
     }
 }

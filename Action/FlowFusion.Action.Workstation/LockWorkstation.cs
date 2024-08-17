@@ -4,19 +4,13 @@ using FlowFusion.Service.Workstation.Workstation;
 
 namespace FlowFusion.Action.Workstation;
 
-public class LockWorkstation : IAction //XXXXXXXXXXXX
+public class LockWorkstation(IWorkstationService workstationService) : IAction
 {
-    private readonly WorkstationService _workstationService;
-
     public string Name => "Lock workstation";
-
-    public LockWorkstation()
-    {
-        _workstationService = new WorkstationService();
-    }
 
     public async Task Execute(SandBox sandBox)
     {
-        _workstationService.LockUser();
+        workstationService.LockWorkstation();
+        await Task.CompletedTask;
     }
 }

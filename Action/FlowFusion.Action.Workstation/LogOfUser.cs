@@ -4,24 +4,15 @@ using FlowFusion.Service.Workstation.Workstation;
 
 namespace FlowFusion.Action.Workstation;
 
-public class LogOfUser : IAction //XXXXXXXXXXXX
+public class LogOfUser(IWorkstationService workstationService) : IAction
 {
-    private readonly WorkstationService _workstationService;
-
     public string Name => "Log of user";
 
-    public bool Force { get; set; }
-
-    public LogOfUser()
-    {
-        _workstationService = new WorkstationService();
-
-        Force = false;
-    }
+    public bool Force { get; set; } = false;
 
     public async Task Execute(SandBox sandBox)
     {
-        _workstationService.LogoffUser();
+        workstationService.LogOfUser(Force);
         await Task.CompletedTask;
     }
 }

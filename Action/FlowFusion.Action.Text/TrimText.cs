@@ -1,41 +1,24 @@
 ﻿using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
 using FlowFusion.Action.Main.Variable;
-using FlowFusion.Action.Text.TrimTextBase;
+using FlowFusion.Service.Text.Text;
+using FlowFusion.Service.Text.Text.Base;
 
 namespace FlowFusion.Action.Text;
 
-public class TrimText : IAction //XXXXXXXXXXXX
+public class TrimText(ITextService textService) : IAction
 {
     public string Name => "Trim text";
 
-    public ActionInput TextToTrim { get; set; }
-    public WhatToTrim WhatToTrim { get; set; }
-    public Variable TrimmedText { get; set; }
-
-    public TrimText()
-    {
-        TextToTrim = new ActionInput();
-        WhatToTrim = WhatToTrim.WhitespaceCharactersFromTheBeginningAndEnd;
-        TrimmedText = new Variable();
-    }
+    public ActionInput TextToTrim { get; set; } = new();
+    public WhatToTrim WhatToTrim { get; set; } = WhatToTrim.WhitespaceCharactersFromTheBeginningAndEnd;
+    public Variable TrimmedText { get; set; } = new();
 
     public async Task Execute(SandBox sandBox)
     {
         var textToTrimValue = await sandBox.EvaluateActionInput<string>(TextToTrim);
 
-        switch (WhatToTrim)
-        {
-            case WhatToTrim.WhitespaceCharactersFromTheBeginning:
-                TrimmedText.Value = textToTrimValue.TrimStart();
-                break;
-            case WhatToTrim.WhitespaceCharactersFromTheBeginningAndEnd:
-                TrimmedText.Value = textToTrimValue.Trim();
-                break;
-            case WhatToTrim.WhitespaceCharactersFromTheEnd:
-                TrimmedText.Value = textToTrimValue.TrimEnd();
-                break;
-        }
+        TrimmedText.Value = textService.TrimText(textToTrimValue, WhatToTrim);
 
         sandBox.SetVariable(TrimmedText);
     }

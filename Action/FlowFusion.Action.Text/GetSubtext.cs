@@ -1,30 +1,21 @@
 ﻿using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
 using FlowFusion.Action.Main.Variable;
-using FlowFusion.Action.Text.GetSubtextBase;
+using FlowFusion.Service.Text.Text;
+using FlowFusion.Service.Text.Text.Base;
 
 namespace FlowFusion.Action.Text;
 
-public class GetSubtext : IAction //XXXXXXXXXXXX
+public class GetSubtext(ITextService textService) : IAction
 {
     public string Name => "Get subtext";
 
-    public ActionInput OriginalText { get; set; }
-    public StartIndex StartIndex { get; set; }
-    public ActionInput CharacterPosition { get; set; }
-    public Length Length { get; set; }
-    public ActionInput NumberOfChars { get; set; }
-    public Variable Subtext { get; set; }
-
-    public GetSubtext()
-    {
-        OriginalText = new ActionInput();
-        StartIndex = StartIndex.CharacterPosition;
-        CharacterPosition = new ActionInput();
-        Length = Length.NumberOfChars;
-        NumberOfChars = new ActionInput();
-        Subtext = new Variable();
-    }
+    public ActionInput OriginalText { get; set; } = new();
+    public SubtextStartIndex StartIndex { get; set; } = SubtextStartIndex.CharacterPosition;
+    public ActionInput CharacterPosition { get; set; } = new();
+    public SubtextLength Length { get; set; } = SubtextLength.NumberOfChars;
+    public ActionInput NumberOfChars { get; set; } = new();
+    public Variable Subtext { get; set; } = new();
 
     public async Task Execute(SandBox sandBox)
     {
@@ -32,31 +23,8 @@ public class GetSubtext : IAction //XXXXXXXXXXXX
         var characterPositionValue = await sandBox.EvaluateActionInput<int>(CharacterPosition);
         var numberOfCharsValue = await sandBox.EvaluateActionInput<int>(NumberOfChars);
 
-        int startIndex = 0;
-
-        switch (this.StartIndex)
-        {
-            case StartIndex.CharacterPosition:
-                startIndex = characterPositionValue;
-                break;
-            case StartIndex.StartOfText:
-                startIndex = 0;
-                break;
-        }
-
-        int length = 0;
-
-        switch (this.Length)
-        {
-            case Length.EndOfText:
-                length = originalTextValue.Length - startIndex;
-                break;
-            case Length.NumberOfChars:
-                length = numberOfCharsValue;
-                break;
-        }
-
-        Subtext.Value = originalTextValue.Substring(startIndex, length);
+        Subtext.Value = textService.GetSubtext(originalTextValue, StartIndex,
+            characterPositionValue, Length, numberOfCharsValue);
 
         sandBox.SetVariable(Subtext);
     }

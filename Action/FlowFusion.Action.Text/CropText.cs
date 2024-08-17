@@ -1,25 +1,29 @@
 ﻿using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
 using FlowFusion.Action.Main.Variable;
-using FlowFusion.Action.Text.CropTextBase;
+using FlowFusion.Service.Text.Text;
+using FlowFusion.Service.Text.Text.Base;
 
 namespace FlowFusion.Action.Text;
 
-public class CropText : IAction //XXXXXXXXXXXX
+public class CropText : IAction
 {
+    private readonly ITextService _textService;
+
     public string Name => "Crop text";
 
     public ActionInput OriginalText { get; set; }
-    public Mode Mode { get; set; }
+    public CropMode Mode { get; set; }
     public ActionInput EndFlag { get; set; }
     public bool IgnoreCase { get; set; }
     public Variable CroppedText { get; set; }
     public Variable IsFlagFound { get; set; }
 
-    public CropText()
+    public CropText(ITextService textService)
     {
+        _textService = textService;
         OriginalText = new ActionInput();
-        Mode = Mode.GetTextBeforeTheSpecifiedFlag;
+        Mode = CropMode.GetTextBeforeTheSpecifiedFlag;
         EndFlag = new ActionInput();
         IgnoreCase = false;
         CroppedText = new Variable();
@@ -31,53 +35,7 @@ public class CropText : IAction //XXXXXXXXXXXX
         var originalTextValue = await sandBox.EvaluateActionInput<string>(OriginalText);
         var endFlagValue = await sandBox.EvaluateActionInput<string>(EndFlag);
 
-
-        var comparison = IgnoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
-        int flagIndex = originalTextValue.IndexOf(endFlagValue, comparison);
-
-        var croppedText = originalTextValue;
-        var isFlagFound = false;
-
-        if (flagIndex == -1)
-        {
-            croppedText = originalTextValue;
-            isFlagFound = false;
-        }
-        else
-        {
-            switch (Mode)
-            {
-                case Mode.GetTextAfterTheSpecifiedFlag:
-                    croppedText = originalTextValue.Substring(flagIndex + endFlagValue.Length);
-                    isFlagFound = true;
-                    break;
-                case Mode.GetTextBeforeTheSpecifiedFlag:
-                    croppedText = originalTextValue.Substring(0, flagIndex);
-                    isFlagFound = true;
-                    break;
-                case Mode.GetTextBetweenTheTwoSpecifiedFlags:
-                    if (string.IsNullOrEmpty(endFlagValue) == false)
-                    {
-                        int endFlagIndex = originalTextValue.IndexOf(endFlagValue, flagIndex + endFlagValue.Length, comparison);
-
-                        if (endFlagIndex == -1)
-                        {
-                            croppedText = originalTextValue;
-                            isFlagFound = false;
-                        }
-                        else
-                        {
-                            croppedText = originalTextValue.Substring(flagIndex + endFlagValue.Length,
-                                endFlagIndex - (flagIndex + endFlagValue.Length));
-                            isFlagFound = true;
-                        }
-                    }
-                    break;
-            }
-        }
-
-        CroppedText.Value = croppedText;
-        IsFlagFound.Value = isFlagFound;
+        (CroppedText.Value, IsFlagFound.Value) = _textService.CropText(originalTextValue, Mode, endFlagValue, IgnoreCase);
 
         sandBox.SetVariable(CroppedText);
         sandBox.SetVariable(IsFlagFound);

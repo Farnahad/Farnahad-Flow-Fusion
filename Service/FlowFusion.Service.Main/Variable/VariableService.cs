@@ -1,6 +1,8 @@
-﻿namespace FlowFusion.Service.Main.Variable;
+﻿using FlowFusion.Action.Main.Variable;
 
-class VariableService
+namespace FlowFusion.Service.Main.Variable;
+
+public class VariableService : IVariableService
 {
     public VariableType GetVariableType(string value)
     {
@@ -11,12 +13,12 @@ class VariableService
             return VariableType.Boolean;
         }
 
-        if (int.TryParse(value, out _))
-            return VariableType.Integer;
-
         if (double.TryParse(value, out _))
-            return VariableType.Double;
+            return VariableType.Number;
 
-        return VariableType.String;
+        return VariableType.Text;
+        // return VariableType.CustomObject;
+        // return VariableType.DataTable;
+        // return VariableType.List;
     }
 }

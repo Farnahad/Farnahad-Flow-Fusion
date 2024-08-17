@@ -1,56 +1,28 @@
 ﻿using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
 using FlowFusion.Action.Main.Variable;
-using FlowFusion.Action.Text.JoinTextBase;
+using FlowFusion.Service.Text.Text;
+using FlowFusion.Service.Text.Text.Base;
 
 namespace FlowFusion.Action.Text;
 
-public class JoinText : IAction //XXXXXXXXXXXX
+public class JoinText(ITextService textService) : IAction
 {
     public string Name => "Join text";
 
-    public ActionInput SpecifyTheListToJoin { get; set; }
-    public DelimiterToSeparateListItems DelimiterToSeparateListItems { get; set; }
+    public ActionInput SpecifyTheListToJoin { get; set; } = new();
+    public JoinDelimiterToSeparateListItems DelimiterToSeparateListItems { get; set; } = JoinDelimiterToSeparateListItems.None;
     public StandardDelimiter StandardDelimiter { get; set; }
     public ActionInput CustomDelimiter { get; set; }
-    public Variable JoinedText { get; set; }
-
-    public JoinText()
-    {
-        SpecifyTheListToJoin = new ActionInput();
-        DelimiterToSeparateListItems = DelimiterToSeparateListItems.None;
-        JoinedText = new Variable();
-    }
+    public Variable JoinedText { get; set; } = new();
 
     public async Task Execute(SandBox sandBox)
     {
         var specifyTheListToJoinValue = await sandBox.EvaluateActionInput<List<string>>(SpecifyTheListToJoin);
+        var customDelimiterValue = await sandBox.EvaluateActionInput<string>(CustomDelimiter);
 
-        switch (DelimiterToSeparateListItems)
-        {
-            case DelimiterToSeparateListItems.Custom:
-                var customDelimiterValue = await sandBox.EvaluateActionInput<string>(CustomDelimiter);
-                JoinedText.Value = string.Join(customDelimiterValue, specifyTheListToJoinValue);
-                break;
-            case DelimiterToSeparateListItems.None:
-                JoinedText.Value = string.Join("", specifyTheListToJoinValue);
-                break;
-            case DelimiterToSeparateListItems.Standard:
-
-                switch (StandardDelimiter)
-                {
-                    case StandardDelimiter.NewLine:
-                        JoinedText.Value = string.Join(Environment.NewLine, specifyTheListToJoinValue);
-                        break;
-                    case StandardDelimiter.Space:
-                        JoinedText.Value = string.Join(" ", specifyTheListToJoinValue);
-                        break;
-                    case StandardDelimiter.Tab:
-                        JoinedText.Value = string.Join("\t", specifyTheListToJoinValue);
-                        break;
-                }
-                break;
-        }
+        JoinedText.Value = textService.JoinText(specifyTheListToJoinValue, DelimiterToSeparateListItems,
+            StandardDelimiter, customDelimiterValue);
 
         sandBox.SetVariable(JoinedText);
     }

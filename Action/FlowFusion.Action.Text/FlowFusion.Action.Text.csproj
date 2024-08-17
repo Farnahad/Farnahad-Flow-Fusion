@@ -7,6 +7,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\Service\FlowFusion.Service.Core\FlowFusion.Service.Core.csproj" />
+		<ProjectReference Include="..\..\Service\FlowFusion.Service.Text\FlowFusion.Service.Text.csproj" />
 		<ProjectReference Include="..\FlowFusion.Action.Main\FlowFusion.Action.Main.csproj" />
 	</ItemGroup>
 </Project>

@@ -4,25 +4,16 @@ using FlowFusion.Service.Workstation.Workstation;
 
 namespace FlowFusion.Action.Workstation;
 
-public class SetDefaultPrinter : IAction //XXXXXXXXXXXX
+public class SetDefaultPrinter(IWorkstationService workstationService) : IAction
 {
-    private readonly WorkstationService _workstationService;
-
     public string Name => "Set default printer";
 
-    public ActionInput PrinterName { get; set; }
-
-    public SetDefaultPrinter()
-    {
-        _workstationService = new WorkstationService();
-
-        PrinterName = new ActionInput();
-    }
+    public ActionInput PrinterName { get; set; } = new();
 
     public async Task Execute(SandBox sandBox)
     {
         var printerNameValue = await sandBox.EvaluateActionInput<string>(PrinterName);
 
-        _workstationService.SetDefaultPrinter(printerNameValue);
+        workstationService.SetDefaultPrinter(printerNameValue);
     }
 }

@@ -8,9 +8,11 @@
 
 	<ItemGroup>
 		<PackageReference Include="Prism.Wpf" Version="8.1.97" />
+		<PackageReference Include="System.Drawing.Common" Version="8.0.7" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\Core\FlowFusion.Core.Main\FlowFusion.Core.Main.csproj" />
+	  <ProjectReference Include="..\..\Core\FlowFusion.Core.Windows\FlowFusion.Core.Windows.csproj" />
 	</ItemGroup>
 </Project>

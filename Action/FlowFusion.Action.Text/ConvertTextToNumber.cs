@@ -1,37 +1,22 @@
 ﻿using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
 using FlowFusion.Action.Main.Variable;
+using FlowFusion.Service.Text.Text;
 
 namespace FlowFusion.Action.Text;
 
-public class ConvertTextToNumber : IAction //XXXXXXXXXXXX
+public class ConvertTextToNumber(ITextService textService) : IAction
 {
-    private readonly VariableService _variableService;
-
     public string Name => "Convert text to number";
 
-    public ActionInput TextToConvert { get; set; }
-    public Variable TextAsNumber { get; set; }
-
-    public ConvertTextToNumber()
-    {
-        _variableService = new VariableService();
-
-        TextToConvert = new ActionInput();
-        TextAsNumber = new Variable();
-    }
+    public ActionInput TextToConvert { get; set; } = new();
+    public Variable TextAsNumber { get; set; } = new();
 
     public async Task Execute(SandBox sandBox)
     {
         var textToConvertValue = await sandBox.EvaluateActionInput<string>(TextToConvert);
 
-        var variableType = _variableService.GetVariableType(textToConvertValue);
-        TextAsNumber.Value = variableType switch
-        {
-            VariableType.Double => double.Parse(textToConvertValue),
-            VariableType.Integer => int.Parse(textToConvertValue),
-            _ => TextAsNumber.Value
-        };
+        TextAsNumber.Value = textService.ConvertTextToNumber(textToConvertValue);
 
         sandBox.SetVariable(TextAsNumber);
     }

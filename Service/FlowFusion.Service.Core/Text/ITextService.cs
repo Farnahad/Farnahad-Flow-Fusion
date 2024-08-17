@@ -1,9 +1,10 @@
-﻿namespace FlowFusion.Service.Core.Text
+﻿using FlowFusion.Core.Main.Mvvm;
+
+namespace FlowFusion.Service.Core.Text;
+
+public interface ITextService : IService
 {
-    public interface ITextService : IService
-    {
-        string GetEditTitle(string modelName, string modelProperty);
-        string GetAddTitle(string modelName);
-        string GetListTitle(string modelName);
-    }
+    string GetEditTitle(string modelName, string modelProperty);
+    string GetAddTitle(string modelName);
+    string GetListTitle(string modelName);
 }

@@ -4,28 +4,15 @@ using FlowFusion.Service.Workstation.Workstation;
 
 namespace FlowFusion.Action.Workstation;
 
-public class SetScreenResolution : IAction //XXXXXXXXXXXX
+public class SetScreenResolution(IWorkstationService workstationService) : IAction
 {
-    private readonly WorkstationService _workstationService;
-
     public string Name => "Set screen resolution";
 
-    public ActionInput MonitorNumber { get; set; }
-    public ActionInput MonitorWidth { get; set; }
-    public ActionInput MonitorHeight { get; set; }
-    public ActionInput MonitorBitCount { get; set; }
-    public ActionInput MonitorFrequency { get; set; }
-
-    public SetScreenResolution()
-    {
-        _workstationService = new WorkstationService();
-
-        MonitorNumber = new ActionInput();
-        MonitorWidth = new ActionInput();
-        MonitorHeight = new ActionInput();
-        MonitorBitCount = new ActionInput();
-        MonitorFrequency = new ActionInput();
-    }
+    public ActionInput MonitorNumber { get; set; } = new();
+    public ActionInput MonitorWidth { get; set; } = new();
+    public ActionInput MonitorHeight { get; set; } = new();
+    public ActionInput MonitorBitCount { get; set; } = new();
+    public ActionInput MonitorFrequency { get; set; } = new();
 
     public async Task Execute(SandBox sandBox)
     {
@@ -35,7 +22,7 @@ public class SetScreenResolution : IAction //XXXXXXXXXXXX
         var monitorBitCountValue = await sandBox.EvaluateActionInput<int>(MonitorBitCount);
         var monitorFrequencyValue = await sandBox.EvaluateActionInput<int>(MonitorFrequency);
 
-        _workstationService.SetScreenResolution(monitorNumberValue,
+        workstationService.SetScreenResolution(monitorNumberValue,
             monitorWidthValue, monitorHeightValue, monitorBitCountValue, monitorFrequencyValue);
     }
 }

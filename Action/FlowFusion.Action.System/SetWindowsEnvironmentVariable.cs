@@ -1,6 +1,6 @@
 ﻿using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
-using Type = FlowFusion.Action.System.SetWindowsEnvironmentVariableBase.Type;
+using FlowFusion.Service.System.System.Base;
 
 namespace FlowFusion.Action.System;
 
@@ -10,7 +10,7 @@ public class SetWindowsEnvironmentVariable : IAction //XXXXXXXXXXXX
 
     public ActionInput EnvironmentVariableName { get; set; }
     public ActionInput NewEnvironmentVariableValue { get; set; }
-    public SetWindowsEnvironmentVariableBase.Type Type { get; set; }
+    public WindowsEnvironmentVariableType Type { get; set; }
 
     public SetWindowsEnvironmentVariable()
     {

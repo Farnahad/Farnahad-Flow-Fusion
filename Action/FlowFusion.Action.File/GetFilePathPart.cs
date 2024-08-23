@@ -1,41 +1,33 @@
 ﻿using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
 using FlowFusion.Action.Main.Variable;
+using FlowFusion.Service.File.File;
 
 namespace FlowFusion.Action.File;
 
-public class GetFilePathPart : IAction //XXXXXXXXXXXX
+public class GetFilePathPart(IFileService fileService) : IAction
 {
     public string Name => "Get file path part";
 
-    public ActionInput FilePath { get; set; }
-    public Variable RootPath { get; set; }
-    public Variable Directory { get; set; }
-    public Variable FileName { get; set; }
-    public Variable FileNameNoExtension { get; set; }
-    public Variable FileExtension { get; set; }
-
-    public GetFilePathPart()
-    {
-        FilePath = new ActionInput();
-        RootPath = new Variable();
-        Directory = new Variable();
-        FileName = new Variable();
-        FileNameNoExtension = new Variable();
-        FileExtension = new Variable();
-    }
+    public ActionInput FilePath { get; set; } = new();
+    public Variable RootPath { get; set; } = new();
+    public Variable Directory { get; set; } = new();
+    public Variable FileName { get; set; } = new();
+    public Variable FileNameNoExtension { get; set; } = new();
+    public Variable FileExtension { get; set; } = new();
 
     public async Task Execute(SandBox sandBox)
     {
         var filePathValue = await sandBox.EvaluateActionInput<string>(FilePath);
 
-        var fileInfo = new FileInfo(filePathValue);
+        fileService.GetFilePathPart(filePathValue, out var rootPath, out var directory,
+            out var fileName, out var fileNameNoExtension, out var fileExtension);
 
-        RootPath.Value = fileInfo.FullName;
-        Directory.Value = fileInfo.Directory?.FullName;
-        FileName.Value = fileInfo.Name;
-        FileNameNoExtension.Value = fileInfo.Name.Replace(fileInfo.Extension, "");
-        FileExtension.Value = fileInfo.Extension;
+        RootPath.Value = rootPath;
+        Directory.Value = directory;
+        FileName.Value = fileName;
+        FileNameNoExtension.Value = fileNameNoExtension;
+        FileExtension.Value = fileExtension;
 
         sandBox.SetVariable(RootPath);
         sandBox.SetVariable(Directory);

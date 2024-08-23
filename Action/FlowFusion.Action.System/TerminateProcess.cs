@@ -1,11 +1,11 @@
 ﻿using System.Diagnostics;
 using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
-using FlowFusion.Action.System.TerminateProcessBase;
+using FlowFusion.Service.System.System.Base;
 
 namespace FlowFusion.Action.System;
 
-public class TerminateProcess : IAction //XXXXXXXXXXXX
+public class TerminateProcess : IAction
 {
     public string Name => "Terminate process";
 

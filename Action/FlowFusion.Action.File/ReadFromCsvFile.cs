@@ -1,51 +1,24 @@
-﻿using FlowFusion.Action.File.ReadFromCsvFileBase;
-using FlowFusion.Action.Main;
+﻿using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
 using FlowFusion.Action.Main.Variable;
+using FlowFusion.Service.File.File;
+using FlowFusion.Service.File.File.Base;
 
 namespace FlowFusion.Action.File;
 
-public class ReadFromCsvFile : IAction //XXXXXXXXXXXX
+public class ReadFromCsvFile(IFileService fileService) : IAction
 {
     public string Name => "Read from CSV file";
 
-    public ActionInput FilePath { get; set; }
-    public Encoding Encoding { get; set; }
-    public Variable CsvTable { get; set; }
-
-    public ReadFromCsvFile()
-    {
-        FilePath = new ActionInput();
-        Encoding = Encoding.Utf8;
-        CsvTable = new Variable();
-    }
+    public ActionInput FilePath { get; set; } = new();
+    public ReadEncoding Encoding { get; set; } = ReadEncoding.Utf8;
+    public Variable CsvTable { get; set; } = new();
 
     public async Task Execute(SandBox sandBox)
     {
         var filePathValue = await sandBox.EvaluateActionInput<string>(FilePath);
 
-        var csvLines = new List<string[]>();
-
-        var realEncoding = Encoding switch
-        {
-            Encoding.Ascii => global::System.Text.Encoding.ASCII,
-            Encoding.SystemDefault => global::System.Text.Encoding.Default,
-            Encoding.Unicode => global::System.Text.Encoding.Unicode,
-            Encoding.UnicodeBigEndian => global::System.Text.Encoding.BigEndianUnicode,
-            Encoding.Utf8 => global::System.Text.Encoding.UTF8,
-            _ => global::System.Text.Encoding.Unicode
-        };
-
-        await using (var stream = new global::System.IO.FileStream(filePathValue, FileMode.Open, FileAccess.Read))
-        using (var reader = new StreamReader(stream, realEncoding))
-        {
-            while (await reader.ReadLineAsync() is { } line)
-            {
-                Console.WriteLine(line);
-            }
-        }
-
-        CsvTable.Value = csvLines;
+        CsvTable.Value = await fileService.ReadFromCsvFile(filePathValue, Encoding);
 
         sandBox.SetVariable(CsvTable);
     }

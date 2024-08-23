@@ -4,24 +4,16 @@ using FlowFusion.Service.WindowsServices.WindowsService;
 
 namespace FlowFusion.Action.WindowsServices;
 
-public class StopService : IAction //XXXXXXXXXXXX
+public class StopService(IWindowsServiceService windowsServiceService) : IAction
 {
-    private readonly WindowsServiceService _windowsServiceService;
-
     public string Name => "Stop service";
 
-    public ActionInput ServiceToStop { get; set; }
-
-    public StopService()
-    {
-        _windowsServiceService = new WindowsServiceService();
-
-        ServiceToStop = new ActionInput();
-    }
+    public ActionInput ServiceToStop { get; set; } = new();
 
     public async Task Execute(SandBox sandBox)
     {
         var serviceToStopValue = await sandBox.EvaluateActionInput<string>(ServiceToStop);
-        _windowsServiceService.Stop(serviceToStopValue);
+
+        windowsServiceService.StopService(serviceToStopValue);
     }
 }

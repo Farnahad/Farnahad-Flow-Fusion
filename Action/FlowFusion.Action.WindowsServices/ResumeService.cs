@@ -4,24 +4,16 @@ using FlowFusion.Service.WindowsServices.WindowsService;
 
 namespace FlowFusion.Action.WindowsServices;
 
-public class ResumeService : IAction //XXXXXXXXXXXX
+public class ResumeService(IWindowsServiceService windowsServiceService) : IAction
 {
-    private readonly WindowsServiceService _windowsServiceService;
-
     public string Name => "Resume service";
 
-    public ActionInput ServiceToResume { get; set; }
-
-    public ResumeService()
-    {
-        _windowsServiceService = new WindowsServiceService();
-
-        ServiceToResume = new ActionInput();
-    }
+    public ActionInput ServiceToResume { get; set; } = new();
 
     public async Task Execute(SandBox sandBox)
     {
         var serviceToResume = await sandBox.EvaluateActionInput<string>(ServiceToResume);
-        _windowsServiceService.Resume(serviceToResume);
+
+        windowsServiceService.ResumeService(serviceToResume);
     }
 }

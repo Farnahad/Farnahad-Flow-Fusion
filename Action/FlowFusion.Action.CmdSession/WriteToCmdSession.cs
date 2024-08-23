@@ -1,35 +1,23 @@
 ﻿using System.Diagnostics;
 using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
+using FlowFusion.Service.CmdSession.CmdSession;
 
 namespace FlowFusion.Action.CmdSession;
 
-public class WriteToCmdSession : IAction //XXXXXXXXXXXX
+public class WriteToCmdSession(ICmdSessionService cmdSessionService) : IAction
 {
     public string Name => "Write to CMD session";
 
-    public ActionInput CmdSession { get; set; }
-    public ActionInput Command { get; set; }
-    public bool SendEnterAfterCommand { get; set; }
-
-    public WriteToCmdSession()
-    {
-        CmdSession = new ActionInput();
-        Command = new ActionInput();
-        SendEnterAfterCommand = true;
-    }
+    public ActionInput CmdSession { get; set; } = new();
+    public ActionInput Command { get; set; } = new();
+    public bool SendEnterAfterCommand { get; set; } = true;
 
     public async Task Execute(SandBox sandBox)
     {
         var cmdSessionValue = await sandBox.EvaluateActionInput<Process>(CmdSession);
         var commandValue = await sandBox.EvaluateActionInput<string>(Command);
 
-        await cmdSessionValue.StandardInput.WriteLineAsync(commandValue);
-
-        if (SendEnterAfterCommand)
-            await cmdSessionValue.StandardInput.WriteLineAsync();
-
-        await cmdSessionValue.StandardInput.WriteLineAsync("exit");
-        await cmdSessionValue.WaitForExitAsync();
+        await cmdSessionService.WriteToCmdSession(cmdSessionValue, commandValue, SendEnterAfterCommand);
     }
 }

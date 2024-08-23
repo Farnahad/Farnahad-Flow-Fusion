@@ -4,24 +4,16 @@ using FlowFusion.Service.WindowsServices.WindowsService;
 
 namespace FlowFusion.Action.WindowsServices;
 
-public class StartService : IAction //XXXXXXXXXXXX
+public class StartService(IWindowsServiceService windowsServiceService) : IAction
 {
-    private readonly WindowsServiceService _windowsServiceService;
-
     public string Name => "Start service";
 
-    public ActionInput ServiceToStart { get; set; }
-
-    public StartService()
-    {
-        _windowsServiceService = new WindowsServiceService();
-
-        ServiceToStart = new ActionInput();
-    }
+    public ActionInput ServiceToStart { get; set; } = new();
 
     public async Task Execute(SandBox sandBox)
     {
         var serviceToStart = await sandBox.EvaluateActionInput<string>(ServiceToStart);
-        _windowsServiceService.Start(serviceToStart);
+
+        windowsServiceService.StartService(serviceToStart);
     }
 }

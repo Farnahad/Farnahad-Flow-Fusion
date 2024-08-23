@@ -1,20 +1,20 @@
 ﻿using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
-using Type = FlowFusion.Action.System.DeleteWindowsEnvironmentVariableBase.Type;
+using FlowFusion.Service.System.System.Base;
 
 namespace FlowFusion.Action.System;
 
-public class DeleteWindowsEnvironmentVariable : IAction //XXXXXXXXXXXX
+public class DeleteWindowsEnvironmentVariable : IAction
 {
     public string Name => "Delete Windows environment variable";
 
     public ActionInput EnvironmentVariableName { get; set; }
-    public DeleteWindowsEnvironmentVariableBase.Type Type { get; set; }
+    public WindowsEnvironmentVariableType Type { get; set; }
 
     public DeleteWindowsEnvironmentVariable()
     {
         EnvironmentVariableName = new ActionInput();
-        Type = DeleteWindowsEnvironmentVariableBase.Type.User;
+        Type = WindowsEnvironmentVariableType.User;
     }
 
     public async Task Execute(SandBox sandBox)
@@ -23,10 +23,10 @@ public class DeleteWindowsEnvironmentVariable : IAction //XXXXXXXXXXXX
 
         switch (Type)
         {
-            case Type.System:
+            case WindowsEnvironmentVariableType.System:
                 Environment.SetEnvironmentVariable(environmentVariableNameValue, null, EnvironmentVariableTarget.Machine);
                 break;
-            case Type.User:
+            case WindowsEnvironmentVariableType.User:
                 Environment.SetEnvironmentVariable(environmentVariableNameValue, null, EnvironmentVariableTarget.User);
                 break;
         }

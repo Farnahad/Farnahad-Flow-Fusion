@@ -1,31 +1,21 @@
-﻿using System.IO.Compression;
+﻿using FlowFusion.Action.Compression.ZipFilesBase;
 using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
 using FlowFusion.Action.Main.Variable;
-using CompressionLevel = FlowFusion.Action.Compression.ZipFilesBase.CompressionLevel;
+using FlowFusion.Service.Compression.Compression;
 
 namespace FlowFusion.Action.Compression;
 
-public class ZipFiles : IAction //XXXXXXXXXXXX
+public class ZipFiles(ICompressionService compressionService) : IAction
 {
     public string Name => "Zip files";
 
-    public ActionInput ArchivePath { get; set; }
-    public ActionInput FilesToZip { get; set; }
-    public CompressionLevel CompressionLevel { get; set; }
-    public ActionInput Password { get; set; }
-    public ActionInput ArchiveComment { get; set; }
-    public Variable ZipFile { get; set; }
-
-    public ZipFiles()
-    {
-        ArchivePath = new ActionInput();
-        FilesToZip = new ActionInput();
-        CompressionLevel = CompressionLevel.BestBalanceOfSpeedAndCompression;
-        Password = new ActionInput();
-        ArchiveComment = new ActionInput();
-        ZipFile = new Variable();
-    }
+    public ActionInput ArchivePath { get; set; } = new();
+    public ActionInput FilesToZip { get; set; } = new();
+    public CompressionLevel CompressionLevel { get; set; } = CompressionLevel.BestBalanceOfSpeedAndCompression;
+    public ActionInput Password { get; set; } = new();
+    public ActionInput ArchiveComment { get; set; } = new();
+    public Variable ZipFile { get; set; } = new();
 
     public async Task Execute(SandBox sandBox)
     {
@@ -34,41 +24,8 @@ public class ZipFiles : IAction //XXXXXXXXXXXX
         var passwordValue = await sandBox.EvaluateActionInput<string>(Password);
         var archiveCommentValue = await sandBox.EvaluateActionInput<string>(ArchiveComment);
 
-        using (var archive = global::System.IO.Compression.ZipFile.Open(archivePathValue, ZipArchiveMode.Create))
-        {
-            archive.Comment = archiveCommentValue;
-            // archive.Password = passwordValue;
-
-            foreach (var fileToZip in filesToZipValue)
-            {
-                if (global::System.IO.File.Exists(fileToZip))
-                {
-                    var entryName = Path.GetFileName(fileToZip);
-
-                    var targetCompressionLevel = global::System.IO.Compression.CompressionLevel.Optimal;
-
-                    switch (CompressionLevel)
-                    {
-                        case CompressionLevel.BestBalanceOfSpeedAndCompression:
-                            targetCompressionLevel = global::System.IO.Compression.CompressionLevel.Optimal;
-                            break;
-                        case CompressionLevel.BestCompression:
-                            targetCompressionLevel = global::System.IO.Compression.CompressionLevel.SmallestSize;
-                            break;
-                        case CompressionLevel.BestSpeed:
-                            targetCompressionLevel = global::System.IO.Compression.CompressionLevel.Fastest;
-                            break;
-                        case CompressionLevel.None:
-                            targetCompressionLevel = global::System.IO.Compression.CompressionLevel.NoCompression;
-                            break;
-                    }
-
-                    var zipEntry = archive.CreateEntryFromFile(fileToZip, entryName, targetCompressionLevel);
-                }
-            }
-        }
-
-        ZipFile.Value = archivePathValue;
+        ZipFile.Value = compressionService.ZipFiles(archivePathValue, filesToZipValue,
+            CompressionLevel, passwordValue, archiveCommentValue);
 
         sandBox.SetVariable(ZipFile);
     }

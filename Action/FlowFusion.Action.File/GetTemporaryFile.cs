@@ -1,26 +1,19 @@
 ﻿using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
 using FlowFusion.Action.Main.Variable;
+using FlowFusion.Service.File.File;
 
 namespace FlowFusion.Action.File;
 
-public class GetTemporaryFile : IAction //XXXXXXXXXXXX
+public class GetTemporaryFile(IFileService fileService) : IAction
 {
     public string Name => "Get temporary file";
 
-    public Variable TempFile { get; set; }
-
-    public GetTemporaryFile()
-    {
-        TempFile = new Variable();
-    }
+    public Variable TempFile { get; set; } = new();
 
     public async Task Execute(SandBox sandBox)
     {
-        var tempFilePath = Path.GetTempFileName();
-        global::System.IO.File.Create(tempFilePath).Close();
-
-        TempFile.Value = tempFilePath;
+        TempFile.Value = fileService.GetTemporaryFile();
 
         sandBox.SetVariable(TempFile);
         await Task.CompletedTask;

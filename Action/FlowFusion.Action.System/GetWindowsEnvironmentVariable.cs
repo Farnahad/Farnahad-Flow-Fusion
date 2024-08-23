@@ -1,11 +1,11 @@
 ﻿using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
 using FlowFusion.Action.Main.Variable;
-using FlowFusion.Action.System.GetWindowsEnvironmentVariableBase;
+using FlowFusion.Service.System.System.Base;
 
 namespace FlowFusion.Action.System;
 
-public class GetWindowsEnvironmentVariable : IAction //XXXXXXXXXXXX
+public class GetWindowsEnvironmentVariable : IAction
 {
     public string Name => "Get Windows environment variable";
 

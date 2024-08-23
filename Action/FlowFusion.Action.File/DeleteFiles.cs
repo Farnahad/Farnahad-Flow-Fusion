@@ -1,26 +1,19 @@
 ﻿using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
+using FlowFusion.Service.File.File;
 
 namespace FlowFusion.Action.File;
 
-public class DeleteFiles : IAction //XXXXXXXXXXXX
+public class DeleteFiles(IFileService fileService) : IAction
 {
     public string Name => "Delete file(s)";
 
-    public ActionInput FilesToDelete { get; set; }
-
-    public DeleteFiles()
-    {
-        FilesToDelete = new ActionInput();
-    }
+    public ActionInput FilesToDelete { get; set; } = new();
 
     public async Task Execute(SandBox sandBox)
     {
         var filesToDeleteValue = await sandBox.EvaluateActionInput<List<string>>(FilesToDelete);
 
-        foreach (var fileToDelete in filesToDeleteValue)
-        {
-            global::System.IO.File.Delete(fileToDelete);
-        }
+        fileService.DeleteFiles(filesToDeleteValue);
     }
 }

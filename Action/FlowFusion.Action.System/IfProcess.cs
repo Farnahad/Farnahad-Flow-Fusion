@@ -5,14 +5,16 @@ using FlowFusion.Service.WindowsServices.WindowsService;
 
 namespace FlowFusion.Action.System;
 
-public class IfProcess : IAction //XXXXXXXXXXXX
+public class IfProcess : IAction
 {
     private readonly WindowsServiceService _windowsServiceService;
 
     public string Name => "If process";
 
-    public IfProcessBase.IfProcess _IfProcess { get; set; }
+    // ReSharper disable once InconsistentNaming
+    public Service.System.System.Base.IfProcess _IfProcess { get; set; }
     public ActionInput ProcessName { get; set; }
+    // ReSharper disable once CollectionNeverUpdated.Global
     public List<IAction> Actions { get; set; }
 
     public IfProcess()

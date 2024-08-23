@@ -2,18 +2,18 @@
 using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
 using FlowFusion.Action.Main.Variable;
-using FlowFusion.Action.System.RunApplicationBase;
+using FlowFusion.Service.System.System.Base;
 
 namespace FlowFusion.Action.System;
 
-public class RunApplication : IAction //XXXXXXXXXXXX
+public class RunApplication : IAction
 {
     public string Name => "Run application";
 
     public ActionInput ApplicationPath { get; set; }
     public ActionInput CommandLineArguments { get; set; }
     public ActionInput WorkingFolder { get; set; }
-    public RunApplicationBase.WindowStyle WindowStyle { get; set; }
+    public WindowStyle WindowStyle { get; set; }
     public AfterApplicationLunch AfterApplicationLunch { get; set; }
     public ActionInput Timeout { get; set; }
     public Variable AppProcessId { get; set; }

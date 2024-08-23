@@ -15,4 +15,8 @@
 		<ProjectReference Include="..\..\Action\FlowFusion.Action.Main\FlowFusion.Action.Main.csproj" />
 		<ProjectReference Include="..\FlowFusion.Service.Main\FlowFusion.Service.Main.csproj" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="XXXXXXXXXXXX\XXXXXXXXXXXX - Copy\" />
+	</ItemGroup>
 </Project>

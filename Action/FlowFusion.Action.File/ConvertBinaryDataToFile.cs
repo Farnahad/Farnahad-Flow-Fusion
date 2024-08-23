@@ -1,34 +1,22 @@
 ﻿using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
+using FlowFusion.Service.File.File;
 
 namespace FlowFusion.Action.File;
 
-public class ConvertBinaryDataToFile : IAction //XXXXXXXXXXXX
+public class ConvertBinaryDataToFile(IFileService fileService) : IAction
 {
     public string Name => "Convert binary data to file";
 
-    public ActionInput BinaryData { get; set; }
-    public ActionInput FilePath { get; set; }
-    public ConvertBinaryDataToFileBase.IfFileExists IfFileExists { get; set; }
-
-    public ConvertBinaryDataToFile()
-    {
-        BinaryData = new ActionInput();
-        FilePath = new ActionInput();
-        IfFileExists = ConvertBinaryDataToFileBase.IfFileExists.DoNothing;
-    }
+    public ActionInput BinaryData { get; set; } = new();
+    public ActionInput FilePath { get; set; } = new();
+    public Service.File.File.Base.IfFileExists IfFileExists { get; set; } = Service.File.File.Base.IfFileExists.DoNothing;
 
     public async Task Execute(SandBox sandBox)
     {
         var binaryDataValue = await sandBox.EvaluateActionInput<byte[]>(BinaryData);
         var filePathValue = await sandBox.EvaluateActionInput<string>(FilePath);
 
-        var fileExists = global::System.IO.File.Exists(filePathValue);
-
-        if ((fileExists && IfFileExists == ConvertBinaryDataToFileBase.IfFileExists.Overwrite) || fileExists == false)
-        {
-            // ReSharper disable once AssignNullToNotNullAttribute
-            await global::System.IO.File.WriteAllBytesAsync(filePathValue, binaryDataValue);
-        }
+        await fileService.ConvertBinaryDataToFile(binaryDataValue, filePathValue, IfFileExists);
     }
 }

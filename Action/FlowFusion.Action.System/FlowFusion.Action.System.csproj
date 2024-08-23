@@ -7,10 +7,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference
-			Include="..\..\Service\FlowFusion.Service.Scripting\FlowFusion.Service.Scripting.csproj" />
-		<ProjectReference
-			Include="..\..\Service\FlowFusion.Service.WindowsServices\FlowFusion.Service.WindowsServices.csproj" />
+		<ProjectReference Include="..\..\Service\FlowFusion.Service.Scripting\FlowFusion.Service.Scripting.csproj" />
+		<ProjectReference Include="..\..\Service\FlowFusion.Service.System\FlowFusion.Service.System.csproj" />
+		<ProjectReference Include="..\..\Service\FlowFusion.Service.WindowsServices\FlowFusion.Service.WindowsServices.csproj" />
 		<ProjectReference Include="..\FlowFusion.Action.Main\FlowFusion.Action.Main.csproj" />
 	</ItemGroup>
 </Project>

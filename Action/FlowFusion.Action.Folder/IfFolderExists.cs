@@ -1,32 +1,25 @@
-﻿using FlowFusion.Action.Folder.IfFolderExistsBase;
-using FlowFusion.Action.Main;
+﻿using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
+using FlowFusion.Service.Folder.Folder;
+using FlowFusion.Service.Folder.Folder.Base;
 
 namespace FlowFusion.Action.Folder;
 
-public class IfFolderExists : IAction //XXXXXXXXXXXX
+public class IfFolderExists(IFolderService folderService) : IAction
 {
     public string Name => "If folder exists";
 
-    public IfFolder IfFolder { get; set; }
-    public ActionInput FolderPath { get; set; }
-    public List<IAction> Actions { get; set; }
+    public IfFolder IfFolder { get; set; } = IfFolder.Exists;
+    public ActionInput FolderPath { get; set; } = new();
 
-    public IfFolderExists()
-    {
-        IfFolder = IfFolder.Exists;
-        FolderPath = new ActionInput();
-        Actions = new List<IAction>();
-    }
+    // ReSharper disable once CollectionNeverUpdated.Global
+    public List<IAction> Actions { get; set; } = new();
 
     public async Task Execute(SandBox sandBox)
     {
         var folderPathValue = await sandBox.EvaluateActionInput<string>(FolderPath);
 
-        var directoryInfo = new DirectoryInfo(folderPathValue);
-
-        if ((directoryInfo.Exists && IfFolder == IfFolder.Exists) ||
-            (directoryInfo.Exists == false && IfFolder == IfFolder.DosNotExist))
+        if (folderService.IfFolderExists(IfFolder, folderPathValue))
         {
             foreach (var action in Actions)
                 await action.Execute(sandBox);

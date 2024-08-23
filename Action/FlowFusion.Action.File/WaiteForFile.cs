@@ -1,62 +1,24 @@
-﻿using FlowFusion.Action.File.WaiteForFileBase;
-using FlowFusion.Action.Main;
+﻿using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
+using FlowFusion.Service.File.File;
+using FlowFusion.Service.File.File.Base;
 
 namespace FlowFusion.Action.File;
 
-public class WaiteForFile : IAction //XXXXXXXXXXXX
+public class WaiteForFile(IFileService fileService) : IAction
 {
     public string Name => "Waite for file";
 
-    public WaiteForFileToBe WaiteForFileToBe { get; set; }
-    public ActionInput FilePath { get; set; }
-    public bool FailWithTimeoutError { get; set; }
-    public ActionInput Duration { get; set; }
-
-    public WaiteForFile()
-    {
-        WaiteForFileToBe = WaiteForFileToBe.Created;
-        FilePath = new ActionInput();
-        FailWithTimeoutError = false;
-        Duration = new ActionInput();
-    }
+    public WaiteForFileToBe WaiteForFileToBe { get; set; } = WaiteForFileToBe.Created;
+    public ActionInput FilePath { get; set; } = new();
+    public bool FailWithTimeoutError { get; set; } = false;
+    public ActionInput Duration { get; set; } = new();
 
     public async Task Execute(SandBox sandBox)
     {
         var filePathValue = await sandBox.EvaluateActionInput<string>(FilePath);
         var durationValue = await sandBox.EvaluateActionInput<int>(Duration);
 
-        var timeout = TimeSpan.FromMilliseconds(durationValue);
-
-        using var cancellationTokenSource = new CancellationTokenSource(timeout);
-        var fileWatchTask = WaiteForFileToBe == WaiteForFileToBe.Created ?
-            WaitForFileCreationAsync(filePathValue, cancellationTokenSource.Token) :
-            WaitForFileDeletionAsync(filePathValue, cancellationTokenSource.Token);
-
-        await fileWatchTask;
-    }
-
-    private Task WaitForFileCreationAsync(string filePath, CancellationToken token)
-    {
-        return Task.Run(async () =>
-        {
-            while (!global::System.IO.File.Exists(filePath))
-            {
-                token.ThrowIfCancellationRequested();
-                await Task.Delay(100, token);
-            }
-        }, token);
-    }
-
-    private Task WaitForFileDeletionAsync(string filePath, CancellationToken token)
-    {
-        return Task.Run(async () =>
-        {
-            while (global::System.IO.File.Exists(filePath))
-            {
-                token.ThrowIfCancellationRequested();
-                await Task.Delay(100, token);
-            }
-        }, token);
+        await fileService.WaiteForFile(WaiteForFileToBe, filePathValue, FailWithTimeoutError, durationValue);
     }
 }

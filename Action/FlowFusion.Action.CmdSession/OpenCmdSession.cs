@@ -1,59 +1,23 @@
-﻿using System.Diagnostics;
-using FlowFusion.Action.Main;
+﻿using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
 using FlowFusion.Action.Main.Variable;
+using FlowFusion.Service.CmdSession.CmdSession;
 
 namespace FlowFusion.Action.CmdSession;
 
-public class OpenCmdSession : IAction //XXXXXXXXXXXX
+public class OpenCmdSession(ICmdSessionService cmdSessionService) : IAction
 {
     public string Name => "Open CMD session";
 
-    public ActionInput WorkingDirectory { get; set; }
-    public bool ChangeCodePage { get; set; }
-    public Variable CmdSession { get; set; }
-
-    public OpenCmdSession()
-    {
-        WorkingDirectory = new ActionInput();
-        ChangeCodePage = false;
-        CmdSession = new Variable();
-    }
+    public ActionInput WorkingDirectory { get; set; } = new();
+    public bool ChangeCodePage { get; set; } = false;
+    public Variable CmdSession { get; set; } = new();
 
     public async Task Execute(SandBox sandBox)
     {
         var workingDirectoryValue = await sandBox.EvaluateActionInput<string>(WorkingDirectory);
 
-        var startInfo = new ProcessStartInfo
-        {
-            FileName = "cmd.exe",
-            WorkingDirectory = workingDirectoryValue,
-            RedirectStandardInput = true,
-            RedirectStandardOutput = true,
-            RedirectStandardError = true,
-            UseShellExecute = false,
-            CreateNoWindow = false
-        };
-
-        var process = Process.Start(startInfo);
-        if (ChangeCodePage)
-        {
-            // ReSharper disable once PossibleNullReferenceException
-            await process.StandardInput.WriteLineAsync("chcp 65001"); // Change code page to UTF-8
-        }
-
-        // ReSharper disable once PossibleNullReferenceException
-        process.OutputDataReceived += (sender, args) =>
-        {
-            if (string.IsNullOrEmpty(args.Data) == false)
-            {
-            }
-        };
-
-        process.BeginOutputReadLine();
-        await process.WaitForExitAsync();
-
-        CmdSession.Value = process;
+        CmdSession.Value = await cmdSessionService.OpenCmdSession(workingDirectoryValue, ChangeCodePage);
 
         sandBox.SetVariable(CmdSession);
     }

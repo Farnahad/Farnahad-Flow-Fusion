@@ -4,7 +4,7 @@ using FlowFusion.Action.Main.Variable;
 
 namespace FlowFusion.Action.System;
 
-public class Ping : IAction //XXXXXXXXXXXX
+public class Ping : IAction
 {
     public string Name => "Ping";
 

@@ -3,7 +3,7 @@ using FlowFusion.Action.Main.Action;
 
 namespace FlowFusion.Action.FlowControl;
 
-public class GoTo : IAction //XXXXXXXXXXXX
+public class GoTo : IAction
 {
     public string Name => "Go to";
 
@@ -17,12 +17,7 @@ public class GoTo : IAction //XXXXXXXXXXXX
     public async Task Execute(SandBox sandBox)
     {
         var goToLabelValue = await sandBox.EvaluateActionInput<string>(GoToLabel);
-
-        var label = sandBox.WorkFlow.Actions.Where(item => item.GetType() == typeof(Label))
-            .FirstOrDefault(item => item.Name == goToLabelValue);
-
-        if (label != null)
-            sandBox.CurrentAction = label;
+        sandBox.GoToLabel(goToLabelValue);
 
         await Task.CompletedTask;
     }

@@ -9,12 +9,12 @@ public interface ISystemService
     string GetWindowsEnvironmentVariable(string environmentVariableName,
         bool searchForVariableOnlyInScope, Scope scope);
     bool IfProcess(Service.System.System.Base.IfProcess ifProcess, string processName);
-    (string, string) Ping(string hostName, int timeOut);
-    int RunApplication(string applicationPath, string commandLineArguments, string workingFolder,
+    Task<(string, string)> Ping(string hostName, int timeOut);
+    Task<int> RunApplication(string applicationPath, string commandLineArguments, string workingFolder,
         WindowStyle windowStyle, AfterApplicationLunch afterApplicationLunch, int timeout);
     void SetWindowsEnvironmentVariable(string environmentVariableName, string newEnvironmentVariableValue,
         WindowsEnvironmentVariableType windowsEnvironmentVariableType);
-    void TerminateProcess(SpecifyProcessBy specifyProcessBy, string processName, int processId);
-    void WaitForProcess(string processName, WaitForProcessTo waitForProcessTo,
+    Task TerminateProcess(SpecifyProcessBy specifyProcessBy, string processName, int processId);
+    Task WaitForProcess(string processName, WaitForProcessTo waitForProcessTo,
         bool failWithTimeoutError, int duration);
 }

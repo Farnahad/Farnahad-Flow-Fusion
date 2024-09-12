@@ -1,36 +1,23 @@
 ﻿using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
+using FlowFusion.Service.System.System;
 using FlowFusion.Service.System.System.Base;
 
 namespace FlowFusion.Action.System;
 
-public class SetWindowsEnvironmentVariable : IAction //XXXXXXXXXXXX
+public class SetWindowsEnvironmentVariable(ISystemService systemService) : IAction
 {
     public string Name => "Set Windows environment variable";
 
-    public ActionInput EnvironmentVariableName { get; set; }
-    public ActionInput NewEnvironmentVariableValue { get; set; }
-    public WindowsEnvironmentVariableType Type { get; set; }
-
-    public SetWindowsEnvironmentVariable()
-    {
-        EnvironmentVariableName = new ActionInput();
-        NewEnvironmentVariableValue = new ActionInput();
-        Type = Type.User;
-    }
+    public ActionInput EnvironmentVariableName { get; set; } = new();
+    public ActionInput NewEnvironmentVariableValue { get; set; } = new();
+    public WindowsEnvironmentVariableType Type { get; set; } = WindowsEnvironmentVariableType.User;
 
     public async Task Execute(SandBox sandBox)
     {
         var environmentVariableNameValue = await sandBox.EvaluateActionInput<string>(EnvironmentVariableName);
+        var newEnvironmentVariableValueValue = await sandBox.EvaluateActionInput<string>(NewEnvironmentVariableValue);
 
-        switch (Type)
-        {
-            case Type.System:
-                Environment.SetEnvironmentVariable(environmentVariableNameValue, null, EnvironmentVariableTarget.Machine);
-                break;
-            case Type.User:
-                Environment.SetEnvironmentVariable(environmentVariableNameValue, null, EnvironmentVariableTarget.User);
-                break;
-        }
+        systemService.SetWindowsEnvironmentVariable(environmentVariableNameValue, newEnvironmentVariableValueValue, Type);
     }
 }

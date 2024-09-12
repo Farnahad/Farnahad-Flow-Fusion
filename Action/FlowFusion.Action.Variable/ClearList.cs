@@ -1,23 +1,18 @@
 ﻿using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
+using FlowFusion.Service.Variable.Variable;
 
 namespace FlowFusion.Action.Variable;
 
-public class ClearList : IAction //XXXXXXXXXXXX
+public class ClearList(IVariableService variableService) : GeneralAction
 {
-    public string Name => "Clear List";
+    public override string Name => "Clear List";
 
-    public ActionInput ListToClear { get; set; }
+    public ActionInput ListToClear { get; set; } = new();
 
-    public ClearList()
-    {
-        ListToClear = new ActionInput();
-    }
-
-    public async Task Execute(SandBox sandBox)
+    public override async Task Execute(SandBox sandBox)
     {
         var list = await sandBox.EvaluateActionInput<List<object>>(ListToClear);
-
-        list.Clear();
+        variableService.ClearList(list);
     }
 }

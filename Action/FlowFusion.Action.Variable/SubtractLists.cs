@@ -1,28 +1,22 @@
 ﻿using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
+using FlowFusion.Service.Variable.Variable;
 
 namespace FlowFusion.Action.Variable;
 
-public class SubtractLists : IAction //XXXXXXXXXXXX
+public class SubtractLists(IVariableService variableService) : GeneralAction
 {
-    public string Name => "Subtract Lists";
+    public override string Name => "Subtract Lists";
 
-    public ActionInput FirstList { get; set; }
-    public ActionInput SecondList { get; set; }
-    public Main.Variable.Variable ListDifference { get; set; }
+    public ActionInput FirstList { get; set; } = new();
+    public ActionInput SecondList { get; set; } = new();
+    public Main.Variable.Variable ListDifference { get; set; } = new();
 
-    public SubtractLists()
+    public override async Task Execute(SandBox sandBox)
     {
-        FirstList = new ActionInput();
-        SecondList = new ActionInput();
-        ListDifference = new Main.Variable.Variable();
-    }
+        var firstListValue = await sandBox.EvaluateActionInput<List<object>>(FirstList);
+        var secondListValue = await sandBox.EvaluateActionInput<List<object>>(SecondList);
 
-    public async Task Execute(SandBox sandBox)
-    {
-        var firstList = await sandBox.EvaluateActionInput<List<object>>(FirstList);
-        var secondList = await sandBox.EvaluateActionInput<List<object>>(SecondList);
-
-        ListDifference.Value = firstList.Except(secondList).ToList();
+        ListDifference.Value = variableService.SubtractLists(firstListValue, secondListValue);
     }
 }

@@ -11,10 +11,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\..\Action\FlowFusion.Action.Main\FlowFusion.Action.Main.csproj" />
 	  <ProjectReference Include="..\..\Core\FlowFusion.Core.Main\FlowFusion.Core.Main.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="XXXXXXXXXXXX\XXXXXXXXXXXX - Copy\" />
 	</ItemGroup>
 </Project>

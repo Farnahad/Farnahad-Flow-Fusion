@@ -5,9 +5,9 @@ using FlowFusion.Action.Main.Variable;
 
 namespace FlowFusion.Action.DateTime;
 
-public class SubtractDates : IAction //XXXXXXXXXXXX
+public class SubtractDates : GeneralAction
 {
-    public string Name => "Subtract dates";
+    public override string Name => "Subtract dates";
 
     public ActionInput FromDate { get; set; }
     public ActionInput SubtractDate { get; set; }
@@ -22,7 +22,7 @@ public class SubtractDates : IAction //XXXXXXXXXXXX
         TimeDifference = new Variable();
     }
 
-    public async Task Execute(SandBox sandBox)
+    public override async Task Execute(SandBox sandBox)
     {
         var fromDateValue = await sandBox.EvaluateActionInput<global::System.DateTime>(FromDate);
         var subtractDateValue = await sandBox.EvaluateActionInput<global::System.DateTime>(SubtractDate);

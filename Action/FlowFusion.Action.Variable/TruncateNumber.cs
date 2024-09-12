@@ -1,34 +1,23 @@
 ﻿using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
-using FlowFusion.Action.Variable.TruncateNumberBase;
+using FlowFusion.Service.Variable.Variable;
+using FlowFusion.Service.Variable.Variable.Base;
 
 namespace FlowFusion.Action.Variable;
 
-public class TruncateNumber : IAction //XXXXXXXXXXXX
+public class TruncateNumber(IVariableService variableService) : GeneralAction
 {
-    public string Name => "Truncate Number";
+    public override string Name => "Truncate Number";
 
-    public ActionInput NumberToTruncate { get; set; }
-    public Operation Operation { get; set; }
-    public Main.Variable.Variable TruncatedValue { get; set; }
+    public ActionInput NumberToTruncate { get; set; } = new();
+    public TruncateNumberOperation Operation { get; set; } = TruncateNumberOperation.GetIntegerPart;
+    public Main.Variable.Variable TruncatedValue { get; set; } = new();
 
-    public TruncateNumber()
+    public override async Task Execute(SandBox sandBox)
     {
-        NumberToTruncate = new ActionInput();
-        Operation = Operation.GetIntegerPart;
-        TruncatedValue = new Main.Variable.Variable();
-    }
+        var numberToTruncateValue = await sandBox.EvaluateActionInput<double>(NumberToTruncate);
 
-    public async Task Execute(SandBox sandBox)
-    {
-        var numberToTruncate = await sandBox.EvaluateActionInput<double>(NumberToTruncate);
-
-        TruncatedValue.Value = Operation switch
-        {
-            Operation.GetIntegerPart => (int)Math.Floor(numberToTruncate),
-            Operation.GetDecimalPart => numberToTruncate % 1,
-            _ => TruncatedValue.Value
-        };
+        TruncatedValue.Value = variableService.TruncateNumber(numberToTruncateValue, Operation);
 
         sandBox.SetVariable(TruncatedValue);
     }

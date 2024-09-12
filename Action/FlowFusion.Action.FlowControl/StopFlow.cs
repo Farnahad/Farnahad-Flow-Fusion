@@ -1,10 +1,10 @@
-﻿using FlowFusion.Action.FlowControl.StopFlowBase;
-using FlowFusion.Action.Main;
+﻿using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
+using FlowFusion.Service.FlowControl.FlowControl.Base;
 
 namespace FlowFusion.Action.FlowControl;
 
-public class StopFlow : IAction //XXXXXXXXXXXX
+public class StopFlow : IAction
 {
     public string Name => "Stop flow";
 

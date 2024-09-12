@@ -1,50 +1,27 @@
 ﻿using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
 using FlowFusion.Action.Variable.RemoveItemFromListBase;
+using FlowFusion.Service.Variable.Variable;
 
 namespace FlowFusion.Action.Variable;
 
-public class RemoveItemFromList : IAction //XXXXXXXXXXXX
+public class RemoveItemFromList(IVariableService variableService) : GeneralAction
 {
-    public string Name => "Remove Item from List";
+    public override string Name => "Remove Item from List";
 
-    public RemoveItemBy RemoveItemBy { get; set; }
-    public ActionInput AtIndex { get; set; }
-    public ActionInput WithValue { get; set; }
+    public RemoveItemBy RemoveItemBy { get; set; } = RemoveItemBy.Index;
+    public ActionInput AtIndex { get; set; } = new();
+    public ActionInput WithValue { get; set; } = new();
     public bool RemoveAllItemOccurrences { get; set; }
-    public ActionInput FromList { get; set; }
+    public ActionInput FromList { get; set; } = new();
 
-    public RemoveItemFromList()
+    public override async Task Execute(SandBox sandBox)
     {
-        RemoveItemBy = RemoveItemBy.Index;
-        AtIndex = new ActionInput();
-        WithValue = new ActionInput();
-        FromList = new ActionInput();
-    }
+        var atIndexValue = await sandBox.EvaluateActionInput<int>(AtIndex);
+        var withValueValue = await sandBox.EvaluateActionInput<object>(WithValue);
+        var fromListValue = await sandBox.EvaluateActionInput<List<object>>(FromList);
 
-    public async Task Execute(SandBox sandBox)
-    {
-        var fromList = await sandBox.EvaluateActionInput<List<object>>(FromList);
-
-        switch (RemoveItemBy)
-        {
-            case RemoveItemBy.Index:
-                var atIndex = await sandBox.EvaluateActionInput<int>(AtIndex);
-                fromList.RemoveAt(atIndex);
-                break;
-            case RemoveItemBy.Value:
-                var withValue = await sandBox.EvaluateActionInput<object>(WithValue);
-                if (RemoveAllItemOccurrences)
-                {
-                    var removeItems = fromList.Where(item => item == withValue);
-                    foreach (var removeItem in removeItems)
-                        fromList.Remove(removeItem);
-                }
-                else
-                {
-                    fromList.Remove(withValue);
-                }
-                break;
-        }
+        variableService.RemoveItemFromList(RemoveItemBy, atIndexValue,
+            withValueValue, RemoveAllItemOccurrences, fromListValue);
     }
 }

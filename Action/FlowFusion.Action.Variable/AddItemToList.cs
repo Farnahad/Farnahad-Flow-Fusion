@@ -1,26 +1,21 @@
 ﻿using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
+using FlowFusion.Service.Variable.Variable;
 
 namespace FlowFusion.Action.Variable;
 
-public class AddItemToList : IAction //XXXXXXXXXXXX
+public class AddItemToList(IVariableService variableService) : GeneralAction
 {
-    public string Name => "Add Item to List";
+    public override string Name => "Add Item to List";
 
-    public ActionInput AddItem { get; set; }
-    public ActionInput InToList { get; set; }
+    public ActionInput AddItem { get; set; } = new();
+    public ActionInput InToList { get; set; } = new();
 
-    public AddItemToList()
-    {
-        AddItem = new ActionInput();
-        InToList = new ActionInput();
-    }
-
-    public async Task Execute(SandBox sandBox)
+    public override async Task Execute(SandBox sandBox)
     {
         var list = await sandBox.EvaluateActionInput<List<object>>(InToList);
         var value = await sandBox.EvaluateActionInput<object>(AddItem);
 
-        list.Add(value);
+        variableService.AddItemToList(list, value);
     }
 }

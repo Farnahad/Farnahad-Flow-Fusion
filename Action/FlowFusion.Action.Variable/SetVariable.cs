@@ -1,37 +1,38 @@
-﻿using FlowFusion.Action.Main;
+﻿using System.Data;
+using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
 using FlowFusion.Action.Main.Variable;
+using FlowFusion.Service.Variable.Variable;
 
 namespace FlowFusion.Action.Variable;
 
-public class SetVariable : IAction //XXXXXXXXXXXX
+public class SetVariable(IVariableService variableService) : GeneralAction
 {
-    private readonly VariableService _variableService;
-
-    public string Name => "Set Variable";
+    public override string Name => "Set Variable";
 
     public string Variable { get; set; }
     public string Value { get; set; }
 
-    public SetVariable()
+    public override async Task Execute(SandBox sandBox)
     {
-        _variableService = new VariableService();
-    }
+        var variableType = variableService.GetVariableType(Value);
 
-    public async Task Execute(SandBox sandBox)
-    {
-        var variableType = _variableService.GetVariableType(Value);
+        var newVariable = new Main.Variable.Variable(Variable, null);
 
         object value = variableType switch
         {
-            VariableType.Boolean => bool.Parse(Value),
-            VariableType.Double => double.Parse(Value),
-            VariableType.Integer => int.Parse(Value),
-            VariableType.String => Value,
-            _ => null
+            VariableType.Text => newVariable.Value = Value,
+            VariableType.Number => newVariable.Value = double.Parse(Value),
+            VariableType.Boolean => newVariable.Value = bool.Parse(Value),
+            VariableType.CustomObject => newVariable.Value = (object)Value,
+            VariableType.List => newVariable.Value = new List<object>(),
+            VariableType.DataTable => newVariable.Value = new DataTable(),
+            _ => newVariable.Value = null
         };
 
-        sandBox.SetVariable(new Main.Variable.Variable(Variable, value));
+        if (newVariable.Value != null)
+            sandBox.SetVariable(newVariable);
+
         await Task.CompletedTask;
     }
 }

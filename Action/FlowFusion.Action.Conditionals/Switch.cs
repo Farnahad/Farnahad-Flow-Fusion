@@ -1,20 +1,17 @@
 ﻿using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
+using FlowFusion.Service.Conditionals.Conditionals;
 
 namespace FlowFusion.Action.Conditionals;
 
-public class Switch : IAction //XXXXXXXXXXXX
+public class Switch(IConditionalsService conditionalsService) : IAction
 {
+    private readonly IConditionalsService _conditionalsService = conditionalsService;
     public string Name => "Switch";
 
-    public ActionInput ValueToCheck { get; set; }
+    public ActionInput ValueToCheck { get; set; } = new();
     public List<Case> Cases { get; set; }
     public DefaultCase DefaultCase { get; set; }
-
-    public Switch()
-    {
-        ValueToCheck = new ActionInput();
-    }
 
     public async Task Execute(SandBox sandBox)
     {

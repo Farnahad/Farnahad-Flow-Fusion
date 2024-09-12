@@ -3,7 +3,7 @@ using FlowFusion.Action.Main.Action;
 
 namespace FlowFusion.Action.FlowControl;
 
-public class RunSubflow : IAction //XXXXXXXXXXXX
+public class RunSubflow : IAction
 {
     public string Name => "Run subflow";
 
@@ -15,6 +15,6 @@ public class RunSubflow : IAction //XXXXXXXXXXXX
 
     public async Task Execute(SandBox sandBox)
     {
-        await new SandBox(WorkFlow).Run();
+        await sandBox.Run(WorkFlow);
     }
 }

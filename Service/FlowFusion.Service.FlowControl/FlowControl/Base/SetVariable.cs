@@ -1,6 +1,7 @@
-﻿using FlowFusion.Action.Main.Variable;
+﻿using FlowFusion.Action.Main.Action;
+using FlowFusion.Action.Main.Variable;
 
-namespace FlowFusion.Action.FlowControl.OnBlockErrorBase;
+namespace FlowFusion.Service.FlowControl.FlowControl.Base;
 
 public class SetVariable
 {

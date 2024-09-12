@@ -1,6 +1,5 @@
 ﻿// ReSharper disable InvalidXmlDocComment
-
-namespace FlowFusion.Action.Conditionals.ElseIfBase;
+namespace FlowFusion.Service.Conditionals.Conditionals.Base.CaseBase;
 
 public enum Operator
 {

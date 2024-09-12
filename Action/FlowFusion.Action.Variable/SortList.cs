@@ -1,24 +1,20 @@
 ﻿using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
+using FlowFusion.Service.Variable.Variable;
 
 namespace FlowFusion.Action.Variable;
 
-public class SortList : IAction //XXXXXXXXXXXX
+public class SortList(IVariableService variableService) : GeneralAction
 {
-    public string Name => "Sort List";
+    public override string Name => "Sort List";
 
-    public ActionInput ListToSort { get; set; }
+    public ActionInput ListToSort { get; set; } = new();
     public bool SortByListItemsProperties { get; set; }
 
-    public SortList()
+    public override async Task Execute(SandBox sandBox)
     {
-        ListToSort = new ActionInput();
-    }
+        var listToSortValue = await sandBox.EvaluateActionInput<List<object>>(ListToSort);
 
-    public async Task Execute(SandBox sandBox)
-    {
-        var listToSort = await sandBox.EvaluateActionInput<List<object>>(ListToSort);
-
-        listToSort.Sort();
+        variableService.SortList(listToSortValue);
     }
 }

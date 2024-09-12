@@ -1,25 +1,21 @@
 ﻿using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
+using FlowFusion.Service.Variable.Variable;
 
 namespace FlowFusion.Action.Variable;
 
-public class RemoveDuplicateItemsFromList : IAction //XXXXXXXXXXXX
+public class RemoveDuplicateItemsFromList(IVariableService variableService) : GeneralAction
 {
-    public string Name => "Remove Duplicate Items From List";
+    public override string Name => "Remove Duplicate Items From List";
 
-    public ActionInput ListToRemoveDuplicateItemsFrom { get; set; }
+    public ActionInput ListToRemoveDuplicateItemsFrom { get; set; } = new();
     public bool IgnoreTextCaseWhileSearchingForDuplicateItems { get; set; }
 
-    public RemoveDuplicateItemsFromList()
+    public override async Task Execute(SandBox sandBox)
     {
-        ListToRemoveDuplicateItemsFrom = new ActionInput();
-    }
+        var listToRemoveDuplicateItemsFromValue = await sandBox.EvaluateActionInput<List<object>>(ListToRemoveDuplicateItemsFrom);
 
-    public async Task Execute(SandBox sandBox)
-    {
-        var listToRemoveDuplicateItemsFrom = await sandBox.EvaluateActionInput<List<object>>(ListToRemoveDuplicateItemsFrom);
-
-        listToRemoveDuplicateItemsFrom = listToRemoveDuplicateItemsFrom
-            .GroupBy(item => item).Select(g => g.First()).ToList();
+        listToRemoveDuplicateItemsFromValue = variableService.RemoveDuplicateItemsFromList(
+            listToRemoveDuplicateItemsFromValue, IgnoreTextCaseWhileSearchingForDuplicateItems);
     }
 }

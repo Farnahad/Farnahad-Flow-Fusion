@@ -1,26 +1,19 @@
 ﻿using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
 using FlowFusion.Action.Main.Variable;
+using FlowFusion.Service.System.System;
 using FlowFusion.Service.System.System.Base;
 
 namespace FlowFusion.Action.System;
 
-public class GetWindowsEnvironmentVariable : IAction
+public class GetWindowsEnvironmentVariable(ISystemService systemService) : IAction
 {
     public string Name => "Get Windows environment variable";
 
-    public ActionInput EnvironmentVariableName { get; set; }
-    public bool SearchForVariableOnlyInScope { get; set; }
-    public Scope Scope { get; set; }
-    public Variable EnvironmentVariableValue { get; set; }
-
-    public GetWindowsEnvironmentVariable()
-    {
-        EnvironmentVariableName = new ActionInput();
-        SearchForVariableOnlyInScope = false;
-        Scope = Scope.User;
-        EnvironmentVariableValue = new Variable();
-    }
+    public ActionInput EnvironmentVariableName { get; set; } = new();
+    public bool SearchForVariableOnlyInScope { get; set; } = false;
+    public Scope Scope { get; set; } = Scope.User;
+    public Variable EnvironmentVariableValue { get; set; } = new();
 
     public async Task Execute(SandBox sandBox)
     {

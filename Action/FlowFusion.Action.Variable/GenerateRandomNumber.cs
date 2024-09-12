@@ -1,29 +1,23 @@
 ﻿using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
+using FlowFusion.Service.Variable.Variable;
 
 namespace FlowFusion.Action.Variable;
 
-public class GenerateRandomNumber : IAction //XXXXXXXXXXXX
+public class GenerateRandomNumber(IVariableService variableService) : GeneralAction
 {
-    public string Name => "Generate Random Number";
+    public override string Name => "Generate Random Number";
 
-    public ActionInput MinimumValue { get; set; }
-    public ActionInput MaximumValue { get; set; }
-    public Main.Variable.Variable RandomNumber { get; set; }
+    public ActionInput MinimumValue { get; set; } = new();
+    public ActionInput MaximumValue { get; set; } = new();
+    public Main.Variable.Variable RandomNumber { get; set; } = new();
 
-    public GenerateRandomNumber()
-    {
-        MinimumValue = new ActionInput();
-        MaximumValue = new ActionInput();
-        RandomNumber = new Main.Variable.Variable();
-    }
-
-    public async Task Execute(SandBox sandBox)
+    public override async Task Execute(SandBox sandBox)
     {
         var minimumValue = await sandBox.EvaluateActionInput<int>(MinimumValue);
         var maximumValue = await sandBox.EvaluateActionInput<int>(MaximumValue);
 
-        RandomNumber.Value = new Random().Next(minimumValue, maximumValue);
+        RandomNumber.Value = variableService.GenerateRandomNumber(minimumValue, maximumValue);
 
         sandBox.SetVariable(RandomNumber);
     }

@@ -3,16 +3,11 @@ using FlowFusion.Action.Main.Action;
 
 namespace FlowFusion.Action.Conditionals;
 
-public class DefaultCase : IAction //XXXXXXXXXXXX
+public class DefaultCase : IAction
 {
     public string Name => "Default Case";
 
-    public List<IAction> Actions { get; set; }
-
-    public DefaultCase()
-    {
-        Actions = new List<IAction>();
-    }
+    public List<IAction> Actions { get; set; } = new();
 
     public async Task Execute(SandBox sandBox)
     {

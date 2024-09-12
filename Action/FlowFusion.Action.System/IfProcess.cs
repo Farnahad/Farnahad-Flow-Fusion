@@ -1,30 +1,20 @@
 ﻿using System.ServiceProcess;
 using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
-using FlowFusion.Service.WindowsServices.WindowsService;
+using FlowFusion.Service.System.System;
 
 namespace FlowFusion.Action.System;
 
-public class IfProcess : IAction
+public class IfProcess(ISystemService systemService) : IAction
 {
-    private readonly WindowsServiceService _windowsServiceService;
-
     public string Name => "If process";
 
     // ReSharper disable once InconsistentNaming
-    public Service.System.System.Base.IfProcess _IfProcess { get; set; }
-    public ActionInput ProcessName { get; set; }
+    public Service.System.System.Base.IfProcess _IfProcess { get; set; } = Service.System.System.Base.IfProcess.IsRunning;
+    public ActionInput ProcessName { get; set; } = new();
+
     // ReSharper disable once CollectionNeverUpdated.Global
-    public List<IAction> Actions { get; set; }
-
-    public IfProcess()
-    {
-        _windowsServiceService = new WindowsServiceService();
-
-        _IfProcess = IfProcessBase.IfProcess.IsRunning;
-        ProcessName = new ActionInput();
-        Actions = new List<IAction>();
-    }
+    public List<IAction> Actions { get; set; } = new();
 
     public async Task Execute(SandBox sandBox)
     {

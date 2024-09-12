@@ -3,17 +3,17 @@ using FlowFusion.Action.Main.Action;
 
 namespace FlowFusion.Action.FlowControl;
 
-public class ExitSubflow : IAction //XXXXXXXXXXXX
+public class ExitSubflow : GeneralAction
 {
-    public string Name => "Exit Subflow";
+    public override string Name => "Exit Subflow";
 
     public ExitSubflow()
     {
     }
 
-    public async Task Execute(SandBox sandBox)
+    public override async Task Execute(SandBox sandBox)
     {
-        sandBox.SandBoxStatus = SandBoxStatus.Stopping;
+        sandBox.ExitSubflow();
         await Task.CompletedTask;
     }
 }

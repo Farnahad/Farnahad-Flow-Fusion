@@ -4,9 +4,9 @@ using FlowFusion.Action.Main.Variable;
 
 namespace FlowFusion.Action.FlowControl;
 
-public class GetLastError : IAction //XXXXXXXXXXXX
+public class GetLastError : GeneralAction
 {
-    public string Name => "Get last error";
+    public override string Name => "Get last error";
 
     public Variable StoreInto { get; set; }
     public bool ClearError { get; set; }
@@ -17,7 +17,7 @@ public class GetLastError : IAction //XXXXXXXXXXXX
         ClearError = false;
     }
 
-    public async Task Execute(SandBox sandBox)
+    public override async Task Execute(SandBox sandBox)
     {
         StoreInto.Value = sandBox.Exception;
 

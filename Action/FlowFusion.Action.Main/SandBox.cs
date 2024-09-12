@@ -1,4 +1,5 @@
 ﻿using FlowFusion.Action.Main.Action;
+using System.Reflection.Emit;
 
 namespace FlowFusion.Action.Main;
 
@@ -22,40 +23,40 @@ public class SandBox
     {
         foreach (var inputVariable in WorkFlow.InputVariables)
         {
-                
+
         }
 
         foreach (var outputVariable in WorkFlow.OutputVariables)
         {
-            
+
         }
     }
 
-    public async Task<SandBox> Run()
+    public async Task<SandBox> Run(WorkFlow workFlow)
     {
         var index = 0;
-        CurrentAction = WorkFlow.Actions[index];
+        CurrentAction = workFlow.Actions[index];
 
         while (CurrentAction != null)
         {
             await CurrentAction.Execute(this);
 
             index++;
-            if (WorkFlow.Actions.Count == index)
+            if (workFlow.Actions.Count == index)
                 break;
 
-            CurrentAction = WorkFlow.Actions[index];
+            CurrentAction = workFlow.Actions[index];
         }
 
         return this;
     }
 
-    public T GetValue<T>(ActionInput actionInput)
+    public T GetValue<T>(Variable.Variable variable)
     {
         var realVariable = _variables.FirstOrDefault(item => item.Name == variable.Name);
 
         if (realVariable != null)
-            return realVariable.Value;
+            return (T)realVariable.Value;
 
         return default;
     }
@@ -80,5 +81,42 @@ public class SandBox
     public async Task<T> EvaluateActionInput<T>(ActionInput actionInput)
     {
         return Task.FromResult(new T());
+    }
+
+    public void GoToLabel(string labelName)
+    {
+        var labelAction = WorkFlow.Actions.FirstOrDefault(item => item.Name == labelName);
+
+        if (labelAction != null)
+            CurrentAction = labelAction;
+    }
+
+    public void GoToBeggingOfBlock()
+    {
+    }
+
+    public void GoToEndOfBlock()
+    {
+    }
+
+    public void GoToNextAction()
+    {
+    }
+
+    public void RepeatAction()
+    {
+    }
+
+    public void ThrowError(Exception exception)
+    {
+    }
+
+    public async Task Stop()
+    {
+        await Task.CompletedTask;
+    }
+
+    public void ExitSubflow()
+    {
     }
 }

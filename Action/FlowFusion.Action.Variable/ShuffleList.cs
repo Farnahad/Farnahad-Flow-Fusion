@@ -1,31 +1,19 @@
 ﻿using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
+using FlowFusion.Service.Variable.Variable;
 
 namespace FlowFusion.Action.Variable;
 
-public class ShuffleList : IAction //XXXXXXXXXXXX
+public class ShuffleList(IVariableService variableService) : GeneralAction
 {
-    public string Name => "Shuffle List";
+    public override string Name => "Shuffle List";
 
-    public ActionInput ListToShuffle { get; set; }
+    public ActionInput ListToShuffle { get; set; } = new();
 
-    public ShuffleList()
+    public override async Task Execute(SandBox sandBox)
     {
-        ListToShuffle = new ActionInput();
-    }
+        var listToShuffleValue = await sandBox.EvaluateActionInput<List<object>>(ListToShuffle);
 
-    public async Task Execute(SandBox sandBox)
-    {
-        var list = await sandBox.EvaluateActionInput<List<object>>(ListToShuffle);
-
-        var random = new Random();
-        var n = list.Count;
-
-        for (var i = n - 1; i > 0; i--)
-        {
-            var j = random.Next(i + 1);
-
-            (list[i], list[j]) = (list[j], list[i]);
-        }
+        variableService.ShuffleList(listToShuffleValue);
     }
 }

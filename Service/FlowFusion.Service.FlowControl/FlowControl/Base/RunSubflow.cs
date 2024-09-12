@@ -1,4 +1,4 @@
-﻿namespace FlowFusion.Action.FlowControl.OnBlockErrorBase;
+﻿namespace FlowFusion.Service.FlowControl.FlowControl.Base;
 
 public class RunSubflow
 {

@@ -3,7 +3,7 @@ using FlowFusion.Action.Main.Action;
 
 namespace FlowFusion.Action.FlowControl;
 
-public class Label : IAction //XXXXXXXXXXXX
+public class Label : IAction
 {
     public string Name => "Label";
 

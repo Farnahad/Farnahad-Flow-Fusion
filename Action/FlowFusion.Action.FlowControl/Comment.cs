@@ -3,9 +3,9 @@ using FlowFusion.Action.Main.Action;
 
 namespace FlowFusion.Action.FlowControl;
 
-public class Comment : IAction //XXXXXXXXXXXX
+public class Comment : GeneralAction
 {
-    public string Name => "Comment";
+    public override string Name => "Comment";
 
     public string CommentText { get; set; }
 
@@ -14,7 +14,7 @@ public class Comment : IAction //XXXXXXXXXXXX
         CommentText = "";
     }
 
-    public async Task Execute(SandBox sandBox)
+    public override async Task Execute(SandBox sandBox)
     {
         await Task.CompletedTask;
     }

@@ -1,23 +1,19 @@
 ﻿using FlowFusion.Action.Main;
 using FlowFusion.Action.Main.Action;
+using FlowFusion.Service.Variable.Variable;
 
 namespace FlowFusion.Action.Variable;
 
-public class ReverseList : IAction //XXXXXXXXXXXX
+public class ReverseList(IVariableService variableService) : GeneralAction
 {
-    public string Name => "Reverse List";
+    public override string Name => "Reverse List";
 
-    public ActionInput ListToReverse { get; set; }
+    public ActionInput ListToReverse { get; set; } = new();
 
-    public ReverseList()
+    public override async Task Execute(SandBox sandBox)
     {
-        ListToReverse = new ActionInput();
-    }
+        var listToReverseValue = await sandBox.EvaluateActionInput<List<object>>(ListToReverse);
 
-    public async Task Execute(SandBox sandBox)
-    {
-        var listToReverse = await sandBox.EvaluateActionInput<List<object>>(ListToReverse);
-
-        listToReverse.Reverse();
+        variableService.ReverseList(listToReverseValue);
     }
 }
